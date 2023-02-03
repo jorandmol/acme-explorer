@@ -2,6 +2,8 @@ import express from 'express'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import initMongoDBConnection from './api/config/mongoose.js'
+import tripRoutes from './api/routes/TripRoutes.js'
+
 dotenv.config()
 
 const app = express()
@@ -14,12 +16,13 @@ app.get('/', function (req, res) {
     res.send('Welcome to ACME-Explorer RESTful API')
 })
 
-try{
-    await initMongoDBConnection()
-    app.listen(port, function () {
-      console.log('ACME-Explorer RESTful API server started on: ' + port)
-    })
-  }
-  catch(err){
-    console.error('ACME-Explorer RESTful API could not connect to DB ' + err)
-  }
+tripRoutes(app)
+
+try {
+  await initMongoDBConnection()
+  app.listen(port, function () {
+    console.log('ACME-Explorer RESTful API server started on: ' + port)
+  })
+} catch(err){
+  console.error('ACME-Explorer RESTful API could not connect to DB ' + err)
+}
