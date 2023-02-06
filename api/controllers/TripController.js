@@ -38,14 +38,20 @@ const readTrip = async (req, res) => {
 }
 
 const updateTrip = async (req, res) => {
+  const { id } = req.params
   const newTrip = req.body
   try {
-    const trip = await Trip.findOneAndUpdate({ _id: req.params.id }, newTrip, { new:true })
-    if (trip) {
-      res.json(trip)
-    } else{
+    const trip = await Trip.findById(id)
+    if (!trip) {
       res.status(404).send('Trip not found')
+      return
     }
+    if (trip.publicationDate) {
+      res.status(422).send('The trip has already been published, you can not modify it')
+      return
+    }
+    const updatedTrip = trip.update(newTrip)
+    res.json(updatedTrip)
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(422).send(err)
@@ -68,4 +74,4 @@ const deleteTrip = async (req, res) => {
   }
 }
 
-export {listTrips, createTrip, readTrip, updateTrip, deleteTrip}
+export { listTrips, createTrip, readTrip, updateTrip, deleteTrip }

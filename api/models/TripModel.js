@@ -14,9 +14,16 @@ const TripSchema = new mongoose.Schema({
         required: 'Manager id required',
         ref: 'Actor'
     },
+    title: {
+        type: String,
+        required: 'Title is required',
+        maxLength: 100
+    },
     description: {
         type: String,
-        required: 'Description is required'
+        required: 'Description is required',
+        minLength: 10,
+        maxLength: 255
     },
     price: {
         type: Number,
@@ -25,7 +32,9 @@ const TripSchema = new mongoose.Schema({
     },
     requirements: {
         type: String,
-        required: 'Set trip\'s requirements'
+        required: 'Set trip\'s requirements',
+        minLength: 10,
+        maxLength: 255
     },
     startDate: {
         type: Date,
@@ -46,7 +55,7 @@ const TripSchema = new mongoose.Schema({
         type: Date,
         default: null
     },
-    cancelationReason: {
+    cancellationReason: {
         type: String,
         default: null
     },

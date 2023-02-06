@@ -36,4 +36,9 @@ export default function (app) {
     .put(updateTrip)
     .delete(deleteTrip)
 
+  // TODO
+  // - Add stages route (?)
+  // - Cancel trip route (?)
+  // - Publish trip route (?)
+
 }
