@@ -28,7 +28,6 @@ const initMongoDBConnection = async () => {
     // Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
     // by default, you need to set it to false.
     // mongoose.connect(mongoDBURI)
-    console.log(mongoDBURI)
     await mongoose.connect(mongoDBURI, mongoDBOptions)
 }
 

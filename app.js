@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import initMongoDBConnection from './api/config/mongoose.js'
 import applicationRoutes from './api/routes/ApplicationRoutes.js'
+import tripRoutes from './api/routes/TripRoutes.js'
+
 dotenv.config()
 
 const app = express()
@@ -16,13 +18,13 @@ app.get('/', function (req, res) {
 })
 
 applicationRoutes(app)
+tripRoutes(app)
 
-try{
-    await initMongoDBConnection()
-    app.listen(port, function () {
-      console.log('ACME-Explorer RESTful API server started on: ' + port)
-    })
-  }
-  catch(err){
-    console.error('ACME-Explorer RESTful API could not connect to DB ' + err)
-  }
+try {
+  await initMongoDBConnection()
+  app.listen(port, function () {
+    console.log('ACME-Explorer RESTful API server started on: ' + port)
+  })
+} catch(err){
+  console.error('ACME-Explorer RESTful API could not connect to DB ' + err)
+}
