@@ -50,7 +50,7 @@ const updateTrip = async (req, res) => {
       res.status(422).send('The trip has already been published, you can not modify it')
       return
     }
-    const updatedTrip = trip.update(newTrip)
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, newTrip)
     res.json(updatedTrip)
   } catch (err) {
     if (err.name === 'ValidationError') {
