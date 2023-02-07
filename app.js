@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import initMongoDBConnection from './api/config/mongoose.js'
 import tripRoutes from './api/routes/TripRoutes.js'
+import actorRoutes from './api/routes/ActorRoutes.js'
 
 dotenv.config()
 
@@ -17,6 +18,7 @@ app.get('/', function (req, res) {
 })
 
 tripRoutes(app)
+actorRoutes(app)
 
 try {
   await initMongoDBConnection()
