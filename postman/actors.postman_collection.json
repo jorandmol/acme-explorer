@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "bdf64a7a-82bb-4596-b259-b28117ee87aa",
+		"name": "actors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24780295"
+	},
+	"item": [
+		{
+			"name": "listActors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readActor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63e2732f60ea8efc059fb802"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateActor",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Pepardo\",\n    \"surname\": \"Rodríguez\",\n    \"email\": \"la_presion@gmail.com\",\n    \"password\": \"LOL123456789abcde\",\n    \"phone\": \"+34674747478\",\n    \"address\": \"15 Rue del percebe\",\n    \"role\": \"explorer\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63e2732f60ea8efc059fb802"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteActor",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63e2732f60ea8efc059fb802"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createActor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Pepardo\",\n    \"surname\": \"Rodríguez\",\n    \"email\": \"pep_la_presion@gmail.com\",\n    \"password\": \"123456789abcde\",\n    \"phone\": \"+34674747478\",\n    \"address\": \"13 Rue del percebe\",\n    \"role\": \"explorer\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "path",
+			"value": "actors",
+			"type": "string"
+		}
+	]
+}
