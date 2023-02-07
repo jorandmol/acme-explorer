@@ -1,4 +1,3 @@
-import { listActors } from '../controllers/ActorController.js'
 import { listActors, createActor, readActor, updateActor, deleteActor } from '../controllers/ActorController.js'
 import { creationValidator } from '../controllers/validators/ActorValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
