@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import initMongoDBConnection from './api/config/mongoose.js'
+import applicationRoutes from './api/routes/ApplicationRoutes.js'
 dotenv.config()
 
 const app = express()
@@ -13,6 +14,8 @@ app.use(bodyParser.json())
 app.get('/', function (req, res) {
     res.send('Welcome to ACME-Explorer RESTful API')
 })
+
+applicationRoutes(app)
 
 try{
     await initMongoDBConnection()

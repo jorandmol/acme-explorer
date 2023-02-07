@@ -1,18 +1,33 @@
 import mongoose from 'mongoose'
-import StatusEnum from '../enum/StatusEnum'
+import StatusEnum from '../enum/StatusEnum.js'
 
 const ApplicationSchema = new mongoose.Schema({
+    explorer: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: 'Explorer id required',
+        ref: 'Actor'
+    },
+    trip: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: 'Trip id required',
+        ref: 'Trip'
+    },
     status: {
         type: String,
         enum: StatusEnum,
         default: StatusEnum.PENDING,
     },
-    cancelationDate: {
+    cancellationDate: {
         type: Date,
         default: null
     },
+    cancellationReason: {
+        type: String,
+        default: null
+    },
     comments: {
-        type: String
+        type: String,
+        default: null
     }
 }, { timestamps: true })
 
