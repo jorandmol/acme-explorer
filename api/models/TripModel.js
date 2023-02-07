@@ -1,61 +1,96 @@
 import mongoose from 'mongoose'
+import dateFormat from 'dateformat'
+import { customAlphabet } from 'nanoid'
+
+const generateId = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4)
 
 const TripSchema = new mongoose.Schema({
     ticker: {
         type: String,
-        required: true,
         unique: true
+    },
+    creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: 'Manager id required',
+        ref: 'Actor'
+    },
+    title: {
+        type: String,
+        required: 'Title is required',
+        maxLength: 100
     },
     description: {
         type: String,
-        required: true
+        required: 'Description is required',
+        minLength: 10,
+        maxLength: 255
     },
     price: {
         type: Number,
-        required: true
+        required: false,
+        default: 0.0
     },
     requirements: {
         type: String,
-        required: true
+        required: 'Set trip\'s requirements',
+        minLength: 10,
+        maxLength: 255
     },
     startDate: {
         type: Date,
-        required: true
+        required: 'Start date is required'
     },
     endDate: {
         type: Date,
-        required: true
+        required: 'End date is required'
     },
     pictures: {
         type: [String],
     },
     publicationDate: {
         type: Date,
-        required: true
+        required: false
     },
     cancellationDate: {
         type: Date,
         default: null
     },
-    cancelationReason: {
+    cancellationReason: {
         type: String,
         default: null
     },
-    stages: {
+    stages: [{
         title: {
             type: String,
-            required: true
+            required: false
         },
         description: {
             type: String,
-            required: true
+            required: false
         },
         price: {
             type: Number,
-            required: true
+            required: false
         }
-    }
+    }]
 }, { timestamps: true })
+
+TripSchema.pre('save', function (callback) {
+    const newTrip = this
+    const date = dateFormat(new Date(), 'yymmdd')
+    
+    const ticker = `${date}-${generateId()}`
+    newTrip.ticker = ticker
+
+    // Initialize other values
+    newTrip.pictures = []
+    newTrip.stages = []
+    newTrip.publicationDate = null
+    newTrip.cancellationDate = null
+    newTrip.cancelationReason = null
+
+    callback()
+})
 
 const model = mongoose.model('Trip', TripSchema)
 

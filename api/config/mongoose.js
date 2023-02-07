@@ -4,6 +4,8 @@ import dotenv from 'dotenv'
 // MongoDB URI building
 dotenv.config()
 
+const dbName = process.env.NODE_ENV || 'development'
+
 const mongoDBUser = process.env.DATABASE_USER || 'myUser'
 const mongoDBPass = process.env.DATABASE_PASSWORD || 'myUserPassword'
 const mongoDBCredentials = (mongoDBUser && mongoDBPass) ? mongoDBUser + ':' + mongoDBPass + '@' : ''
@@ -14,6 +16,7 @@ const mongoDBName = process.env.DATABASE_NAME || 'ACME-Explorer'
 
 const mongoDBURI = process.env.DATABASE_URI || 'mongodb://' + mongoDBCredentials + mongoDBHostname + ':' + mongoDBPort + '/' + mongoDBName
 const mongoDBOptions = {
+    dbName,
     connectTimeoutMS: 10000,
     socketTimeoutMS: 45000,
     family: 4,
@@ -25,7 +28,6 @@ const initMongoDBConnection = async () => {
     // Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
     // by default, you need to set it to false.
     // mongoose.connect(mongoDBURI)
-    console.log(mongoDBURI)
     await mongoose.connect(mongoDBURI, mongoDBOptions)
 }
 
