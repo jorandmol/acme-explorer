@@ -5,9 +5,9 @@ import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware
 export default function (app) {
   /**
   * Get an finder
-  *    Required role: None
+  *    Required role: Explorer (its own finder)
   * Post an finder
-  *    RequiredRoles: Manager
+  *    RequiredRoles: Explorer
   *
   * @section finders
   * @type get post
@@ -23,9 +23,9 @@ export default function (app) {
 
   /**
   * Put an finder
-  *    RequiredRoles: to be manager
+  *    RequiredRoles: Explorer (its own finder)
   * Get an finder
-  *    RequiredRoles: None
+  *    RequiredRoles: Explorer (its own finder)
   *
   * @section finders
   * @type get put
