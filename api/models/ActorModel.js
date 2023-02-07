@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import RoleEnum from '../enum/RoleEnum'
+import RoleEnum from '../enum/RoleEnum.js'
 
 const ActorSchema = new mongoose.Schema({
     name: {
@@ -26,7 +26,8 @@ const ActorSchema = new mongoose.Schema({
         type: String
     },
     role: {
-        type: RoleEnum,
+        type: String,
+        enum: Object.values(RoleEnum),
         required: true
     },
     ban: {
