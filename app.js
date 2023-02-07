@@ -5,6 +5,7 @@ import initMongoDBConnection from './api/config/mongoose.js'
 import applicationRoutes from './api/routes/ApplicationRoutes.js'
 import tripRoutes from './api/routes/TripRoutes.js'
 import actorRoutes from './api/routes/ActorRoutes.js'
+import configRoutes from './api/routes/ConfigRoutes.js'
 
 dotenv.config()
 
@@ -21,6 +22,7 @@ app.get('/', function (req, res) {
 applicationRoutes(app)
 tripRoutes(app)
 actorRoutes(app)
+configRoutes(app)
 
 try {
   await initMongoDBConnection()
