@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "b03f7b85-68a0-4ffd-a991-3502181e3ebd",
+		"name": "globalConfig",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25718361"
+	},
+	"item": [
+		{
+			"name": "listConfig",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateConfig",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"defaultLanguage\": \"en\",\n    \"cacheLifetime\": 3600,\n    \"numResults\": 10,\n    \"sponsorshipFlatRate\": 0.15\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "path",
+			"value": "config"
+		}
+	]
+}

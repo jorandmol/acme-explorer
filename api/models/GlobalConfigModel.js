@@ -1,7 +1,11 @@
 import mongoose from 'mongoose'
 
 const GlobalConfigSchema = new mongoose.Schema({
-    cacheDuration: {
+    defaultLanguage: {
+        type: String,
+        default: 'en'
+    },
+    cacheLifetime: {
         type: Number,
         default: 3600
     },
@@ -9,7 +13,7 @@ const GlobalConfigSchema = new mongoose.Schema({
         type: Number,
         default: 10
     },
-    flatRate: {
+    sponsorshipFlatRate: {
         type: Number,
         default: 0.1
     }
