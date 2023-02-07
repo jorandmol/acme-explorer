@@ -38,14 +38,27 @@ const readApplication = async (req, res) => {
 }
 
 const updateApplication = async (req, res) => {
+  const { id } = req.params
   const newApplication = req.body
   try {
-    const application = await Application.findOneAndUpdate({ _id: req.params.id }, newApplication, { new:true })
-    if (application) {
-      res.json(application)
-    } else{
+    const application = await Application.findById(id)
+    if (!application) {
       res.status(404).send('Application not found')
+      return
     }
+    if (application.status === 'cancelled' && application.cancellationDate) {
+      res.status(422).send('The application has been cancelled, you can not modify it')
+      return
+    }
+    if (newApplication.status === 'cancelled') {
+      if (!newApplication.cancellationReason) {
+        res.status(422).send('If you want to cancel the application, you must set a cancellation reason')
+        return
+      }
+      newApplication.cancellationDate = new Date()
+    }
+    const updatedApplication =  await Application.findOneAndUpdate({ _id: id }, newApplication, { new: true })
+    res.json(updatedApplication)
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(422).send(err)
