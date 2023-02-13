@@ -1,6 +1,16 @@
 import mongoose from 'mongoose'
 
 const SponsorshipSchema = new mongoose.Schema({
+    sponsor: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: 'Sponsor id required',
+        ref: 'Actor'
+    },
+    trip: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: 'Trip id required',
+        ref: 'Trip'
+    },
     banner: {
         type: String,
         required: true

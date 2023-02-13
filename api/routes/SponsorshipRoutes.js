@@ -1,5 +1,5 @@
 import { listSponsorships, createSponsorship, readSponsorship, updateSponsorship, deleteSponsorship } from '../controllers/SponsorshipController.js'
-import { creationValidator } from '../controllers/validators/SponsorshipValidator.js'
+import { creationValidator, updateValidator } from '../controllers/validators/SponsorshipValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
@@ -33,7 +33,11 @@ export default function (app) {
   */
   app.route('/v1/sponsorships/:id')
     .get(readSponsorship)
-    .put(updateSponsorship)
+    .put(
+      updateValidator,
+      handleExpressValidation,
+      updateSponsorship
+    )
     .delete(deleteSponsorship)
 
 }
