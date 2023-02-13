@@ -1,4 +1,4 @@
-import { listTrips, createTrip, readTrip, updateTrip, deleteTrip } from '../controllers/TripController.js'
+import { listTrips, createTrip, readTrip, updateTrip, deleteTrip, addStages, cancelTrip } from '../controllers/TripController.js'
 import { creationValidator, updateValidator, stageValidator, cancellationValidator } from '../controllers/validators/TripValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
@@ -39,19 +39,20 @@ export default function (app) {
       updateTrip
     )
     .delete(deleteTrip)
-  
-  app.route('/v1/trips/:id/stages')
-    .patch(
-      stageValidator,
-      handleExpressValidation,
-      // addStages
-  )
 
+  /**
+  * Cancel a trip
+  *    RequiredRoles: to be manager who created the trip
+  *
+  * @section trips
+  * @type patch
+  * @url /v1/trips/:id/cancellation
+  */
   app.route('/v1/trips/:id/cancellation')
     .patch(
       cancellationValidator,
       handleExpressValidation,
-      // addStages
+      cancelTrip
   )
 
   // TODO
