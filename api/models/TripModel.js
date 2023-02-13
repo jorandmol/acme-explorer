@@ -4,6 +4,26 @@ import { customAlphabet } from 'nanoid'
 
 const generateId = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4)
 
+const SponsorshipSchema = new mongoose.Schema({
+    sponsor: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: 'Actor'
+    },
+    banner: {
+        type: String,
+        required: false
+    },
+    link: {
+        type: String,
+        required: false
+    },
+    isPayed: {
+        type: Boolean,
+        default: false
+    }
+})
+
 const TripSchema = new mongoose.Schema({
     ticker: {
         type: String,
@@ -79,7 +99,10 @@ const TripSchema = new mongoose.Schema({
             type: Number,
             required: false
         }
-    }]
+    }],
+    sponsorships: [
+        SponsorshipSchema
+    ]
 }, { timestamps: true })
 
 TripSchema.pre('save', function (callback) {

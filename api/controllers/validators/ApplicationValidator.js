@@ -1,8 +1,8 @@
 import { check } from 'express-validator'
 
+// TODO: Validate the optional ones
 const creationValidator = [
-  check('explorer').exists({ checkFalsy: true }).isMongoId(),
-  check('trip').exists({ checkFalsy: true }).isMongoId()
+  check('explorer').exists({ checkFalsy: true }).isMongoId()
 ]
 
 export { creationValidator }

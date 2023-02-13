@@ -1,7 +1,9 @@
 import Trip from '../models/TripModel.js'
 import Application from '../models/ApplicationModel.js'
 import StatusEnum from '../enum/StatusEnum.js'
+import SponsorshipSchema from '../models/SponsorshipModel.js'
 
+// TODO: Add filters
 const listTrips = async (req, res) => {
   const filters = {}
   try {
@@ -90,9 +92,35 @@ const deleteTrip = async (req, res) => {
   }
 }
 
+const publishTrip = async (req, res) => {
+  const { id } = req.params
+  const { publicationDate } = req.body
+  try {
+    const trip = await Trip.findById(id)
+    if (!trip) {
+      res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.publicationDate) {
+      res.status(422).send('The trip has already been published')
+      return
+    }
+    
+    trip.publicationDate = publicationDate 
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, trip, { new: true })
+    res.json(updatedTrip)
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
+
 const cancelTrip = async (req, res) => {
   const { id } = req.params
-  const cancellationReason = req.body
+  const { cancellationReason } = req.body
   try {
     const trip = await Trip.findById(id)
     if (!trip) {
@@ -126,4 +154,65 @@ const cancelTrip = async (req, res) => {
   }
 }
 
-export { listTrips, createTrip, readTrip, updateTrip, deleteTrip, cancelTrip }
+const listTripApplications = async (req, res) => {
+  const { id } = req.params
+  try {
+    const trip = await Trip.findById(id)
+    if (!trip) {
+      res.status(404).send('Trip not found')
+      return
+    }
+
+    const applications = await Application.find({ trip: trip._id })
+    res.json(applications)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
+const createTripApplication = async (req, res) => {
+  const { id } = req.params
+  const newApplication = new Application(req.body)
+  try {
+    const trip = await Trip.findById(id)
+    if (!trip) {
+      res.status(404).send('Trip not found')
+      return
+    }
+
+    newApplication.trip = trip._id
+    const application = await newApplication.save()
+    res.json(application)
+  } catch(err){
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
+
+const addTripASponsorship = async (req, res) => {
+  const { id } = req.params
+  const newSponsorship = req.body
+  try {
+    const trip = await Trip.findById(id)
+    if (!trip) {
+      res.status(404).send('Trip not found')
+      return
+    }
+
+    // TODO: Do some kind of validation
+    trip.sponsorships = [...trip.sponsorships, newSponsorship]
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, trip, { new: true })
+    res.json(updatedTrip)
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
+
+export { listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication, addTripASponsorship }

@@ -17,7 +17,6 @@ const _startDateIsBefore = (startDate, { req }) => {
 }
 
 const creationValidator = [
-  check('creator').exists({ checkNull: true, checkFalsy: true }).isMongoId().trim().escape(),
   check('title').exists({ checkFalsy: true }).isString().isLength({ max: 100 }).trim().escape(),
   check('description').exists({ checkFalsy: true }).isString().isLength({ min: 10, max: 255 }).trim().escape(),
   check('requirements').exists({ checkFalsy: true }).isString().isLength({ min: 10, max: 255 }).trim().escape(),
@@ -26,6 +25,7 @@ const creationValidator = [
 ]
 
 const updateValidator = [
+  check('creator').exists({ checkNull: true, checkFalsy: true }).isMongoId().trim().escape(),
   check('title').exists({ checkFalsy: true }).isString().isLength({ max: 100 }).trim().escape(),
   check('description').exists({ checkFalsy: true }).isString().isLength({ min: 10, max: 255 }).trim().escape(),
   check('requirements').exists({ checkFalsy: true }).isString().isLength({ min: 10, max: 255 }).trim().escape(),
@@ -36,11 +36,19 @@ const updateValidator = [
   check('stages.*.description').exists({ checkFalsy: true }).isString().isLength({ min: 10, max: 255 }).trim().escape(),
   check('stages.*.price').exists({ checkFalsy: true }).isFloat({ min: 10 }),
   check('pictures.*.title').optional().isString().isLength({ max: 100 }).trim().escape(),
-  check('pictures.*.image').optional().isString().isBase64()
+  check('pictures.*.image').optional().isString().isBase64(),
+  check('sponsorships.*.sponsor').optional().isMongoId().trim().escape(),
+  check('sponsorships.*.banner').optional().isURL(),
+  check('sponsorships.*.link').optional().isURL(),
+  check('sponsorships.*.isPayed').optional().isBoolean()
 ]
 
-const cancellationValidator = [
+const cancelValidator = [
   check('cancellationReason').exists({ checkFalsy: true }).isString().isLength({ min: 25, max: 255 }).trim().escape(),
 ]
 
-export { creationValidator, updateValidator, cancellationValidator }
+const publishValidator = [
+  check('publicationDate').exists({ checkFalsy: true }).isISO8601().toDate().custom(_isFuture)
+]
+
+export { creationValidator, updateValidator, publishValidator, cancelValidator }
