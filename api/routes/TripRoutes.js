@@ -1,5 +1,5 @@
 import { listTrips, createTrip, readTrip, updateTrip, deleteTrip } from '../controllers/TripController.js'
-import { creationValidator } from '../controllers/validators/TripValidator.js'
+import { creationValidator, updateValidator, stageValidator, cancellationValidator } from '../controllers/validators/TripValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
@@ -33,12 +33,28 @@ export default function (app) {
   */
   app.route('/v1/trips/:id')
     .get(readTrip)
-    .put(updateTrip)
+    .put(
+      updateValidator,
+      handleExpressValidation,
+      updateTrip
+    )
     .delete(deleteTrip)
+  
+  app.route('/v1/trips/:id/stages')
+    .patch(
+      stageValidator,
+      handleExpressValidation,
+      // addStages
+  )
+
+  app.route('/v1/trips/:id/cancellation')
+    .patch(
+      cancellationValidator,
+      handleExpressValidation,
+      // addStages
+  )
 
   // TODO
-  // - Add stages route (?)
-  // - Cancel trip route (?)
   // - Publish trip route (?)
 
 }

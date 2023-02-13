@@ -44,9 +44,16 @@ const TripSchema = new mongoose.Schema({
         type: Date,
         required: 'End date is required'
     },
-    pictures: {
-        type: [String],
-    },
+    pictures: [{
+        title: {
+            type: String,
+            required: false
+        },
+        image: {
+            type: String,
+            required: false
+        }
+    }],
     publicationDate: {
         type: Date,
         required: false
