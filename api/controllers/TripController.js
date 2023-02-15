@@ -246,7 +246,7 @@ const updateTripSponsorships = async (req, res) => {
       return
     }
 
-    trip.sponsorships = { sponsorships }
+    trip.sponsorships = sponsorships
     const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, trip, { new: true })
     res.json(updatedTrip)
   } catch (err) {
