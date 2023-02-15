@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import bcrypt from 'bcryptjs'
 import RoleEnum from '../enum/RoleEnum.js'
 
 const ActorSchema = new mongoose.Schema({
@@ -41,6 +42,16 @@ const ActorSchema = new mongoose.Schema({
 }, { timestamps: true })
 
 const model = mongoose.model('Actor', ActorSchema)
+
+ActorSchema.pre('save', function(next) {
+    if (!this.isModified('password')) {
+      return next();
+    }
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(this.password, salt);
+    this.password = hash;
+    next();
+});
 
 export const schema = model.schema
 export default model

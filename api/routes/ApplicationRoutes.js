@@ -1,5 +1,5 @@
 import { listApplications, createApplication, readApplication, updateApplication, deleteApplication } from '../controllers/ApplicationController.js'
-import { creationValidator } from '../controllers/validators/ApplicationValidator.js'
+import { creationValidator, updateValidator } from '../controllers/validators/ApplicationValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
@@ -33,7 +33,10 @@ export default function (app) {
   */
   app.route('/v1/applications/:id')
     .get(readApplication)
-    .put(updateApplication)
+    .put(updateValidator,
+      handleExpressValidation,
+      updateApplication
+    )
     .delete(deleteApplication)
 
 }

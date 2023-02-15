@@ -58,7 +58,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n   \"banner\": \"https://example.img\",\n    \"link\": \"https://example.com\",\n    \"isPayed\": true\n}",
+					"raw": "{\n    \"sponsor\": \"63e14f4d5ca1260062da073d\",\n    \"trip\": \"63e14f4d5ca1260012da077e\",\n    \"banner\": \"https://example.img\",\n    \"link\": \"https://example.com\",\n    \"isPayed\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -105,7 +105,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63e27a0d04b4edf00f8c8703"
+							"value": "63e27a0c04b4edf00f8c8701"
 						}
 					]
 				}
@@ -119,7 +119,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"banner\": \"https://example.img\",\n    \"link\": \"https://example.com\"\n}",
+					"raw": "{\n    \"sponsor\": \"63e14f4d5ca1260062da073d\",\n    \"trip\": \"63e14f4d5ca1260012da077d\",\n    \"banner\": \"https://example.img\",\n    \"link\": \"https://example.com\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -1,9 +1,19 @@
 import { check } from 'express-validator'
 
 const creationValidator = [
+  check('sponsor').exists({ checkFalsy: true }).isMongoId(),
+  check('trip').exists({ checkFalsy: true }).isMongoId(),
   check('banner').exists({ checkFalsy: true }).isURL(),
   check('link').exists({ checkFalsy: true }).isURL(),
   check('isPayed').optional().isBoolean()
 ]
 
-export { creationValidator }
+const updateValidator = [
+  check('sponsor').exists({ checkFalsy: true }).isMongoId(),
+  check('trip').exists({ checkFalsy: true }).isMongoId(),
+  check('banner').exists({ checkFalsy: true }).isURL(),
+  check('link').exists({ checkFalsy: true }).isURL(),
+  check('isPayed').exists().isBoolean()
+]
+
+export { creationValidator, updateValidator }
