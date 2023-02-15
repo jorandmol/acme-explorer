@@ -24,6 +24,21 @@ const SponsorshipSchema = new mongoose.Schema({
     }
 })
 
+const StageSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: false
+    },
+    description: {
+        type: String,
+        required: false
+    },
+    price: {
+        type: Number,
+        required: false
+    }
+})
+
 const TripSchema = new mongoose.Schema({
     ticker: {
         type: String,
@@ -86,20 +101,9 @@ const TripSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-    stages: [{
-        title: {
-            type: String,
-            required: false
-        },
-        description: {
-            type: String,
-            required: false
-        },
-        price: {
-            type: Number,
-            required: false
-        }
-    }],
+    stages: [
+        StageSchema
+    ],
     sponsorships: [
         SponsorshipSchema
     ]

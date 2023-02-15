@@ -1,7 +1,6 @@
 import { check } from 'express-validator'
 import StatusEnum from '../../enum/StatusEnum.js'
 
-// TODO: Validate the optional ones
 const creationValidator = [
   check('explorer').exists({ checkFalsy: true }).isMongoId(),
   check('trip').exists({ checkFalsy: true }).isMongoId(),

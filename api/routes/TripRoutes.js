@@ -1,4 +1,4 @@
-import { listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication, addTripASponsorship } from '../controllers/TripController.js'
+import { listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication, addTripSponsorship } from '../controllers/TripController.js'
 import { creationValidator as tripCreationValidator, updateValidator, publishValidator, cancelValidator } from '../controllers/validators/TripValidator.js'
 import { creationValidator as appCreationValidator } from '../controllers/validators/ApplicationValidator.js'
 import { creationValidator as sponsorshipValidator } from '../controllers/validators/SponsorshipValidator.js'
@@ -115,7 +115,7 @@ export default function (app) {
   .patch(
     sponsorshipValidator,
     handleExpressValidation,
-    addTripASponsorship
+    addTripSponsorship
   )
 
 }

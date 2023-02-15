@@ -192,7 +192,7 @@ const createTripApplication = async (req, res) => {
   }
 }
 
-const addTripASponsorship = async (req, res) => {
+const addTripSponsorship = async (req, res) => {
   const { id } = req.params
   const newSponsorship = req.body
   try {
@@ -215,4 +215,4 @@ const addTripASponsorship = async (req, res) => {
   }
 }
 
-export { listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication, addTripASponsorship }
+export { listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication, addTripSponsorship }
