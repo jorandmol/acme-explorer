@@ -3,7 +3,6 @@ import StatusEnum from '../../enum/StatusEnum.js'
 
 const creationValidator = [
   check('explorer').exists({ checkFalsy: true }).isMongoId(),
-  check('trip').exists({ checkFalsy: true }).isMongoId(),
   check('comment').optional().isString().isLength({ min: 10, max: 255 }).trim().escape(),
 ]
 

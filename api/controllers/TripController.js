@@ -8,10 +8,10 @@ const _generateFilter = (filters) => {
     filters = { $text: { $search: keyword }}
   }
   if (minPrice) {
-    filters = { ...filters, price: { $gte: minPrice } }
+    filters = { ...filters, price: { $gte: parseFloat(minPrice) } }
   }
   if (maxPrice) {
-    filters = { ...filters, price: { $lte: maxPrice } }
+    filters = { ...filters, price: { $lte: parseFloat(maxPrice) } }
   }
   if (minDate) {
     filters = { ...filters, startDate: { $gte: minDate } }
@@ -75,6 +75,11 @@ const updateTrip = async (req, res) => {
     if (!newTrip.price) {
       newTrip.price = newStages.map(stage => stage.price).reduce((totalPrice, actualPrice) => totalPrice + actualPrice, 0)
     }
+
+    // Keep dates null
+    newTrip.publicationDate = null
+    newTrip.cancellationDate = null
+    newTrip.cancellationReason = null
     const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, newTrip, { new: true })
     res.json(updatedTrip)
   } catch (err) {

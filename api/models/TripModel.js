@@ -122,6 +122,7 @@ tripSchema.pre('save', function (callback) {
     // Initialize other values
     newTrip.pictures = []
     newTrip.stages = []
+    newtrip.sponsorships = []
     newTrip.publicationDate = null
     newTrip.cancellationDate = null
     newTrip.cancelationReason = null
