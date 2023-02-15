@@ -115,7 +115,7 @@
 		{
 			"name": "addTripSponsorship",
 			"request": {
-				"method": "PATCH",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -127,7 +127,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/sponsor",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/sponsorships",
 					"host": [
 						"{{host}}{{port}}"
 					],
@@ -135,7 +135,42 @@
 						"{{apiVersion}}",
 						"{{path}}",
 						":id",
-						"sponsor"
+						"sponsorships"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63e144632ba413df4fa0d9b2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateTripSponsorship",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sponsorships\": [\n        {\n            \"sponsor\": \"63e144632ba413df4fa0d9b6\",\n            \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n            \"link\": \"https://www.cristianoronaldo.com/#cr7\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/sponsorships",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id",
+						"sponsorships"
 					],
 					"variable": [
 						{

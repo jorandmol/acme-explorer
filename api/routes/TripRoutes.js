@@ -1,7 +1,7 @@
-import { listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication, addTripSponsorship } from '../controllers/TripController.js'
-import { creationValidator as tripCreationValidator, updateValidator, publishValidator, cancelValidator } from '../controllers/validators/TripValidator.js'
+import { listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication, createTripSponsorship, updateTripSponsorships } from '../controllers/TripController.js'
+import { creationValidator as tripCreationValidator, updateValidator, publishValidator, cancelValidator, sponsorshipsValidator } from '../controllers/validators/TripValidator.js'
 import { creationValidator as appCreationValidator } from '../controllers/validators/ApplicationValidator.js'
-import { creationValidator as sponsorshipValidator } from '../controllers/validators/SponsorshipValidator.js'
+import { creationValidator as sponsorshipCreationValidator } from '../controllers/validators/SponsorshipValidator.js'
 import { filterValidator } from '../controllers/validators/FinderValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
@@ -107,18 +107,25 @@ export default function (app) {
   */
 
   /**
+  * Add new sponsorship
+  *   RequiredRoles: Sponsor 
+  * 
   * Update trip's sponsorships
-  *    RequiredRoles: Sponsor
+  *    RequiredRoles: Manager
   *
   * @section trips
-  * @type patch
-  * @url /v1/trips/:id/sponsor
+  * @type post patch
+  * @url /v1/trips/:id/sponsorships
   */
-  app.route('/v1/trips/:id/sponsor')
-  .patch(
-    sponsorshipValidator,
+  app.route('/v1/trips/:id/sponsorships')
+  .post(
+    sponsorshipCreationValidator,
     handleExpressValidation,
-    addTripSponsorship
+    createTripSponsorship
+  ).patch(
+    sponsorshipsValidator,
+    handleExpressValidation,
+    updateTripSponsorships
   )
 
 }

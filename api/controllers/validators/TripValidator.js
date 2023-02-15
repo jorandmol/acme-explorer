@@ -36,11 +36,7 @@ const updateValidator = [
   check('stages.*.description').exists({ checkFalsy: true }).isString().isLength({ min: 10, max: 255 }).trim().escape(),
   check('stages.*.price').exists({ checkFalsy: true }).isFloat({ min: 10 }),
   check('pictures.*.title').optional().isString().isLength({ max: 100 }).trim().escape(),
-  check('pictures.*.image').optional().isString().isBase64(),
-  check('sponsorships.*.sponsor').optional().isMongoId().trim().escape(),
-  check('sponsorships.*.banner').optional().isURL(),
-  check('sponsorships.*.link').optional().isURL(),
-  check('sponsorships.*.isPayed').optional().isBoolean()
+  check('pictures.*.image').optional().isString().isBase64()
 ]
 
 const cancelValidator = [
@@ -51,4 +47,11 @@ const publishValidator = [
   check('publicationDate').exists({ checkFalsy: true }).isISO8601().toDate().custom(_isFuture)
 ]
 
-export { creationValidator, updateValidator, publishValidator, cancelValidator }
+const sponsorshipsValidator = [
+  check('sponsorships.*.sponsor').exists({ checkFalsy: true }).isMongoId().trim().escape(),
+  check('sponsorships.*.banner').exists({ checkFalsy: true }).isURL(),
+  check('sponsorships.*.link').exists({ checkFalsy: true }).isURL(),
+  check('sponsorships.*.isPayed').optional().isBoolean()
+]
+
+export { creationValidator, updateValidator, publishValidator, cancelValidator, sponsorshipsValidator }

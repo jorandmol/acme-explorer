@@ -214,7 +214,7 @@ const createTripApplication = async (req, res) => {
   }
 }
 
-const addTripSponsorship = async (req, res) => {
+const createTripSponsorship = async (req, res) => {
   const { id } = req.params
   const newSponsorship = req.body
   try {
@@ -224,7 +224,6 @@ const addTripSponsorship = async (req, res) => {
       return
     }
 
-    // TODO: Do some kind of validation
     trip.sponsorships = [...trip.sponsorships, newSponsorship]
     const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, trip, { new: true })
     res.json(updatedTrip)
@@ -237,4 +236,26 @@ const addTripSponsorship = async (req, res) => {
   }
 }
 
-export { listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication, addTripSponsorship }
+const updateTripSponsorships = async (req, res) => {
+  const { id } = req.params
+  const { sponsorships } = req.body
+  try {
+    const trip = await Trip.findById(id)
+    if (!trip) {
+      res.status(404).send('Trip not found')
+      return
+    }
+
+    trip.sponsorships = { sponsorships }
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, trip, { new: true })
+    res.json(updatedTrip)
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
+
+export { listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication, createTripSponsorship, updateTripSponsorships }
