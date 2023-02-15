@@ -4,7 +4,7 @@ import { customAlphabet } from 'nanoid'
 
 const generateId = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4)
 
-const SponsorshipSchema = new mongoose.Schema({
+const sponsorshipSchema = new mongoose.Schema({
     sponsor: {
         type: mongoose.Schema.Types.ObjectId,
         required: false,
@@ -24,7 +24,7 @@ const SponsorshipSchema = new mongoose.Schema({
     }
 })
 
-const StageSchema = new mongoose.Schema({
+const stageSchema = new mongoose.Schema({
     title: {
         type: String,
         required: false
@@ -39,7 +39,7 @@ const StageSchema = new mongoose.Schema({
     }
 })
 
-const TripSchema = new mongoose.Schema({
+const tripSchema = new mongoose.Schema({
     ticker: {
         type: String,
         unique: true
@@ -102,14 +102,17 @@ const TripSchema = new mongoose.Schema({
         default: null
     },
     stages: [
-        StageSchema
+        stageSchema
     ],
     sponsorships: [
-        SponsorshipSchema
+        sponsorshipSchema
     ]
 }, { timestamps: true })
 
-TripSchema.pre('save', function (callback) {
+tripSchema.index({ creator: 1 })
+tripSchema.index({ ticker: 'text', title: 'text', description: 'text' })
+
+tripSchema.pre('save', function (callback) {
     const newTrip = this
     const date = dateFormat(new Date(), 'yymmdd')
     
@@ -126,7 +129,7 @@ TripSchema.pre('save', function (callback) {
     callback()
 })
 
-const model = mongoose.model('Trip', TripSchema)
+const model = mongoose.model('Trip', tripSchema)
 
 export const schema = model.schema
 export default model

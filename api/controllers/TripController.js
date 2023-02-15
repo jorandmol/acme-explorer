@@ -1,11 +1,28 @@
 import Trip from '../models/TripModel.js'
 import Application from '../models/ApplicationModel.js'
 import StatusEnum from '../enum/StatusEnum.js'
-import SponsorshipSchema from '../models/SponsorshipModel.js'
 
-// TODO: Add filters
+const _generateFilter = (filters) => {
+  const { keyword, minPrice, maxPrice, minDate, maxDate } = filters
+  if (keyword) {
+    filters = { $text: { $search: keyword }}
+  }
+  if (minPrice) {
+    filters = { ...filters, price: { $gte: minPrice } }
+  }
+  if (maxPrice) {
+    filters = { ...filters, price: { $lte: maxPrice } }
+  }
+  if (minDate) {
+    filters = { ...filters, startDate: { $gte: minDate } }
+  }
+  if (maxDate) {
+    filters = { ...filters, endDate: { $lte: minDate } }
+  }
+}
+
 const listTrips = async (req, res) => {
-  const filters = {}
+  const filters = _generateFilter(req.query)
   try {
     const trips = await Trip.find(filters)
     res.json(trips)
