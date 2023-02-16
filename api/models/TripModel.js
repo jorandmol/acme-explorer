@@ -4,7 +4,42 @@ import { customAlphabet } from 'nanoid'
 
 const generateId = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4)
 
-const TripSchema = new mongoose.Schema({
+const sponsorshipSchema = new mongoose.Schema({
+    sponsor: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: 'Actor'
+    },
+    banner: {
+        type: String,
+        required: false
+    },
+    link: {
+        type: String,
+        required: false
+    },
+    isPayed: {
+        type: Boolean,
+        default: false
+    }
+})
+
+const stageSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: false
+    },
+    description: {
+        type: String,
+        required: false
+    },
+    price: {
+        type: Number,
+        required: false
+    }
+})
+
+const tripSchema = new mongoose.Schema({
     ticker: {
         type: String,
         unique: true
@@ -44,9 +79,16 @@ const TripSchema = new mongoose.Schema({
         type: Date,
         required: 'End date is required'
     },
-    pictures: {
-        type: [String],
-    },
+    pictures: [{
+        title: {
+            type: String,
+            required: false
+        },
+        image: {
+            type: String,
+            required: false
+        }
+    }],
     publicationDate: {
         type: Date,
         required: false
@@ -59,23 +101,18 @@ const TripSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-    stages: [{
-        title: {
-            type: String,
-            required: false
-        },
-        description: {
-            type: String,
-            required: false
-        },
-        price: {
-            type: Number,
-            required: false
-        }
-    }]
+    stages: [
+        stageSchema
+    ],
+    sponsorships: [
+        sponsorshipSchema
+    ]
 }, { timestamps: true })
 
-TripSchema.pre('save', function (callback) {
+tripSchema.index({ creator: 1 })
+tripSchema.index({ ticker: 'text', title: 'text', description: 'text' })
+
+tripSchema.pre('save', function (callback) {
     const newTrip = this
     const date = dateFormat(new Date(), 'yymmdd')
     
@@ -85,6 +122,7 @@ TripSchema.pre('save', function (callback) {
     // Initialize other values
     newTrip.pictures = []
     newTrip.stages = []
+    newtrip.sponsorships = []
     newTrip.publicationDate = null
     newTrip.cancellationDate = null
     newTrip.cancelationReason = null
@@ -92,7 +130,7 @@ TripSchema.pre('save', function (callback) {
     callback()
 })
 
-const model = mongoose.model('Trip', TripSchema)
+const model = mongoose.model('Trip', tripSchema)
 
 export const schema = model.schema
 export default model

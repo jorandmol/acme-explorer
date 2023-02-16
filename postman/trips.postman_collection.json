@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ca0a7e53-a762-4894-ba52-bfc7dc50736e",
+		"_postman_id": "712a7896-ecc5-4af8-a9db-6916d1000588",
 		"name": "trips",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24780295"
@@ -19,6 +19,164 @@
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "minPrice",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "maxPrice",
+							"value": "100",
+							"disabled": true
+						},
+						{
+							"key": "minDate",
+							"value": "2022-12-01",
+							"disabled": true
+						},
+						{
+							"key": "maxDate",
+							"value": "2022-12-05",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listTripApplications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/applications",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id",
+						"applications"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63e144632ba413df4fa0d9b2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createTripApplications",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"explorer\": \"63e144632ba413df4fa0d9b5\",\n    \"comment\": \"Por favor :(\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/applications",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id",
+						"applications"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63e144632ba413df4fa0d9b2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addTripSponsorship",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sponsor\": \"63e144632ba413df4fa0d9b6\",\n    \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n    \"link\": \"https://www.cristianoronaldo.com/#cr7\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/sponsorships",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id",
+						"sponsorships"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63e144632ba413df4fa0d9b2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateTripSponsorship",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sponsorships\": [\n        {\n            \"sponsor\": \"63e144632ba413df4fa0d9b6\",\n            \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n            \"link\": \"https://www.cristianoronaldo.com/#cr7\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/sponsorships",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id",
+						"sponsorships"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63e144632ba413df4fa0d9b2"
+						}
 					]
 				}
 			},
@@ -50,13 +208,83 @@
 			"response": []
 		},
 		{
+			"name": "publishTrip",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"publicationDate\": \"2023-06-10T13:00:00.000Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/publish",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id",
+						"publish"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63e144632ba413df4fa0d9b2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cancelTrip",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cancellationReason\": \"Porque quiero\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/cancel",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id",
+						"cancel"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63e144632ba413df4fa0d9b2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "updateTrip",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"creator\": \"63e143773c3c619deba0bd8b\",\n    \"description\": \"description\",\n    \"price\": 0,\n    \"requirements\": \"reequirements\",\n    \"startDate\": \"2023-07-10T13:00:00.000Z\",\n    \"endDate\": \"2023-07-15T13:00:00.000Z\",\n    \"pictures\": [],\n    \"cancellationDate\": \"2023-03-06T18:18:11.446Z\",\n    \"cancelationReason\": \"Sá matao Paco\",\n    \"stages\": [],\n    \"createdAt\": \"2023-02-06T18:18:11.446Z\",\n    \"updatedAt\": \"2023-02-06T18:18:11.446Z\",\n    \"ticker\": \"230206-NOTT\",\n    \"publicationDate\": null\n}",
+					"raw": "{\n    \"creator\": \"63e143773c3c619deba0bd8b\",\n    \"description\": \"description\",\n    \"price\": 0,\n    \"requirements\": \"reequirements\",\n    \"startDate\": \"2023-07-10T13:00:00.000Z\",\n    \"endDate\": \"2023-07-15T13:00:00.000Z\",\n    \"pictures\": [],\n    \"stages\": [],\n    \"sponsorships\": [],\n    \"createdAt\": \"2023-02-06T18:18:11.446Z\",\n    \"updatedAt\": \"2023-02-06T18:18:11.446Z\",\n    \"ticker\": \"230206-NOTT\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

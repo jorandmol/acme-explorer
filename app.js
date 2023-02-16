@@ -6,7 +6,6 @@ import applicationRoutes from './api/routes/ApplicationRoutes.js'
 import tripRoutes from './api/routes/TripRoutes.js'
 import actorRoutes from './api/routes/ActorRoutes.js'
 import finderRoutes from './api/routes/FinderRoutes.js'
-import sponsorshipRoutes from './api/routes/SponsorshipRoutes.js'
 import configRoutes from './api/routes/ConfigRoutes.js'
 import loaderRoutes from './api/routes/LoaderRoutes.js'
 
@@ -26,7 +25,6 @@ applicationRoutes(app)
 tripRoutes(app)
 actorRoutes(app)
 finderRoutes(app)
-sponsorshipRoutes(app)
 configRoutes(app)
 loaderRoutes(app)
 
