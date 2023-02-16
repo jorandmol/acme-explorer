@@ -4,21 +4,24 @@ import StatusEnum from '../enum/StatusEnum.js'
 
 const _generateFilter = (filters) => {
   const { keyword, minPrice, maxPrice, minDate, maxDate } = filters
+  let filter = {}
   if (keyword) {
-    filters = { $text: { $search: keyword }}
+    filter = { $text: { $search: keyword }}
   }
   if (minPrice) {
-    filters = { ...filters, price: { $gte: parseFloat(minPrice) } }
+    filter = { ...filter, price: { $gte: parseFloat(minPrice) } }
   }
   if (maxPrice) {
-    filters = { ...filters, price: { $lte: parseFloat(maxPrice) } }
+    filter = { ...filter, price: { $lte: parseFloat(maxPrice) } }
   }
   if (minDate) {
-    filters = { ...filters, startDate: { $gte: minDate } }
+    filter = { ...filter, startDate: { $gte: minDate } }
   }
   if (maxDate) {
-    filters = { ...filters, endDate: { $lte: minDate } }
+    filter = { ...filter, endDate: { $lte: minDate } }
   }
+  
+  return filter
 }
 
 const listTrips = async (req, res) => {
