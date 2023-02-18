@@ -17,12 +17,12 @@ const ApplicationSchema = new mongoose.Schema({
         enum: StatusEnum,
         default: StatusEnum.PENDING,
     },
-    cancellationDate: {
-        type: Date,
+    rejectionReason: {
+        type: String,
         default: null
     },
-    cancellationReason: {
-        type: String,
+    cancellationDate: {
+        type: Date,
         default: null
     },
     comments: {

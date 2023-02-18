@@ -51,7 +51,7 @@ const updateApplication = async (req, res) => {
       return
     }
     if (newApplication.status === 'cancelled') {
-      if (!newApplication.cancellationReason) {
+      if (!newApplication.rejectionReason) {
         res.status(422).send('If you want to cancel the application, you must set a cancellation reason')
         return
       }

@@ -58,7 +58,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n   \"explorer\": \"63e143773c3c619deba0bd9c\",\n    \"trip\": \"63e144632ba413df4fa0d9b2\",\n    \"status\": \"cancelled\",\n    \"cancellationReason\": \"Porque no paga\"\n}",
+					"raw": "{\n   \"explorer\": \"63e143773c3c619deba0bd9c\",\n    \"trip\": \"63e144632ba413df4fa0d9b2\",\n    \"status\": \"cancelled\",\n    \"rejectionReason\": \"Porque no paga\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

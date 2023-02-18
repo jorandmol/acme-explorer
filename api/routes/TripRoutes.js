@@ -77,9 +77,9 @@ export default function (app) {
     )
 
   /**
-  * 
+  *
   * APPLICATIONS
-  * 
+  *
   */
 
   /**
@@ -101,15 +101,15 @@ export default function (app) {
   )
 
   /**
-  * 
+  *
   * SPONSORSHIPS
-  * 
+  *
   */
 
   /**
   * Add new sponsorship
-  *   RequiredRoles: Sponsor 
-  * 
+  *   RequiredRoles: Sponsor
+  *
   * Update trip's sponsorships
   *    RequiredRoles: Manager
   *

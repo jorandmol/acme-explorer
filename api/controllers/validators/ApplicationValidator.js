@@ -10,7 +10,7 @@ const updateValidator = [
   check('status').exists({ checkFalsy: true }).isIn(Object.values(StatusEnum)),
   check('explorer').exists({ checkFalsy: true }).isMongoId(),
   check('trip').exists({ checkFalsy: true }).isMongoId(),
-  check('cancellationReason').optional().isString().isLength({ min: 10, max: 255 }).trim().escape(),
+  check('rejectionReason').optional().isString().isLength({ min: 10, max: 255 }).trim().escape(),
   check('comment').optional().isString().isLength({ min: 10, max: 255 }).trim().escape(),
 ]
 
