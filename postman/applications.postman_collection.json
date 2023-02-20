@@ -52,67 +52,6 @@
 			"response": []
 		},
 		{
-			"name": "updateApplication",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n   \"explorer\": \"63e143773c3c619deba0bd9c\",\n    \"trip\": \"63e144632ba413df4fa0d9b2\",\n    \"status\": \"cancelled\",\n    \"rejectionReason\": \"Porque no paga\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}/:id",
-					"host": [
-						"{{host}}"
-					],
-					"port": "{{port}}",
-					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "63e252c0b974cd8036ace5c6"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "deleteApplication",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}/:id",
-					"host": [
-						"{{host}}"
-					],
-					"port": "{{port}}",
-					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "63e252c0b974cd8036ace5c6"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "createApplication",
 			"request": {
 				"method": "POST",
@@ -135,6 +74,150 @@
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "acceptApplication",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}/:id/accept",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id",
+						"accept"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63ed2787cae0b8536028cfa1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cancelApplication",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}/:id/accept",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id",
+						"accept"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63ed2787cae0b8536028cfa1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payApplication",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}/:id/accept",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id",
+						"accept"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63ed2787cae0b8536028cfa1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rejectApplication",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}/:id/accept",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id",
+						"accept"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63ed2787cae0b8536028cfa1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateApplicationComments",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"comments\": \"nada que comentar\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}/:id/comments",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}",
+						":id",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63ed2787cae0b8536028cfa1"
+						}
 					]
 				}
 			},

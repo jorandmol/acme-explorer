@@ -21,6 +21,10 @@ const ApplicationSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    paidAt: {
+        type: Date,
+        default: null
+    },
     cancellationDate: {
         type: Date,
         default: null
@@ -30,6 +34,12 @@ const ApplicationSchema = new mongoose.Schema({
         default: null
     }
 }, { timestamps: true })
+
+ApplicationSchema.statics.alreadyExists = async function (explorerId, tripId) {
+    const application = await this.findOne({ explorer: explorerId, trip: tripId })
+    if (application) return true
+    else return false
+}
 
 const model = mongoose.model('Application', ApplicationSchema)
 
