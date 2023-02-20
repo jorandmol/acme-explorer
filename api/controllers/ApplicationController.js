@@ -1,4 +1,5 @@
 import Application from '../models/ApplicationModel.js'
+import StatusEnum from '../enum/StatusEnum.js'
 
 const listApplications = async (req, res) => {
   const filters = {}
@@ -12,10 +13,14 @@ const listApplications = async (req, res) => {
 
 const createApplication = async (req, res) => {
   const newApplication = new Application(req.body)
-  try{
+  try {
+    if (await Application.alreadyExists(newApplication.explorer, newApplication.trip)) {
+      res.status(409).send('Application already exists')
+      return
+    }
     const application = await newApplication.save()
     res.json(application)
-  } catch(err){
+  } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(422).send(err)
     } else {
@@ -25,11 +30,11 @@ const createApplication = async (req, res) => {
 }
 
 const readApplication = async (req, res) => {
-  try{
+  try {
     const application = await Application.findById(req.params.id)
     if (application) {
       res.json(application)
-    } else{
+    } else {
       res.status(404).send('Application not found')
     }
   } catch (err) {
@@ -37,28 +42,127 @@ const readApplication = async (req, res) => {
   }
 }
 
-const updateApplication = async (req, res) => {
+const cancelApplication = async (req, res) => {
+  // pending, due o accepted y trip no started
+  const { id } = req.params;
+  try {
+    const application = await Application.findById(id);
+    if (application) {
+      if (application.status === StatusEnum.PENDING || application.status === StatusEnum.DUE || application.status === StatusEnum.ACCEPTED) {
+        application.status = StatusEnum.CANCELLED;
+        application.cancellationDate = new Date();
+        const updatedApplication = await application.save();
+        res.send(updatedApplication);
+      } else {
+        res.status(422).send({ message: "Application status is " + application.status.toUpperCase() + ", it must be PENDING, DUE or ACCEPTED" });
+      }
+    } else {
+      res.status(404).send({ message: "Application Not Found" });
+    }
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+};
+
+const acceptApplication = async (req, res) => {
+  // pending y trip no started
+  const { id } = req.params;
+  try {
+    const application = await Application.findById(id);
+    if (application) {
+      if (application.status === StatusEnum.PENDING) {
+        application.status = StatusEnum.DUE;
+        const updatedApplication = await application.save();
+        res.send(updatedApplication);
+      } else {
+        res.status(422).send({ message: "Application status is " + application.status.toUpperCase() + ", it must be PENDING" });
+      }
+    } else {
+      res.status(404).send({ message: "Application Not Found" });
+    }
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+};
+
+const rejectApplication = async (req, res) => {
+  // pending y trip no started
+  const { id } = req.params;
+  const { rejectionReason } = req.body;
+  try {
+    const application = await Application.findById(id);
+    if (application) {
+      if (application.status === StatusEnum.PENDING) {
+        application.status = StatusEnum.REJECTED;
+        application.rejectionReason = rejectionReason;
+        const updatedApplication = await application.save();
+        res.send(updatedApplication);
+      } else {
+        res.status(422).send({ message: "Application status is " + application.status.toUpperCase() + ", it must be PENDING" });
+      }
+    } else {
+      res.status(404).send({ message: "Application Not Found" });
+    }
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+};
+
+const payApplication = async (req, res) => {
+  // due y trip no started
+  const { id } = req.params;
+  try {
+    const application = await Application.findById(id);
+    if (application) {
+      if (application.status === StatusEnum.DUE) {
+        application.status = StatusEnum.ACCEPTED;
+        application.paidAt = new Date();
+        const updatedApplication = await application.save();
+        res.send(updatedApplication);
+      } else {
+        res.status(422).send({ message: "Application status is " + application.status.toUpperCase() + ", it must be DUE" });
+      }
+    } else {
+      res.status(404).send({ message: "Application Not Found" });
+    }
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+};
+
+const updateApplicationComments = async (req, res) => {
+  // pending y trip no started
   const { id } = req.params
-  const newApplication = req.body
+  const { comments } = req.body
   try {
     const application = await Application.findById(id)
-    if (!application) {
-      res.status(404).send('Application not found')
-      return
-    }
-    if (application.status === 'cancelled' && application.cancellationDate) {
-      res.status(422).send('The application has been cancelled, you can not modify it')
-      return
-    }
-    if (newApplication.status === 'cancelled') {
-      if (!newApplication.cancellationReason) {
-        res.status(422).send('If you want to cancel the application, you must set a cancellation reason')
-        return
+    if (application) {
+      if (application.status === StatusEnum.PENDING) {
+        application.comments = comments
+        const updatedApplication = await application.save();
+        res.send(updatedApplication);
+      } else {
+        res.status(422).send({ message: "Application status is " + application.status.toUpperCase() + ", it must be PENDING" });
       }
-      newApplication.cancellationDate = new Date()
+    } else {
+      res.status(404).send({ message: "Application Not Found" });
     }
-    const updatedApplication =  await Application.findOneAndUpdate({ _id: id }, newApplication, { new: true })
-    res.json(updatedApplication)
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(422).send(err)
@@ -68,17 +172,4 @@ const updateApplication = async (req, res) => {
   }
 }
 
-const deleteApplication = async (req, res) => {
-  try {
-    const deletionResponse = await Application.deleteOne({ _id: req.params.id })
-    if (deletionResponse.deletedCount > 0) {
-      res.json({ message: 'Application successfully deleted' })
-    } else {
-      res.status(404).send('Application could not be deleted')
-    }
-  } catch (err) {
-    res.status(500).send(err)
-  }
-}
-
-export {listApplications, createApplication, readApplication, updateApplication, deleteApplication}
+export { listApplications, createApplication, readApplication, cancelApplication, acceptApplication, rejectApplication, payApplication, updateApplicationComments }

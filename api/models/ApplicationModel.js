@@ -17,12 +17,16 @@ const ApplicationSchema = new mongoose.Schema({
         enum: StatusEnum,
         default: StatusEnum.PENDING,
     },
-    cancellationDate: {
+    rejectionReason: {
+        type: String,
+        default: null
+    },
+    paidAt: {
         type: Date,
         default: null
     },
-    cancellationReason: {
-        type: String,
+    cancellationDate: {
+        type: Date,
         default: null
     },
     comments: {
@@ -30,6 +34,12 @@ const ApplicationSchema = new mongoose.Schema({
         default: null
     }
 }, { timestamps: true })
+
+ApplicationSchema.statics.alreadyExists = async function (explorerId, tripId) {
+    const application = await this.findOne({ explorer: explorerId, trip: tripId })
+    if (application) return true
+    else return false
+}
 
 const model = mongoose.model('Application', ApplicationSchema)
 
