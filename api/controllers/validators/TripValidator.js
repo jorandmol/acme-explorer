@@ -49,9 +49,9 @@ const publishValidator = [
 
 const sponsorshipsValidator = [
   check('sponsorships.*.sponsor').exists({ checkFalsy: true }).isMongoId().trim().escape(),
-  check('sponsorships.*.banner').exists({ checkFalsy: true }).isURL(),
+  check('sponsorships.*.banner').exists({ checkFalsy: true }).isBase64(),
   check('sponsorships.*.link').exists({ checkFalsy: true }).isURL(),
-  check('sponsorships.*.isPayed').optional().isBoolean()
+  check('sponsorships.*.paidAt').optional().isISO8601().toDate()
 ]
 
 export { creationValidator, updateValidator, publishValidator, cancelValidator, sponsorshipsValidator }

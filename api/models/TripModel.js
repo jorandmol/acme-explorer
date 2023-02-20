@@ -7,35 +7,29 @@ const generateId = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4)
 const sponsorshipSchema = new mongoose.Schema({
     sponsor: {
         type: mongoose.Schema.Types.ObjectId,
-        required: false,
         ref: 'Actor'
     },
     banner: {
         type: String,
-        required: false
     },
     link: {
         type: String,
-        required: false
     },
-    isPayed: {
-        type: Boolean,
-        default: false
+    paidAt: {
+        type: Date,
+        default: null
     }
 })
 
 const stageSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: false
     },
     description: {
         type: String,
-        required: false
     },
     price: {
         type: Number,
-        required: false
     }
 })
 
@@ -62,7 +56,6 @@ const tripSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        required: false,
         default: 0.0
     },
     requirements: {
@@ -82,16 +75,14 @@ const tripSchema = new mongoose.Schema({
     pictures: [{
         title: {
             type: String,
-            required: false
         },
         image: {
             type: String,
-            required: false
         }
     }],
     publicationDate: {
         type: Date,
-        required: false
+        default: null
     },
     cancellationDate: {
         type: Date,
@@ -115,17 +106,14 @@ tripSchema.index({ ticker: 'text', title: 'text', description: 'text' })
 tripSchema.pre('save', function (callback) {
     const newTrip = this
     const date = dateFormat(new Date(), 'yymmdd')
-    
+
     const ticker = `${date}-${generateId()}`
     newTrip.ticker = ticker
 
     // Initialize other values
     newTrip.pictures = []
     newTrip.stages = []
-    newtrip.sponsorships = []
-    newTrip.publicationDate = null
-    newTrip.cancellationDate = null
-    newTrip.cancelationReason = null
+    newTrip.sponsorships = []
 
     callback()
 })

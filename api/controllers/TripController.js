@@ -18,9 +18,9 @@ const _generateFilter = (filters) => {
     filter = { ...filter, startDate: { $gte: minDate } }
   }
   if (maxDate) {
-    filter = { ...filter, endDate: { $lte: minDate } }
+    filter = { ...filter, endDate: { $lte: maxDate } }
   }
-  
+
   return filter
 }
 
@@ -130,8 +130,8 @@ const publishTrip = async (req, res) => {
       res.status(422).send('The trip has already been published')
       return
     }
-    
-    trip.publicationDate = publicationDate 
+
+    trip.publicationDate = publicationDate
     const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, trip, { new: true })
     res.json(updatedTrip)
   } catch (err) {
@@ -162,10 +162,10 @@ const cancelTrip = async (req, res) => {
     }
     const apps = await Application.find({ 'trip': trip._id, 'status': StatusEnum.ACCEPTED })
     if (apps.length > 0) {
-      res.status(422).send('The trip has applications accepted, you can not cancel it')
+      res.status(422).send('The trip has accepted applications, you can not cancel it')
       return
     }
-    
+
     trip.cancellationDate = new Date()
     trip.cancellationReason = cancellationReason
     const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, trip, { new: true })
