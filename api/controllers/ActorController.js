@@ -68,4 +68,27 @@ const deleteActor = async (req, res) => {
   }
 }
 
+const listSponsorSponsorships = async (req, res) => {
+  const { id } = req.params
+  try {
+    const sponshorships = await Trip.aggregate([
+      { $unwind: sponsorships },
+      { $match: {
+        "sponshorships.sponsor": id 
+      }},
+      { $project: {
+        _id: "$sponsorships._id",
+        sponsor: "$sponsorships.sponsor",
+        banner: "$sponsorships.banner",
+        link: "$sponsorships.link",
+        paidAt: "$sponsorships.paidAt"
+      }}
+    ])
+
+    res.json(sponshorships)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
 export {listActors, createActor, readActor, updateActor, deleteActor}
