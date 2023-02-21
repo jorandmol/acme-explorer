@@ -57,7 +57,7 @@ BASE_ENDPOINT: `/api/v1`
 - `PUT   /finders/{explorerId}`
 
 
-### onfig
+### config
 - `GET   /config`
 - `PUT   /config`
 
