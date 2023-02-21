@@ -34,7 +34,7 @@ BASE_ENDPOINT: `/api/v1`
 
 
 ### sponsorships
-- `POST    /sponsorships` (añadir dentro del array de sponsorships en trip)
+- `POST    /sponsorships`
 - `GET     /sponsorships/{id}`
 - `PUT     /sponsorships/{id}`
 - `PATCH   /sponsorships/{id}/pay`
