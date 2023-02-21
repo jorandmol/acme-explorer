@@ -162,10 +162,20 @@ const getExplorerApplications = async (req, res) => {
 const listSponsorSponsorships = async (req, res) => {
   const { id } = req.params
   try {
+    const actor = await Actor.findById(req.params.id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role === RoleEnum.SPONSOR) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
     const sponshorships = await Trip.aggregate([
       { $unwind: sponsorships },
       { $match: {
-        "sponshorships.sponsor": id 
+        "sponshorships.sponsor": actor._id 
       }},
       { $project: {
         _id: "$sponsorships._id",
