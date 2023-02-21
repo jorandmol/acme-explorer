@@ -159,20 +159,34 @@ const getExplorerApplications = async (req, res) => {
   }
 }
 
-const getSponsorSponsorships = async (req, res) => {
+const listSponsorSponsorships = async (req, res) => {
+  const { id } = req.params
   try {
     const actor = await Actor.findById(req.params.id)
-    if (actor) {
-      if (actor.role === RoleEnum.SPONSOR) {
-        // sponsorships from trips.sponsorships (array) and each sponsorship has a sponsor field
-        const trips = await Trip.find({ sponsorships: { $elemMatch: { sponsor: actor._id } } })
-        res.json(trips)
-      } else {
-        res.status(403).send('Actor is not a sponsor')
-      }
-    } else {
+    if (!actor) {
       res.status(404).send('Actor not found')
+      return
     }
+    if (actor.role !== RoleEnum.SPONSOR) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
+    const sponshorships = await Trip.aggregate([
+      { $unwind: sponsorships },
+      { $match: {
+        "sponshorships.sponsor": actor._id 
+      }},
+      { $project: {
+        _id: "$sponsorships._id",
+        sponsor: "$sponsorships.sponsor",
+        banner: "$sponsorships.banner",
+        link: "$sponsorships.link",
+        paidAt: "$sponsorships.paidAt"
+      }}
+    ])
+
+    res.json(sponshorships)
   } catch (err) {
     res.status(500).send(err)
   }
@@ -180,4 +194,4 @@ const getSponsorSponsorships = async (req, res) => {
 
 
 
-export {listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor, getManagerTrips, getManagerApplications, getExplorerApplications, getSponsorSponsorships}
+export {listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor, getManagerTrips, getManagerApplications, getExplorerApplications, listSponsorSponsorships}

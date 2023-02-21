@@ -8,6 +8,7 @@ import actorRoutes from './api/routes/ActorRoutes.js'
 import finderRoutes from './api/routes/FinderRoutes.js'
 import configRoutes from './api/routes/ConfigRoutes.js'
 import loaderRoutes from './api/routes/LoaderRoutes.js'
+import sponsorshipRoutes from './api/routes/SponsorshipRoutes.js'
 import dataWarehouseRoutes from './api/routes/DataWarehouseRoutes.js'
 import { initializeDataWarehouseJob } from "./api/services/DataWarehouseServiceProvider.js";
 
@@ -26,6 +27,7 @@ app.get('/', function (req, res) {
 applicationRoutes(app)
 tripRoutes(app)
 actorRoutes(app)
+sponsorshipRoutes(app)
 finderRoutes(app)
 configRoutes(app)
 loaderRoutes(app)

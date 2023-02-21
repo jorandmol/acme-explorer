@@ -1,4 +1,4 @@
-import { listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor, getManagerTrips, getManagerApplications, getExplorerApplications, getSponsorSponsorships} from '../controllers/ActorController.js'
+import { listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor, getManagerTrips, getManagerApplications, getExplorerApplications, listSponsorSponsorships} from '../controllers/ActorController.js'
 import { creationValidator } from '../controllers/validators/ActorValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
@@ -94,7 +94,7 @@ export default function (app) {
    * @url /v1/sponsors/:id/sponsorships
    */
   app.route('/v1/sponsors/:id/sponsorships')
-    .get(getSponsorSponsorships)
+    .get(listSponsorSponsorships)
 
 
 }
