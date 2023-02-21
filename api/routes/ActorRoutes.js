@@ -1,4 +1,4 @@
-import { listActors, createActor, readActor, updateActor, deleteActor } from '../controllers/ActorController.js'
+import { listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor, getManagerTrips, getManagerApplications, getExplorerApplications, listSponsorSponsorships} from '../controllers/ActorController.js'
 import { creationValidator } from '../controllers/validators/ActorValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
@@ -35,5 +35,66 @@ export default function (app) {
     .get(readActor)
     .put(updateActor)
     .delete(deleteActor)
+
+  /**
+   * Ban an actor
+   *   RequiredRoles: to be manager
+   * @section actors
+   * @type patch
+   * @url /v1/actors/:id/ban
+   */
+  app.route('/v1/actors/:id/ban')
+    .patch(banActor)
+
+  /**
+   * Unban an actor
+   *  RequiredRoles: to be manager
+   * @section actors
+   * @type patch
+   * @url /v1/actors/:id/unban
+   */
+  app.route('/v1/actors/:id/unban')
+    .patch(unbanActor)
+
+  /**
+   * Get manager trips
+   * RequiredRoles: to be manager
+   * @section trips
+   * @type get
+   * @url /v1/managers/:id/trips
+   */
+  app.route('/v1/managers/:id/trips')
+    .get(getManagerTrips)
+
+  /**
+   * Get manager applications
+   *
+   * @section applications
+   * @type get
+   * @url /v1/managers/:id/applications
+   */
+  app.route('/v1/managers/:id/applications')
+    .get(getManagerApplications)
+
+     /**
+   * Get explorer applications
+   *
+   * @section applications
+   * @type get
+   * @url /v1/explorers/:id/applications
+   */
+  app.route('/v1/explorers/:id/applications')
+  .get(getExplorerApplications)
+
+  /**
+   * Get sponsor sponsorships
+   *
+   * @section sponsorships
+   * @type get
+   * @url /v1/sponsors/:id/sponsorships
+   */
+  app.route('/v1/sponsors/:id/sponsorships')
+    .get(listSponsorSponsorships)
+
 
 }

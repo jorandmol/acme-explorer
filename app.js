@@ -9,6 +9,8 @@ import finderRoutes from './api/routes/FinderRoutes.js'
 import configRoutes from './api/routes/ConfigRoutes.js'
 import loaderRoutes from './api/routes/LoaderRoutes.js'
 import sponsorshipRoutes from './api/routes/SponsorshipRoutes.js'
+import dataWarehouseRoutes from './api/routes/DataWarehouseRoutes.js'
+import { initializeDataWarehouseJob } from "./api/services/DataWarehouseServiceProvider.js";
 
 dotenv.config()
 
@@ -29,6 +31,8 @@ sponsorshipRoutes(app)
 finderRoutes(app)
 configRoutes(app)
 loaderRoutes(app)
+dataWarehouseRoutes(app)
+
 
 try {
   await initMongoDBConnection()
@@ -38,3 +42,5 @@ try {
 } catch(err){
   console.error('ACME-Explorer RESTful API could not connect to DB ' + err)
 }
+
+initializeDataWarehouseJob();
