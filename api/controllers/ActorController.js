@@ -167,7 +167,7 @@ const listSponsorSponsorships = async (req, res) => {
       res.status(404).send('Actor not found')
       return
     }
-    if (actor.role === RoleEnum.SPONSOR) {
+    if (actor.role !== RoleEnum.SPONSOR) {
       res.status(403).send('Actor does not have the required role')
       return
     }
