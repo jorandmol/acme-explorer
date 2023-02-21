@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "80e55076-80e2-42fc-b5da-ac30b5636109",
-		"name": "dataWareHouse",
+		"_postman_id": "d04fcdc5-54e8-470b-ba1d-347d781490e7",
+		"name": "dataWarehouse",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25718361"
 	},
 	"item": [
 		{
-			"name": "readDataWareHouse",
+			"name": "readDataWarehouse",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -26,12 +26,31 @@
 			"response": []
 		},
 		{
-			"name": "createDataWareHouse",
+			"name": "readLatestDataWarehouse",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{pathLatest}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{apiVersion}}",
+						"{{pathLatest}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createDataWarehouse",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}?rebuildPeriod=*/30 * * * * *",
 					"host": [
 						"{{host}}"
 					],
@@ -39,6 +58,12 @@
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}"
+					],
+					"query": [
+						{
+							"key": "rebuildPeriod",
+							"value": "*/30 * * * * *"
+						}
 					]
 				}
 			},
@@ -128,11 +153,15 @@
 		},
 		{
 			"key": "cubePath2",
-			"value": "cube/explorersBySpentMoney"
+			"value": "dashboard/explorers-by-spent-money"
 		},
 		{
 			"key": "cubePath1",
-			"value": "cube/spentMoneyByExplorer"
+			"value": "dashboard/spent-money-by-explorer"
+		},
+		{
+			"key": "pathLatest",
+			"value": "dashboard/latest"
 		}
 	]
 }
