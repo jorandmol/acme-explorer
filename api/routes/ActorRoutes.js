@@ -1,4 +1,4 @@
-import { listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor, getManagerTrips, getManagerApplications, getSponsorSponsorships} from '../controllers/ActorController.js'
+import { listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor, getManagerTrips, getManagerApplications, getExplorerApplications, getSponsorSponsorships} from '../controllers/ActorController.js'
 import { creationValidator } from '../controllers/validators/ActorValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
@@ -67,24 +67,34 @@ export default function (app) {
     .get(getManagerTrips)
 
   /**
-   * Get actor applications
-   * 
+   * Get manager applications
+   *
    * @section applications
    * @type get
-   * @url /v1/actors/:id/applications
+   * @url /v1/managers/:id/applications
    */
-  app.route('/v1/actors/:id/applications')
+  app.route('/v1/managers/:id/applications')
     .get(getManagerApplications)
+
+     /**
+   * Get explorer applications
+   *
+   * @section applications
+   * @type get
+   * @url /v1/explorers/:id/applications
+   */
+  app.route('/v1/explorers/:id/applications')
+  .get(getExplorerApplications)
 
   /**
    * Get sponsor sponsorships
-   * 
+   *
    * @section sponsorships
    * @type get
    * @url /v1/sponsors/:id/sponsorships
    */
   app.route('/v1/sponsors/:id/sponsorships')
     .get(getSponsorSponsorships)
-  
+
 
 }

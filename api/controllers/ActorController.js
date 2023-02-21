@@ -2,6 +2,7 @@ import Actor from '../models/ActorModel.js'
 import Trip from '../models/TripModel.js'
 import Application from '../models/ApplicationModel.js'
 import RoleEnum from '../enum/RoleEnum.js'
+import mongoose from 'mongoose'
 
 const listActors = async (req, res) => {
   const filters = {}
@@ -124,8 +125,8 @@ const getManagerApplications = async (req, res) => {
     const actor = await Actor.findById(req.params.id)
     if (actor) {
       if (actor.role === RoleEnum.MANAGER) {
-        const trips = await Application.find({ trip: { creator: actor._id } })
-        res.json(trips)
+        const applications = await Application.find({ trip: { creator: actor._id } })
+        res.json(applications)
       } else {
         res.status(403).send('Actor is not a manager')
       }
@@ -142,8 +143,11 @@ const getExplorerApplications = async (req, res) => {
     const actor = await Actor.findById(req.params.id)
     if (actor) {
       if (actor.role === RoleEnum.EXPLORER) {
-        const trips = await Application.find({ trip: { explorer: actor._id } })
-        res.json(trips)
+        const applications = await Application.aggregate([
+          { $match: { explorer: new mongoose.Types.ObjectId(actor._id) } },
+          { $group: { _id: "$status", applications: { $push: "$$ROOT" } } }
+        ]);
+        res.json(applications)
       } else {
         res.status(403).send('Actor is not an explorer')
       }
@@ -176,4 +180,4 @@ const getSponsorSponsorships = async (req, res) => {
 
 
 
-export {listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor, getManagerTrips, getManagerApplications, getSponsorSponsorships}
+export {listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor, getManagerTrips, getManagerApplications, getExplorerApplications, getSponsorSponsorships}
