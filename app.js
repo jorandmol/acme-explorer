@@ -8,6 +8,7 @@ import actorRoutes from './api/routes/ActorRoutes.js'
 import finderRoutes from './api/routes/FinderRoutes.js'
 import configRoutes from './api/routes/ConfigRoutes.js'
 import loaderRoutes from './api/routes/LoaderRoutes.js'
+import dataWareHouseRoutes from './api/routes/DataWareHouseRoutes.js'
 
 dotenv.config()
 
@@ -27,6 +28,8 @@ actorRoutes(app)
 finderRoutes(app)
 configRoutes(app)
 loaderRoutes(app)
+dataWareHouseRoutes(app)
+
 
 try {
   await initMongoDBConnection()

@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "80e55076-80e2-42fc-b5da-ac30b5636109",
+		"name": "dataWareHouse",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25718361"
+	},
+	"item": [
+		{
+			"name": "readDataWareHouse",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createDataWareHouse",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createCube1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"explorer\": \"63ed27e96bb6772e5dab87ad\",\r\n    \"period\": \"M06\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{cubePath1}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{apiVersion}}",
+						"{{cubePath1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createCube2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"period\": \"M36\",\r\n    \"theta\": \"gte\",\r\n    \"v\": 1\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{cubePath2}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{apiVersion}}",
+						"{{cubePath2}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "path",
+			"value": "dashboard"
+		},
+		{
+			"key": "cubePath2",
+			"value": "cube/explorersBySpentMoney"
+		},
+		{
+			"key": "cubePath1",
+			"value": "cube/spentMoneyByExplorer"
+		}
+	]
+}
