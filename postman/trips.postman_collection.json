@@ -10,7 +10,13 @@
 			"name": "listTrips",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e143773c3c619deba0bd8b",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
 					"host": [
@@ -19,6 +25,24 @@
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/search",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"search"
 					],
 					"query": [
 						{
@@ -55,7 +79,13 @@
 			"name": "listTripApplications",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e143773c3c619deba0bd8b",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/applications",
 					"host": [
@@ -116,7 +146,13 @@
 			"name": "addTripSponsorship",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e143773c3c619deba0bd8b",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"sponsor\": \"63e144632ba413df4fa0d9b6\",\n    \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n    \"link\": \"https://www.cristianoronaldo.com/#cr7\"\n}",
@@ -151,7 +187,13 @@
 			"name": "updateTripSponsorship",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e143773c3c619deba0bd8b",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"sponsorships\": [\n        {\n            \"sponsor\": \"63e144632ba413df4fa0d9b6\",\n            \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n            \"link\": \"https://www.cristianoronaldo.com/#cr7\"\n        }\n    ]\n}",
@@ -211,7 +253,13 @@
 			"name": "publishTrip",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e143773c3c619deba0bd8b",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"publicationDate\": \"2023-06-10T13:00:00.000Z\"\n}",
@@ -246,7 +294,13 @@
 			"name": "cancelTrip",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e143773c3c619deba0bd8b",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"cancellationReason\": \"Porque quiero\"\n}",
@@ -281,7 +335,13 @@
 			"name": "updateTrip",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e143773c3c619deba0bd8b",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"creator\": \"63e143773c3c619deba0bd8b\",\n    \"description\": \"description\",\n    \"price\": 0,\n    \"requirements\": \"reequirements\",\n    \"startDate\": \"2023-07-10T13:00:00.000Z\",\n    \"endDate\": \"2023-07-15T13:00:00.000Z\",\n    \"pictures\": [],\n    \"stages\": [],\n    \"sponsorships\": [],\n    \"createdAt\": \"2023-02-06T18:18:11.446Z\",\n    \"updatedAt\": \"2023-02-06T18:18:11.446Z\",\n    \"ticker\": \"230206-NOTT\"\n}",
@@ -315,7 +375,13 @@
 			"name": "deleteTrip",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e143773c3c619deba0bd8b",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
 					"host": [
@@ -340,10 +406,16 @@
 			"name": "createTrip",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e143773c3c619deba0bd8b",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"creator\": \"63e143773c3c619deba0bd8b\",\n    \"description\": \"description2\",\n    \"requirements\": \"reequirements2\",\n    \"startDate\": \"2023-07-10 15:00:00.000\",\n    \"endDate\": \"2023-07-15 15:00:00.000\"\n}",
+					"raw": "{\n    \"description\": \"description2\",\n    \"requirements\": \"reequirements2\",\n    \"startDate\": \"2023-07-10 15:00:00.000\",\n    \"endDate\": \"2023-07-15 15:00:00.000\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
