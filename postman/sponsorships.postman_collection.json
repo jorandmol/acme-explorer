@@ -32,10 +32,40 @@
 			"response": []
 		},
 		{
+			"name": "listSponsorships",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e144632ba413df4fa0d9b6",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"host": [
+						"{{host}}{{port}}"
+					],
+					"path": [
+						"{{apiVersion}}",
+						"{{path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "paySponsorship",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e144632ba413df4fa0d9b6",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/pay",
 					"host": [
@@ -61,10 +91,16 @@
 			"name": "updateSponsorship",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e144632ba413df4fa0d9b6",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"sponsor\": \"63e144632ba413df4fa0d9b6\",\n    \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n    \"link\": \"https://www.cristianoronaldo.com/#cr7\"\n}",
+					"raw": "{\n    \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n    \"link\": \"https://www.cristianoronaldo.com/#cr7\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -95,7 +131,13 @@
 			"name": "deleteSponsorship",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e144632ba413df4fa0d9b6",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
 					"host": [
@@ -120,10 +162,16 @@
 			"name": "createSponsorship",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "actorId",
+						"value": "63e144632ba413df4fa0d9b6",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"tripId\": \"63e144632ba413df4fa0d9b5\",\n    \"sponsor\": \"63e144632ba413df4fa0d9b6\",\n    \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n    \"link\": \"https://www.cristianoronaldo.com/#cr7\"\n}",
+					"raw": "{\n    \"tripId\": \"63e144632ba413df4fa0d9b5\",\n    \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n    \"link\": \"https://www.cristianoronaldo.com/#cr7\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
