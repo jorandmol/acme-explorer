@@ -12,7 +12,6 @@ const mongoDBCredentials = (mongoDBUser && mongoDBPass) ? mongoDBUser + ':' + mo
 
 const mongoDBHostname = process.env.DATABASE_HOST || 'localhost'
 const mongoDBPort = process.env.DATABASE_PORT || '27017'
-const mongoDBName = process.env.DATABASE_NAME || 'ACME-Explorer'
 
 const mongoDBURI = process.env.DATABASE_URI || 'mongodb://' + mongoDBCredentials + mongoDBHostname + ':' + mongoDBPort + '/' + mongoDBName
 const mongoDBOptions = {
