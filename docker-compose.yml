@@ -10,9 +10,9 @@ services:
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
-      - MONGODB_USERNAME=${DATABASE_USER}
-      - MONGODB_PASSWORD=${DATABASE_PASSWORD}
-      - MONGODB_DATABASE=${NODE_ENV}
+      - MONGO_INITDB_ROOT_USERNAME=${DATABASE_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DATABASE_PASSWORD}
+      - MONGO_INITDB_DATABASE=ACME-Explorer
   acme-explorer:
     build: .
     ports:
