@@ -1,6 +1,8 @@
 import Trip from '../models/TripModel.js'
+import Actor from '../models/ActorModel.js'
 import Application from '../models/ApplicationModel.js'
 import StatusEnum from '../enum/StatusEnum.js'
+import RoleEnum from '../enum/RoleEnum.js'
 
 const _generateFilter = (filters) => {
   const { keyword, minPrice, maxPrice, minDate, maxDate } = filters
@@ -24,7 +26,7 @@ const _generateFilter = (filters) => {
   return filter
 }
 
-const listTrips = async (req, res) => {
+export const searchTrips = async (req, res) => {
   const filters = _generateFilter(req.query)
   try {
     const trips = await Trip.find(filters)
@@ -34,12 +36,46 @@ const listTrips = async (req, res) => {
   }
 }
 
-const createTrip = async (req, res) => {
+export const listTrips = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actorId } = req.headers
+  try {
+    const actor = await Actor.findById(actorId)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
+    const trips = await Trip.find({ creator: actorId })
+    res.json(trips)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
+export const createTrip = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actorId } = req.headers
   const newTrip = new Trip(req.body)
-  try{
+  try {
+    const actor = await Actor.findById(actorId)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
+    newTrip.creator = actor._id
     const trip = await newTrip.save()
     res.json(trip)
-  } catch(err){
+  } catch(err) {
     if (err.name === 'ValidationError') {
       res.status(422).send(err)
     } else {
@@ -48,8 +84,8 @@ const createTrip = async (req, res) => {
   }
 }
 
-const readTrip = async (req, res) => {
-  try{
+export const readTrip = async (req, res) => {
+  try {
     const trip = await Trip.findById(req.params.id)
     if (trip) {
       res.json(trip)
@@ -61,13 +97,29 @@ const readTrip = async (req, res) => {
   }
 }
 
-const updateTrip = async (req, res) => {
+export const updateTrip = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actorId } = req.headers
   const { id } = req.params
   const newTrip = req.body
   try {
+    const actor = await Actor.findById(actorId)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+    
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator !== actor._id) {
+      res.status(403).send('Actor does not have the required permissions')
       return
     }
     if (trip.publicationDate) {
@@ -76,7 +128,7 @@ const updateTrip = async (req, res) => {
     }
 
     if (!newTrip.price) {
-      newTrip.price = newStages.map(stage => stage.price).reduce((totalPrice, actualPrice) => totalPrice + actualPrice, 0)
+      newTrip.price = [ ...newTrip.stages ].map(stage => stage.price).reduce((totalPrice, actualPrice) => totalPrice + actualPrice, 0)
     }
 
     // Keep dates null
@@ -94,11 +146,28 @@ const updateTrip = async (req, res) => {
   }
 }
 
-const deleteTrip = async (req, res) => {
+export const deleteTrip = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actorId } = req.headers
+  const { id } = req.params
   try {
+    const actor = await Actor.findById(actorId)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+    
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator !== actor._id) {
+      res.status(403).send('Actor does not have the required permissions')
       return
     }
     if (trip.publicationDate) {
@@ -106,7 +175,7 @@ const deleteTrip = async (req, res) => {
       return
     }
 
-    const deletionResponse = await Trip.deleteOne({ _id: req.params.id })
+    const deletionResponse = await Trip.deleteOne({ _id: trip._id })
     if (deletionResponse.deletedCount > 0) {
       res.json({ message: 'Trip successfully deleted' })
     } else {
@@ -117,13 +186,29 @@ const deleteTrip = async (req, res) => {
   }
 }
 
-const publishTrip = async (req, res) => {
+export const publishTrip = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actorId } = req.headers
   const { id } = req.params
   const { publicationDate } = req.body
   try {
+    const actor = await Actor.findById(actorId)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+    
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator !== actor._id) {
+      res.status(403).send('Actor does not have the required permissions')
       return
     }
     if (trip.publicationDate) {
@@ -143,13 +228,29 @@ const publishTrip = async (req, res) => {
   }
 }
 
-const cancelTrip = async (req, res) => {
+export const cancelTrip = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actorId } = req.headers
   const { id } = req.params
   const { cancellationReason } = req.body
   try {
+    const actor = await Actor.findById(actorId)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+    
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator !== actor._id) {
+      res.status(403).send('Actor does not have the required permissions')
       return
     }
     if (trip.cancellationDate) {
@@ -179,12 +280,28 @@ const cancelTrip = async (req, res) => {
   }
 }
 
-const listTripApplications = async (req, res) => {
+export const listTripApplications = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actorId } = req.headers
   const { id } = req.params
   try {
+    const actor = await Actor.findById(actorId)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+    
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator !== actor._id) {
+      res.status(403).send('Actor does not have the required permissions')
       return
     }
 
@@ -195,7 +312,8 @@ const listTripApplications = async (req, res) => {
   }
 }
 
-const createTripApplication = async (req, res) => {
+// TODO: check user logged is explorer and append to the newApplication
+export const createTripApplication = async (req, res) => {
   const { id } = req.params
   const newApplication = new Application(req.body)
   try {
@@ -217,13 +335,29 @@ const createTripApplication = async (req, res) => {
   }
 }
 
-const createTripSponsorship = async (req, res) => {
+export const createTripSponsorship = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actorId } = req.headers
   const { id } = req.params
   const newSponsorship = req.body
   try {
+    const actor = await Actor.findById(actorId)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+    
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator !== actor._id) {
+      res.status(403).send('Actor does not have the required permissions')
       return
     }
 
@@ -239,13 +373,29 @@ const createTripSponsorship = async (req, res) => {
   }
 }
 
-const updateTripSponsorships = async (req, res) => {
+export const updateTripSponsorships = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actorId } = req.headers
   const { id } = req.params
   const { sponsorships } = req.body
   try {
+    const actor = await Actor.findById(actorId)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+    
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator !== actor._id) {
+      res.status(403).send('Actor does not have the required permissions')
       return
     }
 
@@ -260,5 +410,3 @@ const updateTripSponsorships = async (req, res) => {
     }
   }
 }
-
-export { listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication, createTripSponsorship, updateTripSponsorships }
