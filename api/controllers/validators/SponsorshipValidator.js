@@ -1,7 +1,6 @@
 import { check } from 'express-validator'
 
 const updateValidator = [
-  check('sponsor').exists({ checkFalsy: true }).isMongoId(),
   check('banner').exists({ checkFalsy: true }).isBase64(),
   check('link').exists({ checkFalsy: true }).isURL()
 ]

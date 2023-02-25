@@ -68,7 +68,7 @@ const createSponsorship = async (req, res) => {
       return
     }
 
-    const newSponsorship = { sponsor, banner, link }
+    const newSponsorship = { sponsor: actor._id, banner, link }
     trip.sponsorships = [ ...trip.sponsorships, newSponsorship ] 
     const updatedTrip = await Trip.findOneAndUpdate({ _id: tripId }, trip, { new: true })
     res.json(updatedTrip)
@@ -117,7 +117,7 @@ const updateSponsorship = async (req, res) => {
   // TODO: change this when auth is implemented
   const { id } = req.params
   const { actorId } = req.headers
-  const newSponsorship = req.body
+  const { banner, link } = req.body
   try {
     const actor = await Actor.findById(actorId)
     if (!actor) {
@@ -157,6 +157,7 @@ const updateSponsorship = async (req, res) => {
     const trip = Trip.findById(sponsorship.tripId)
     if (!trip) { throw new Error('Sponsorship associated with no trip') }
 
+    const newSponsorship = { ...sponsorship, banner, link }
     const prevSponsorships = [ ...trip.sponsorships ].filter(s => s._id !== sponsorship._id)
     const newSponsorships = [ ...prevSponsorships, newSponsorship ]
     const updatedTrip = await Trip.findOneAndUpdate({ _id: sponsorship.tripId }, { $set: {"sponsorships.$": newSponsorships }}, { new: true })
