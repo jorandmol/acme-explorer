@@ -38,9 +38,9 @@ export const searchTrips = async (req, res) => {
 
 export const listTrips = async (req, res) => {
   // TODO: change this when auth is implemented
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -50,7 +50,7 @@ export const listTrips = async (req, res) => {
       return
     }
 
-    const trips = await Trip.find({ creator: actorId })
+    const trips = await Trip.find({ creator: actor_id })
     res.json(trips)
   } catch (err) {
     res.status(500).send(err)
@@ -59,10 +59,10 @@ export const listTrips = async (req, res) => {
 
 export const createTrip = async (req, res) => {
   // TODO: change this when auth is implemented
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   const newTrip = new Trip(req.body)
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -99,11 +99,11 @@ export const readTrip = async (req, res) => {
 
 export const updateTrip = async (req, res) => {
   // TODO: change this when auth is implemented
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   const { id } = req.params
   const newTrip = req.body
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -112,7 +112,7 @@ export const updateTrip = async (req, res) => {
       res.status(403).send('Actor does not have the required role')
       return
     }
-    
+
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
@@ -148,10 +148,10 @@ export const updateTrip = async (req, res) => {
 
 export const deleteTrip = async (req, res) => {
   // TODO: change this when auth is implemented
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   const { id } = req.params
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -160,7 +160,7 @@ export const deleteTrip = async (req, res) => {
       res.status(403).send('Actor does not have the required role')
       return
     }
-    
+
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
@@ -188,11 +188,11 @@ export const deleteTrip = async (req, res) => {
 
 export const publishTrip = async (req, res) => {
   // TODO: change this when auth is implemented
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   const { id } = req.params
   const { publicationDate } = req.body
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -201,7 +201,7 @@ export const publishTrip = async (req, res) => {
       res.status(403).send('Actor does not have the required role')
       return
     }
-    
+
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
@@ -230,11 +230,11 @@ export const publishTrip = async (req, res) => {
 
 export const cancelTrip = async (req, res) => {
   // TODO: change this when auth is implemented
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   const { id } = req.params
   const { cancellationReason } = req.body
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -243,7 +243,7 @@ export const cancelTrip = async (req, res) => {
       res.status(403).send('Actor does not have the required role')
       return
     }
-    
+
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
@@ -282,10 +282,10 @@ export const cancelTrip = async (req, res) => {
 
 export const listTripApplications = async (req, res) => {
   // TODO: change this when auth is implemented
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   const { id } = req.params
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -294,12 +294,13 @@ export const listTripApplications = async (req, res) => {
       res.status(403).send('Actor does not have the required role')
       return
     }
-    
+
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
       return
     }
+    console.log(actor._id, trip.creator)
     if (trip.creator !== actor._id) {
       res.status(403).send('Actor does not have the required permissions')
       return
@@ -337,11 +338,11 @@ export const createTripApplication = async (req, res) => {
 
 export const createTripSponsorship = async (req, res) => {
   // TODO: change this when auth is implemented
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   const { id } = req.params
   const newSponsorship = req.body
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -350,7 +351,7 @@ export const createTripSponsorship = async (req, res) => {
       res.status(403).send('Actor does not have the required role')
       return
     }
-    
+
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
@@ -375,11 +376,11 @@ export const createTripSponsorship = async (req, res) => {
 
 export const updateTripSponsorships = async (req, res) => {
   // TODO: change this when auth is implemented
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   const { id } = req.params
   const { sponsorships } = req.body
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -388,7 +389,7 @@ export const updateTripSponsorships = async (req, res) => {
       res.status(403).send('Actor does not have the required role')
       return
     }
-    
+
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')

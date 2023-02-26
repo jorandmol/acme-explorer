@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "712a7896-ecc5-4af8-a9db-6916d1000588",
+		"_postman_id": "1bf337e6-b050-4d9e-8c03-bf0811622614",
 		"name": "trips",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24780295"
+		"_exporter_id": "25718361"
 	},
 	"item": [
 		{
@@ -81,8 +81,8 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "actorId",
-						"value": "63e143773c3c619deba0bd8b",
+						"key": "actor_id",
+						"value": "63ed27e96f6eb8680cc0b162",
 						"type": "text"
 					}
 				],
@@ -148,7 +148,7 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "actorId",
+						"key": "actor_id",
 						"value": "63e143773c3c619deba0bd8b",
 						"type": "text"
 					}
@@ -189,7 +189,7 @@
 				"method": "PATCH",
 				"header": [
 					{
-						"key": "actorId",
+						"key": "actor_id",
 						"value": "63e143773c3c619deba0bd8b",
 						"type": "text"
 					}
@@ -255,7 +255,7 @@
 				"method": "PATCH",
 				"header": [
 					{
-						"key": "actorId",
+						"key": "actor_id",
 						"value": "63e143773c3c619deba0bd8b",
 						"type": "text"
 					}
@@ -296,7 +296,7 @@
 				"method": "PATCH",
 				"header": [
 					{
-						"key": "actorId",
+						"key": "actor_id",
 						"value": "63e143773c3c619deba0bd8b",
 						"type": "text"
 					}
@@ -337,7 +337,7 @@
 				"method": "PUT",
 				"header": [
 					{
-						"key": "actorId",
+						"key": "actor_id",
 						"value": "63e143773c3c619deba0bd8b",
 						"type": "text"
 					}
@@ -377,7 +377,7 @@
 				"method": "DELETE",
 				"header": [
 					{
-						"key": "actorId",
+						"key": "actor_id",
 						"value": "63e143773c3c619deba0bd8b",
 						"type": "text"
 					}
@@ -408,14 +408,14 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "actorId",
-						"value": "63e143773c3c619deba0bd8b",
+						"key": "actor_id",
+						"value": "63ed27e9319c95803ebcef72",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"description\": \"description2\",\n    \"requirements\": \"reequirements2\",\n    \"startDate\": \"2023-07-10 15:00:00.000\",\n    \"endDate\": \"2023-07-15 15:00:00.000\"\n}",
+					"raw": "{\n    \"title\": \"Title\",\n    \"description\": \"description\",\n    \"requirements\": \"reequirements\",\n    \"startDate\": \"2023-07-10 15:00:00.000\",\n    \"endDate\": \"2023-07-15 15:00:00.000\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
