@@ -1,5 +1,6 @@
 import Trip from '../models/TripModel.js'
 import Actor from '../models/ActorModel.js'
+import RoleEnum from '../enum/RoleEnum.js'
 
 /*
 * TODO:
@@ -9,9 +10,9 @@ import Actor from '../models/ActorModel.js'
 
 const listSponsorships = async (req, res) => {
   // TODO: change this when auth is implemented
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -21,10 +22,10 @@ const listSponsorships = async (req, res) => {
       return
     }
 
-    const sponshorships = await Trip.aggregate([
-      { $unwind: sponsorships },
+    const sponsorships = await Trip.aggregate([
+      { $unwind: "$sponsorships" },
       { $match: {
-        "sponshorships.sponsor": actor._id 
+        "sponshorships.sponsor": actor._id
       }},
       { $project: {
         _id: "$sponsorships._id",
@@ -41,18 +42,19 @@ const listSponsorships = async (req, res) => {
       }}
     ])
 
-    res.json(sponshorships)
+    res.json(sponsorships)
   } catch (err) {
+    console.log(err)
     res.status(500).send(err)
   }
 }
 
 const createSponsorship = async (req, res) => {
   // TODO: change this when auth is implemented
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   const { tripId, banner, link } = req.body
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -69,7 +71,7 @@ const createSponsorship = async (req, res) => {
     }
 
     const newSponsorship = { sponsor: actor._id, banner, link }
-    trip.sponsorships = [ ...trip.sponsorships, newSponsorship ] 
+    trip.sponsorships = [ ...trip.sponsorships, newSponsorship ]
     const updatedTrip = await Trip.findOneAndUpdate({ _id: tripId }, trip, { new: true })
     res.json(updatedTrip)
   } catch (err) {
@@ -85,9 +87,9 @@ const readSponsorship = async (req, res) => {
   const { id } = req.params
   try {
     const sponsorships = await Trip.aggregate([
-      { $unwind: sponsorships },
+      { $unwind: "$sponsorships" },
       { $match: {
-        "sponshorships._id": id 
+        "sponshorships._id": id
       }},
       { $project: {
         _id: "$sponsorships._id",
@@ -116,10 +118,10 @@ const readSponsorship = async (req, res) => {
 const updateSponsorship = async (req, res) => {
   // TODO: change this when auth is implemented
   const { id } = req.params
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   const { banner, link } = req.body
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -130,10 +132,10 @@ const updateSponsorship = async (req, res) => {
     }
 
     const sponsorships = await Trip.aggregate([
-      { $unwind: sponsorships },
+      { $unwind: "$sponsorships" },
       { $match: {
         "sponshorships._id": id,
-        "sponshorships.sponsor": actor._id 
+        "sponshorships.sponsor": actor._id
       }},
       { $project: {
         _id: "$sponsorships._id",
@@ -163,6 +165,7 @@ const updateSponsorship = async (req, res) => {
     const updatedTrip = await Trip.findOneAndUpdate({ _id: sponsorship.tripId }, { $set: {"sponsorships.$": newSponsorships }}, { new: true })
     res.json(updatedTrip)
   } catch (err) {
+    console.log(err)
     res.status(500).send(err)
   }
 }
@@ -170,9 +173,9 @@ const updateSponsorship = async (req, res) => {
 const paySponsorship = async (req, res) => {
   // TODO: change this when auth is implemented
   const { id } = req.params
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -183,10 +186,10 @@ const paySponsorship = async (req, res) => {
     }
 
     const sponsorships = await Trip.aggregate([
-      { $unwind: sponsorships },
+      { $unwind: "$sponsorships" },
       { $match: {
         "sponshorships._id": id,
-        "sponshorships.sponsor": actor._id 
+        "sponshorships.sponsor": actor._id
       }},
       { $project: {
         _id: "$sponsorships._id",
@@ -223,9 +226,9 @@ const paySponsorship = async (req, res) => {
 const deleteSponsorship = async (req, res) => {
   // TODO: change this when auth is implemented
   const { id } = req.params
-  const { actorId } = req.headers
+  const { actor_id } = req.headers
   try {
-    const actor = await Actor.findById(actorId)
+    const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
       return
@@ -236,10 +239,10 @@ const deleteSponsorship = async (req, res) => {
     }
 
     const sponsorships = await Trip.aggregate([
-      { $unwind: sponsorships },
+      { $unwind: "$sponsorships" },
       { $match: {
         "sponshorships._id": id,
-        "sponshorships.sponsor": actor._id 
+        "sponshorships.sponsor": actor._id
       }},
       { $project: {
         _id: "$sponsorships._id",
