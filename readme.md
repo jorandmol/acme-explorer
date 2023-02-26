@@ -3,22 +3,18 @@
  - Jorge Andrea Molina
  - Juan Carlos Cortés Muñoz
  - Carlos Núñez Arenas
- 
+
 ## API endpoints
 BASE_ENDPOINT: `/api/v1`
- 
+
 ### actors
 
 - `POST  /actors`
 - `GET   /actors`
 - `GET   /actors/{id}`
 - `PUT   /actors/{id}`
-- `PATCH /actors/{id}/ban` 
+- `PATCH /actors/{id}/ban`
 - `PATCH /actors/{id}/unban`
-- `GET   /managers/{id}/trips`
-- `GET   /managers/{id}/applications`
-- `GET   /explorers/{id}/applications`
-- `GET   /sponsors/{id}/sponsorships`
 
 
 ### trips
@@ -61,6 +57,6 @@ BASE_ENDPOINT: `/api/v1`
 - `GET   /config`
 - `PUT   /config`
 
- 
+
  ## UML Class Diagram
  [UML Class Diagram PDF file](./docs/acme-explorer-model.pdf)
