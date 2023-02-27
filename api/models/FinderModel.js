@@ -30,7 +30,7 @@ const FinderSchema = new mongoose.Schema({
         default: null
     },
     results: {
-        type: [Trip],
+        type: [Trip.schema],
         default: []
     },
     expiryDate: {
