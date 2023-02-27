@@ -1,5 +1,6 @@
 import Trip from '../models/TripModel.js'
 import Application from '../models/ApplicationModel.js'
+import GloabalConfig from '../models/GlobalConfigModel.js'
 import StatusEnum from '../enum/StatusEnum.js'
 
 const _generateFilter = (filters) => {
@@ -24,10 +25,21 @@ const _generateFilter = (filters) => {
   return filter
 }
 
+const _getLimit = async () => {
+  try {
+    const config = await GloabalConfig.findOne()
+    return config?.numResults || 10
+  } catch (err) {
+    console.error(err)
+    return 10
+  }
+}
+
 const listTrips = async (req, res) => {
   const filters = _generateFilter(req.query)
   try {
-    const trips = await Trip.find(filters)
+    const limit = await _getLimit()
+    const trips = await Trip.find(filters).limit(limit)
     res.json(trips)
   } catch (err) {
     res.status(500).send(err)
