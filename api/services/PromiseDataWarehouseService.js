@@ -34,18 +34,21 @@ const buildNewDataWarehouse = (resultsDataWarehouse, period) => {
 
 const getRebuildPeriod = async () => {
   try {
-    const rebuildPeriod = await GlobalConfig.findOne();
-    return rebuildPeriod.dataWhRefresh || 10;
+    const config = await GlobalConfig.findOne();
+    if (!config)
+      return defaultPeriod
+    return "*/" + String(config.dataWhRefresh) + " * * * * *"
   }
   catch (err) {
     console.log("Error getting rebuild period: " + err)
   }
 }
 
-const initializeDataWarehouseJob = () => {
-  dataWarehouseJob = new cron.CronJob(defaultPeriod, async () => {
-    const rebuildPeriod = await getRebuildPeriod();
-    console.log("Cron job submitted. Rebuild period: " + rebuildPeriod + " seconds")
+const initializeDataWarehouseJob = async () => {
+  const rebuildPeriod = await getRebuildPeriod()
+  defaultPeriod = rebuildPeriod
+  dataWarehouseJob = new cron.CronJob(rebuildPeriod, async () => {
+    console.log("Cron job submitted. Rebuild period: " + defaultPeriod + " seconds")
     try {
       const dataWarehouseResults = await Promise.all([
         computeTripsManagedByManager(),
@@ -55,7 +58,7 @@ const initializeDataWarehouseJob = () => {
         computeAveragePriceRange(),
         computeTopSearchedKeywords()
       ])
-      const newDataWarehouse = buildNewDataWarehouse(dataWarehouseResults, rebuildPeriod)
+      const newDataWarehouse = buildNewDataWarehouse(dataWarehouseResults, defaultPeriod)
       try {
         newDataWarehouse.save()
         console.log("new DataWarehouse succesfully saved. Date: " + new Date())
@@ -70,13 +73,14 @@ const initializeDataWarehouseJob = () => {
 
 const restartDataWarehouseJob = async (period) => {
   try {
-    defaultPeriod = "*/" + String(period) + " * * * * *"
-    dataWarehouseJob.setTime(new cron.CronTime(defaultPeriod))
+    const rebuildPeriod = "*/" + String(period) + " * * * * *"
+    dataWarehouseJob.setTime(new cron.CronTime(rebuildPeriod))
 
-    const config = await GlobalConfig.findOne();
-    config.dataWhRefresh = period;
+    const config = await GlobalConfig.findOne()
+    config.dataWhRefresh = period
     config.save();
 
+    defaultPeriod = rebuildPeriod
     dataWarehouseJob.start()
   } catch (err) {
     console.log("Error restarting datawarehouse job: " + err)
