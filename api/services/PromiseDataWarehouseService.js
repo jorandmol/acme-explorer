@@ -3,6 +3,7 @@ import DataWarehouse from "../models/DataWarehouseModel.js"
 import Trip from "../models/TripModel.js"
 import Application from "../models/ApplicationModel.js"
 import Finder from "../models/FinderModel.js"
+import GlobalConfig from "../models/GlobalConfigModel.js"
 import StatusEnum from "../enum/StatusEnum.js"
 import mongoose from "mongoose"
 
@@ -31,9 +32,20 @@ const buildNewDataWarehouse = (resultsDataWarehouse, period) => {
   return newDataWarehouse
 }
 
+const getRebuildPeriod = async () => {
+  try {
+    const rebuildPeriod = await GlobalConfig.findOne();
+    return rebuildPeriod.dataWhRefresh || 10;
+  }
+  catch (err) {
+    console.log("Error getting rebuild period: " + err)
+  }
+}
+
 const initializeDataWarehouseJob = () => {
   dataWarehouseJob = new cron.CronJob(defaultPeriod, async () => {
-    console.log("Cron job submitted. Rebuild period: " + defaultPeriod)
+    const rebuildPeriod = await getRebuildPeriod();
+    console.log("Cron job submitted. Rebuild period: " + rebuildPeriod + " seconds")
     try {
       const dataWarehouseResults = await Promise.all([
         computeTripsManagedByManager(),
@@ -43,7 +55,7 @@ const initializeDataWarehouseJob = () => {
         computeAveragePriceRange(),
         computeTopSearchedKeywords()
       ])
-      const newDataWarehouse = buildNewDataWarehouse(dataWarehouseResults, defaultPeriod)
+      const newDataWarehouse = buildNewDataWarehouse(dataWarehouseResults, rebuildPeriod)
       try {
         newDataWarehouse.save()
         console.log("new DataWarehouse succesfully saved. Date: " + new Date())
@@ -56,10 +68,19 @@ const initializeDataWarehouseJob = () => {
   }, null, true, "Europe/Madrid")
 }
 
-const restartDataWarehouseJob = (period) => {
-  defaultPeriod = period
-  dataWarehouseJob.setTime(new cron.CronTime(period))
-  dataWarehouseJob.start()
+const restartDataWarehouseJob = async (period) => {
+  try {
+    defaultPeriod = "*/" + String(period) + " * * * * *"
+    dataWarehouseJob.setTime(new cron.CronTime(defaultPeriod))
+
+    const config = await GlobalConfig.findOne();
+    config.dataWhRefresh = period;
+    config.save();
+
+    dataWarehouseJob.start()
+  } catch (err) {
+    console.log("Error restarting datawarehouse job: " + err)
+  }
 }
 
 const computeTripsManagedByManager = async () => {

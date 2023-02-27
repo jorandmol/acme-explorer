@@ -24,12 +24,12 @@ const lastIndicator = async (req, res) => {
 }
 
 const rebuildPeriod = (req, res) => {
-    const period = req.query.rebuildPeriod
+    const { period } = req.body
 
-    console.log("Updating rebuild period. Request: period:" + period)
+    console.log("Updating rebuild period. Request: period: " + period + " seconds")
     restartDataWarehouseJob(period)
 
-    res.send(period)
+    res.status(200).send({period})
 }
 
 const spentMoneyByExplorer = async (req, res) => {
