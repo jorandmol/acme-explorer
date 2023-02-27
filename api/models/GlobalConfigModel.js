@@ -16,7 +16,11 @@ const GlobalConfigSchema = new mongoose.Schema({
     sponsorshipFlatRate: {
         type: Number,
         default: 0.1
-    }
+    },
+    dataWhRefresh : {
+        type: Number,
+        default: 10
+    },
 }, { timestamps: true })
 
 const model = mongoose.model('GlobalConfig', GlobalConfigSchema)
