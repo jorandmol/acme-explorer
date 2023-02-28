@@ -1,0 +1,37 @@
+openapi: 3.0.0
+info:
+  title: globalConfig
+  version: 1.0.0
+servers:
+  - url: localhost://
+paths:
+  /v1/config:
+    get:
+      tags:
+        - globalConfig
+      summary: listConfig
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - globalConfig
+      summary: updateConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                defaultLanguage: en
+                cacheLifetime: 3600
+                numResults: 10
+                sponsorshipFlatRate: 0.15
+                dataWhRefresh: 30
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

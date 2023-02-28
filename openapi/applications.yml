@@ -1,0 +1,162 @@
+openapi: 3.0.0
+info:
+  title: applications
+  version: 1.0.0
+servers:
+  - url: localhost://
+paths:
+  /v1/applications:
+    get:
+      tags:
+        - applications
+      summary: listApplications
+      parameters:
+        - name: actor_id
+          in: header
+          schema:
+            type: string
+          example: 63ed27e930e2f4865b4879b5
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - applications
+      summary: createApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                explorer: 63ed27e94fe8c982b12e364a
+                trip: 63f38bf93ff6b85445a656af
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/applications/{id}:
+    get:
+      tags:
+        - applications
+      summary: readApplication
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63f38500a1322a7f86e360bf
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/applications/{id}/accept:
+    patch:
+      tags:
+        - applications
+      summary: acceptApplication
+      requestBody:
+        content: {}
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63f38500a1322a7f86e360bf
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/applications/{id}/cancel:
+    patch:
+      tags:
+        - applications
+      summary: cancelApplication
+      requestBody:
+        content: {}
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63ed27871a2c14ab5ea16301
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/applications/{id}/pay:
+    patch:
+      tags:
+        - applications
+      summary: payApplication
+      requestBody:
+        content: {}
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63f38500a1322a7f86e360bf
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/applications/{id}/reject:
+    patch:
+      tags:
+        - applications
+      summary: rejectApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                rejectionReason: The payment period has expired
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63f38500a1322a7f86e360bf
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/applications/{id}/comments:
+    patch:
+      tags:
+        - applications
+      summary: updateApplicationComments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                comments: nada que comentar
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63ed27871a2c14ab5ea16301
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

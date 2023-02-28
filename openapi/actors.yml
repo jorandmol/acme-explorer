@@ -1,0 +1,101 @@
+openapi: 3.0.0
+info:
+  title: actors
+  version: 1.0.0
+servers:
+  - url: localhost://
+paths:
+  /v1/actors:
+    get:
+      tags:
+        - actors
+      summary: listActors
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - actors
+      summary: createActor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Pepardo
+                surname: Rodríguez
+                email: pep_la_presion@gmail.com
+                password: 123456789abcde
+                phone: '+34674747478'
+                address: 13 Rue del percebe
+                role: explorer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/actors/{id}:
+    get:
+      tags:
+        - actors
+      summary: readActor
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63e2732f60ea8efc059fb802
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - actors
+      summary: updateActor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Pepardo
+                surname: Rodríguez
+                email: la_presion@gmail.com
+                password: LOL123456789abcde
+                phone: '+34674747478'
+                address: 15 Rue del percebe
+                role: explorer
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63e2732f60ea8efc059fb802
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - actors
+      summary: deleteActor
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63e2732f60ea8efc059fb802
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

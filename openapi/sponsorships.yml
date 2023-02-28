@@ -1,0 +1,140 @@
+openapi: 3.0.0
+info:
+  title: sponsorships
+  version: 1.0.0
+servers:
+  - url: localhost://
+paths:
+  /v1/sponsorships/{id}:
+    get:
+      tags:
+        - sponsorships
+      summary: readSponsorship
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63fdbe7e997e6f723bfce9b6
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - sponsorships
+      summary: updateSponsorship
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                banner: >-
+                  TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=
+                link: https://messi.com/#goat
+      parameters:
+        - name: actor_id
+          in: header
+          schema:
+            type: string
+          example: 63ed27e9db335a31d53ee505
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63fdbe7e997e6f723bfce9b6
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - sponsorships
+      summary: deleteSponsorship
+      parameters:
+        - name: actor_id
+          in: header
+          schema:
+            type: string
+          example: 63ed27e9db335a31d53ee505
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63fb9b9f8ac35cf72c1610a2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/sponsorships:
+    get:
+      tags:
+        - sponsorships
+      summary: listSponsorships
+      parameters:
+        - name: actor_id
+          in: header
+          schema:
+            type: string
+          example: 63ed27e9db335a31d53ee505
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - sponsorships
+      summary: createSponsorship
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                tripId: 63f38bf93ff6b85445a656af
+                banner: >-
+                  TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=
+                link: https://www.cristianoronaldo.com/#cr7
+      parameters:
+        - name: actor_id
+          in: header
+          schema:
+            type: string
+          example: 63ed27e9db335a31d53ee505
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/sponsorships/{id}/pay:
+    patch:
+      tags:
+        - sponsorships
+      summary: paySponsorship
+      requestBody:
+        content: {}
+      parameters:
+        - name: actor_id
+          in: header
+          schema:
+            type: string
+          example: 63ed27e9db335a31d53ee505
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63fdbe7e997e6f723bfce9b6
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
