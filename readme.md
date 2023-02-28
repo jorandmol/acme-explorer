@@ -32,7 +32,6 @@ BASE_ENDPOINT: `/api/v1`
 - `GET     /trips/{id}/applications`
 - `PATCH   /trips/{id}/publish`
 - `PATCH   /trips/{id}/cancel`
-- `PATCH   /trips/{id}/sponsor`
 - `PUT     /trips/{id}`
 - `DELETE  /trips/{id}`
 
