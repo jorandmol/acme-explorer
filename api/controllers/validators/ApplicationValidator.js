@@ -8,7 +8,6 @@ const creationValidator = [
 ]
 
 const creationFromTripValidator = [
-  check('explorer').exists({ checkFalsy: true }).isMongoId(),
   check('comments').optional().isString().isLength({ min: 10, max: 255 }).trim().escape(),
 ]
 
