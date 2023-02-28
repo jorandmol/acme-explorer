@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import initMongoDBConnection from './api/config/mongoose.js'
+import swagger from './swagger.js'
 import applicationRoutes from './api/routes/ApplicationRoutes.js'
 import tripRoutes from './api/routes/TripRoutes.js'
 import actorRoutes from './api/routes/ActorRoutes.js'
@@ -33,6 +34,7 @@ configRoutes(app)
 loaderRoutes(app)
 dataWarehouseRoutes(app)
 
+swagger(app)
 
 try {
   await initMongoDBConnection()
