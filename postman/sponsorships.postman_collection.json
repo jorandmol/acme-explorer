@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "75561bd8-25bc-4f10-a7ed-625b22ea1c52",
+		"_postman_id": "13db3034-4338-4ac6-9744-3126651c772f",
 		"name": "sponsorships",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25718361"
+		"_exporter_id": "24780295"
 	},
 	"item": [
 		{
@@ -24,7 +24,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63e144632ba413df4fa0d9b2"
+							"value": "63fdbe7e997e6f723bfce9b6"
 						}
 					]
 				}
@@ -80,7 +80,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63fb9b468803cdb3f2b351de"
+							"value": "63fdbe7e997e6f723bfce9b6"
 						}
 					]
 				}
@@ -94,13 +94,13 @@
 				"header": [
 					{
 						"key": "actor_id",
-						"value": "63ed27e91e92ba02851d0082",
+						"value": "63ed27e9db335a31d53ee505",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n    \"link\": \"https://www.google.com\"\n}",
+					"raw": "{\n    \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n    \"link\": \"https://messi.com/#goat\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -120,7 +120,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63fb9b468803cdb3f2b351de"
+							"value": "63fdbe7e997e6f723bfce9b6"
 						}
 					]
 				}
@@ -151,7 +151,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63fb9b468803cdb3f2b351de"
+							"value": "63fb9b9f8ac35cf72c1610a2"
 						}
 					]
 				}

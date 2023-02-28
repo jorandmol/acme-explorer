@@ -1,6 +1,7 @@
 import Trip from '../models/TripModel.js'
 import Actor from '../models/ActorModel.js'
 import RoleEnum from '../enum/RoleEnum.js'
+import { ObjectId } from 'mongodb';
 
 /*
 * TODO:
@@ -8,7 +9,7 @@ import RoleEnum from '../enum/RoleEnum.js'
 * to a middleware so it's easier to maintain
 */
 
-const listSponsorships = async (req, res) => {
+export const listSponsorships = async (req, res) => {
   // TODO: change this when auth is implemented
   const { actor_id } = req.headers
   try {
@@ -21,26 +22,32 @@ const listSponsorships = async (req, res) => {
       res.status(403).send('Actor does not have the required role')
       return
     }
-
-    const sponsorships = await Trip.aggregate([
-      { $unwind: "$sponsorships" },
-      { $match: {
-        "sponshorships.sponsor": actor._id
-      }},
-      { $project: {
-        _id: "$sponsorships._id",
-        sponsor: "$sponsorships.sponsor",
-        banner: "$sponsorships.banner",
-        link: "$sponsorships.link",
-        paidAt: "$sponsorships.paidAt",
-        trip: {
-          _id: "$_id",
-          ticker: "$ticker",
-          title: "$title",
-          description: "$description"
+    
+    const sponsorships = await Trip.aggregate(      
+      [
+        {
+          '$unwind': '$sponsorships'
+        }, {
+          '$match': {
+            'sponsorships.sponsor': actor._id
+          }
+        }, {
+          '$project': {
+            '_id': '$sponsorships._id', 
+            'sponsor': '$sponsorships.sponsor', 
+            'banner': '$sponsorships.banner', 
+            'link': '$sponsorships.link', 
+            'paidAt': '$sponsorships.paidAt', 
+            'trip': {
+              '_id': '$_id', 
+              'ticker': '$ticker', 
+              'title': '$title', 
+              'description': '$description'
+            }
+          }
         }
-      }}
-    ])
+      ]
+    )
 
     res.json(sponsorships)
   } catch (err) {
@@ -49,7 +56,7 @@ const listSponsorships = async (req, res) => {
   }
 }
 
-const createSponsorship = async (req, res) => {
+export const createSponsorship = async (req, res) => {
   // TODO: change this when auth is implemented
   const { actor_id } = req.headers
   const { tripId, banner, link } = req.body
@@ -83,13 +90,13 @@ const createSponsorship = async (req, res) => {
   }
 }
 
-const readSponsorship = async (req, res) => {
+export const readSponsorship = async (req, res) => {
   const { id } = req.params
   try {
     const sponsorships = await Trip.aggregate([
       { $unwind: "$sponsorships" },
       { $match: {
-        "sponshorships._id": id
+        "sponsorships._id": ObjectId(id)
       }},
       { $project: {
         _id: "$sponsorships._id",
@@ -115,7 +122,7 @@ const readSponsorship = async (req, res) => {
   }
 }
 
-const updateSponsorship = async (req, res) => {
+export const updateSponsorship = async (req, res) => {
   // TODO: change this when auth is implemented
   const { id } = req.params
   const { actor_id } = req.headers
@@ -134,8 +141,8 @@ const updateSponsorship = async (req, res) => {
     const sponsorships = await Trip.aggregate([
       { $unwind: "$sponsorships" },
       { $match: {
-        "sponshorships._id": id,
-        "sponshorships.sponsor": actor._id
+        "sponsorships._id": ObjectId(id),
+        "sponsorships.sponsor": actor._id
       }},
       { $project: {
         _id: "$sponsorships._id",
@@ -151,18 +158,19 @@ const updateSponsorship = async (req, res) => {
       return
     }
 
-    const sponsorship = sponsorships[0]
+    const { tripId, ...sponsorship } = sponsorships[0]
     if (sponsorship.paidAt) {
       res.status(422).send('The sponsorship has already been payed, you can not modify it')
       return
     }
-    const trip = Trip.findById(sponsorship.tripId)
+    const trip = await Trip.findById(tripId)
     if (!trip) { throw new Error('Sponsorship associated with no trip') }
 
     const newSponsorship = { ...sponsorship, banner, link }
-    const prevSponsorships = [ ...trip.sponsorships ].filter(s => s._id !== sponsorship._id)
+    const prevSponsorships = trip.sponsorships.filter(s => s._id.toString() !== sponsorship._id.toString())
     const newSponsorships = [ ...prevSponsorships, newSponsorship ]
-    const updatedTrip = await Trip.findOneAndUpdate({ _id: sponsorship.tripId }, { $set: {"sponsorships.$": newSponsorships }}, { new: true })
+
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: ObjectId(tripId) }, { $set: {"sponsorships": newSponsorships }}, { new: true })
     res.json(updatedTrip)
   } catch (err) {
     console.log(err)
@@ -170,7 +178,7 @@ const updateSponsorship = async (req, res) => {
   }
 }
 
-const paySponsorship = async (req, res) => {
+export const paySponsorship = async (req, res) => {
   // TODO: change this when auth is implemented
   const { id } = req.params
   const { actor_id } = req.headers
@@ -188,8 +196,8 @@ const paySponsorship = async (req, res) => {
     const sponsorships = await Trip.aggregate([
       { $unwind: "$sponsorships" },
       { $match: {
-        "sponshorships._id": id,
-        "sponshorships.sponsor": actor._id
+        "sponsorships._id": ObjectId(id),
+        "sponsorships.sponsor": actor._id
       }},
       { $project: {
         _id: "$sponsorships._id",
@@ -205,25 +213,26 @@ const paySponsorship = async (req, res) => {
       return
     }
 
-    const sponsorship = sponsorships[0]
+    const { tripId, ...sponsorship } = sponsorships[0]
     if (sponsorship.paidAt) {
-      res.status(422).send('The sponsorship has already been payed')
+      res.status(422).send('The sponsorship has already been payed, you can not modify it')
       return
     }
-    const trip = Trip.findById(sponsorship.tripId)
+    const trip = await Trip.findById(tripId)
     if (!trip) { throw new Error('Sponsorship associated with no trip') }
 
     sponsorship.paidAt = new Date()
-    const prevSponsorships = [ ...trip.sponsorships ].filter(s => s._id !== sponsorship._id)
+    const prevSponsorships = trip.sponsorships.filter(s => s._id.toString() !== sponsorship._id.toString())
     const newSponsorships = [ ...prevSponsorships, sponsorship ]
-    const updatedTrip = await Trip.findOneAndUpdate({ _id: sponsorship.tripId }, { $set: {"sponsorships.$": newSponsorships }}, { new: true })
+    
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: ObjectId(tripId) }, { $set: {"sponsorships": newSponsorships }}, { new: true })
     res.json(updatedTrip)
   } catch (err) {
     res.status(500).send(err)
   }
 }
 
-const deleteSponsorship = async (req, res) => {
+export const deleteSponsorship = async (req, res) => {
   // TODO: change this when auth is implemented
   const { id } = req.params
   const { actor_id } = req.headers
@@ -241,8 +250,8 @@ const deleteSponsorship = async (req, res) => {
     const sponsorships = await Trip.aggregate([
       { $unwind: "$sponsorships" },
       { $match: {
-        "sponshorships._id": id,
-        "sponshorships.sponsor": actor._id
+        "sponsorships._id": ObjectId(id),
+        "sponsorships.sponsor": actor._id
       }},
       { $project: {
         _id: "$sponsorships._id",
@@ -258,20 +267,18 @@ const deleteSponsorship = async (req, res) => {
       return
     }
 
-    const sponsorship = sponsorships[0]
+    const { tripId, ...sponsorship } = sponsorships[0]
     if (sponsorship.paidAt) {
-      res.status(422).send('The sponsorship has already been payed, you can not delete it')
+      res.status(422).send('The sponsorship has already been payed, you can not modify it')
       return
     }
-    const trip = Trip.findById(sponsorship.tripId)
+    const trip = await Trip.findById(tripId)
     if (!trip) { throw new Error('Sponsorship associated with no trip') }
 
     const newSponsorships = [ ...trip.sponsorships ].filter(s => s._id !== sponsorship._id)
-    const updatedTrip = await Trip.findOneAndUpdate({ _id: sponsorship.tripId }, { $set: {"sponsorships.$": newSponsorships }}, { new: true })
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: ObjectId(tripId) }, { $set: {"sponsorships": newSponsorships }}, { new: true })
     res.json({ message: 'Sponsorship successfully deleted from trip ' + updatedTrip.ticker })
   } catch (err) {
     res.status(500).send(err)
   }
 }
-
-export { listSponsorships, createSponsorship, readSponsorship, updateSponsorship, paySponsorship, deleteSponsorship}
