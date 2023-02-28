@@ -24,14 +24,14 @@ BASE_ENDPOINT: `/api/v1`
 
 ### trips
 
+- `GET     /trips`
 - `POST    /trips`
 - `POST    /trips/{id}/applications`
-- `GET     /trips ?keyword ?minPrice ?maxPrice ?minDate ?maxDate`
+- `GET     /search ?keyword ?minPrice ?maxPrice ?minDate ?maxDate`
 - `GET     /trips/{id}`
 - `GET     /trips/{id}/applications`
 - `PATCH   /trips/{id}/publish`
 - `PATCH   /trips/{id}/cancel`
-- `PATCH   /trips/{id}/sponsor`
 - `PUT     /trips/{id}`
 - `DELETE  /trips/{id}`
 
