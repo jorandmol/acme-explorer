@@ -24,7 +24,8 @@ const convertToOpenApi = async (filename) => {
         const result = await postmanToOpenApi(postmanFilename, null, { defaultTag: collectionName })
         if (result) {
             console.log(`OpenAPI spec for collection ${collectionName} created`)
-            await writeFile(openApiFilename, result)
+            const formatResult = result.replace(/\/080\//g, '/')
+            await writeFile(openApiFilename, formatResult)
             console.log(`OpenAPI file ${collectionName}.yml generated`)
         } else {
             throw new Error()
