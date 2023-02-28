@@ -3,6 +3,7 @@ import DataWarehouse from "../models/DataWarehouseModel.js"
 import Trip from "../models/TripModel.js"
 import Application from "../models/ApplicationModel.js"
 import Finder from "../models/FinderModel.js"
+import GlobalConfig from "../models/GlobalConfigModel.js"
 import StatusEnum from "../enum/StatusEnum.js"
 import mongoose from "mongoose"
 
@@ -31,9 +32,23 @@ const buildNewDataWarehouse = (resultsDataWarehouse, period) => {
   return newDataWarehouse
 }
 
-const initializeDataWarehouseJob = () => {
-  dataWarehouseJob = new cron.CronJob(defaultPeriod, async () => {
-    console.log("Cron job submitted. Rebuild period: " + defaultPeriod)
+const getRebuildPeriod = async () => {
+  try {
+    const config = await GlobalConfig.findOne();
+    if (!config)
+      return defaultPeriod
+    return "*/" + String(config.dataWhRefresh) + " * * * * *"
+  }
+  catch (err) {
+    console.log("Error getting rebuild period: " + err)
+  }
+}
+
+const initializeDataWarehouseJob = async () => {
+  const rebuildPeriod = await getRebuildPeriod()
+  defaultPeriod = rebuildPeriod
+  dataWarehouseJob = new cron.CronJob(rebuildPeriod, async () => {
+    console.log("Cron job submitted. Rebuild period: " + defaultPeriod + " seconds")
     try {
       const dataWarehouseResults = await Promise.all([
         computeTripsManagedByManager(),
@@ -56,10 +71,20 @@ const initializeDataWarehouseJob = () => {
   }, null, true, "Europe/Madrid")
 }
 
-const restartDataWarehouseJob = (period) => {
-  defaultPeriod = period
-  dataWarehouseJob.setTime(new cron.CronTime(period))
-  dataWarehouseJob.start()
+const restartDataWarehouseJob = async (period) => {
+  try {
+    const rebuildPeriod = "*/" + String(period) + " * * * * *"
+    dataWarehouseJob.setTime(new cron.CronTime(rebuildPeriod))
+
+    const config = await GlobalConfig.findOne()
+    config.dataWhRefresh = period
+    config.save();
+
+    defaultPeriod = rebuildPeriod
+    dataWarehouseJob.start()
+  } catch (err) {
+    console.log("Error restarting datawarehouse job: " + err)
+  }
 }
 
 const computeTripsManagedByManager = async () => {

@@ -1,4 +1,6 @@
 import { listConfig, updateConfig } from '../controllers/ConfigController.js'
+import { configValidator } from '../controllers/validators/ConfigValidator.js'
+import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
   /**
@@ -13,5 +15,9 @@ export default function (app) {
   */
   app.route('/v1/config')
     .get(listConfig)
-    .put(updateConfig)
+    .put(
+      configValidator,
+      handleExpressValidation,
+      updateConfig
+    )
 }

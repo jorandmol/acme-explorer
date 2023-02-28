@@ -12,11 +12,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}"
@@ -32,7 +31,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n   \"defaultLanguage\": \"en\",\n    \"cacheLifetime\": 3600,\n    \"numResults\": 10,\n    \"sponsorshipFlatRate\": 0.15\n}",
+					"raw": "{\n   \"defaultLanguage\": \"en\",\n    \"cacheLifetime\": 3600,\n    \"numResults\": 10,\n    \"sponsorshipFlatRate\": 0.15,\n    \"dataWhRefresh\": 30\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -40,11 +39,10 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}"

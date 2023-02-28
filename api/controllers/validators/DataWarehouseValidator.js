@@ -1,5 +1,5 @@
-import { check } from "express-validator";
-import OperatorEnum from "../../enum/OperatorEnum.js";
+import { check } from "express-validator"
+import OperatorEnum from "../../enum/OperatorEnum.js"
 
 const _checkPeriodFormat = async (period, { req }) => {
     const regex = /^M[0-9]{2}$|^Y[0-9]{2}$/
@@ -23,6 +23,10 @@ const _checkPeriodFormat = async (period, { req }) => {
     }
 }
 
+const rebuildPeriodValidator = [
+    check("period").exists({ checkFalsy: true }).isInt({ min: 5, max: 36000 }).trim().escape()
+];
+
 const spentMoneyByExplorerValidator = [
     check("period").exists({ checkFalsy: true }).isString().trim().escape().custom(_checkPeriodFormat),
     check("explorer").exists({ checkFalsy: true }).isMongoId()
@@ -34,4 +38,4 @@ const explorersBySpentMoneyValidator = [
     check("v").exists({ checkFalsy: true }).isNumeric()
 ];
 
-export { spentMoneyByExplorerValidator, explorersBySpentMoneyValidator };
+export { rebuildPeriodValidator, spentMoneyByExplorerValidator, explorersBySpentMoneyValidator }

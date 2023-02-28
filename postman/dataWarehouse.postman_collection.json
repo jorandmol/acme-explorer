@@ -12,11 +12,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}"
@@ -31,11 +30,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{pathLatest}}",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{pathLatest}}",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{pathLatest}}"
@@ -45,25 +43,28 @@
 			"response": []
 		},
 		{
-			"name": "createDataWarehouse",
+			"name": "updateRebuildPeriod",
 			"request": {
-				"method": "POST",
+				"method": "PATCH",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"period\": 30\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}?rebuildPeriod=*/30 * * * * *",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/rebuild-period",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
-						"{{path}}"
-					],
-					"query": [
-						{
-							"key": "rebuildPeriod",
-							"value": "*/30 * * * * *"
-						}
+						"{{path}}",
+						"rebuild-period"
 					]
 				}
 			},
@@ -84,11 +85,10 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{cubePath1}}",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{cubePath1}}",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{cubePath1}}"
@@ -112,11 +112,10 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{cubePath2}}",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{cubePath2}}",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{cubePath2}}"

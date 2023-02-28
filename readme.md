@@ -56,6 +56,14 @@ BASE_ENDPOINT: `/api/v1`
 - `GET   /finders/{explorerId}`
 - `PUT   /finders/{explorerId}`
 
+### dashboard
+
+- `POST  /dashboard/spent-money-by-explorer`
+- `POST  /dashboard/explorers-by-spent-money`
+- `GET   /dashboard`
+- `GET   /dashboard/latest`
+- `PATCH /dashboard/rebuild-period`
+
 ### config
 
 - `GET   /config`

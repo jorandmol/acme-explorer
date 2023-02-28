@@ -1,6 +1,7 @@
 import Trip from '../models/TripModel.js'
 import Actor from '../models/ActorModel.js'
 import Application from '../models/ApplicationModel.js'
+import GloabalConfig from '../models/GlobalConfigModel.js'
 import StatusEnum from '../enum/StatusEnum.js'
 import RoleEnum from '../enum/RoleEnum.js'
 import { ObjectId } from 'mongodb';
@@ -27,10 +28,21 @@ const _generateFilter = (filters) => {
   return filter
 }
 
+const _getLimit = async () => {
+  try {
+    const config = await GloabalConfig.findOne()
+    return config?.numResults || 10
+  } catch (err) {
+    console.error(err)
+    return 10
+  }
+}
+
 export const searchTrips = async (req, res) => {
   const filters = _generateFilter(req.query)
   try {
-    const trips = await Trip.find(filters)
+    const limit = await _getLimit()
+    const trips = await Trip.find(filters).limit(limit)
     res.json(trips)
   } catch (err) {
     res.status(500).send(err)

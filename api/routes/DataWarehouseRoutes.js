@@ -1,5 +1,5 @@
 import { listIndicators, lastIndicator, spentMoneyByExplorer, explorersBySpentMoney, rebuildPeriod } from '../controllers/DataWarehouseController.js'
-import { spentMoneyByExplorerValidator, explorersBySpentMoneyValidator } from '../controllers/validators/DataWarehouseValidator.js'
+import { rebuildPeriodValidator, spentMoneyByExplorerValidator, explorersBySpentMoneyValidator } from '../controllers/validators/DataWarehouseValidator.js'
 import handleExpressValidation from "../middlewares/ValidationHandlingMiddleware.js"
 import { periodDecoder } from "../middlewares/CubePeriodDecoder.js"
 import { operationParser } from '../middlewares/OperationParser.js'
@@ -7,16 +7,14 @@ import { operationParser } from '../middlewares/OperationParser.js'
 export default function (app) {
 
   /**
-   * Get a list of all indicators or post a new computation period for rebuilding
+   * Get a list of all indicators
    * RequiredRole: Administrator
    * @section dashboard
    * @type get post
    * @url /dashboard
-   * @param [string] rebuildPeriod
   */
   app.route('/v1/dashboard')
     .get(listIndicators)
-    .post(rebuildPeriod)
 
   /**
    * Get a list of last computed indicator
@@ -27,6 +25,21 @@ export default function (app) {
   */
   app.route("/v1/dashboard/latest")
     .get(lastIndicator)
+
+  /**
+   * Update computation period for rebuilding
+   * RequiredRole: Administrator
+   * @section dashboard
+   * @type patch
+   * @url /dashboard/rebuild-period
+   * @param {number} rebuildPeriod - Period to rebuild in seconds
+  */
+  app.route('/v1/dashboard/rebuild-period')
+    .patch(
+      rebuildPeriodValidator,
+      handleExpressValidation,
+      rebuildPeriod
+    )
 
   /**
    * Get a list of all indicators about the amount of money that an explorer spent in a period
