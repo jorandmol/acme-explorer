@@ -7,9 +7,7 @@ const updateValidator = [
 
 const creationValidator = [
   check('tripId').exists({ checkFalsy: true }).isMongoId(),
-  check('sponsor').exists({ checkFalsy: true }).isMongoId(),
-  check('banner').exists({ checkFalsy: true }).isBase64(),
-  check('link').exists({ checkFalsy: true }).isURL()
+  ...updateValidator
 ]
 
 export { creationValidator, updateValidator }
