@@ -1,17 +1,31 @@
 import Application from '../models/ApplicationModel.js'
+import Actor from '../models/ActorModel.js'
 import StatusEnum from '../enum/StatusEnum.js'
+import RoleEnum from '../enum/RoleEnum.js'
+import mongoose from 'mongoose'
 
-const listApplications = async (req, res) => {
-  const filters = {}
+export const listApplications = async (req, res) => {
   try {
-    const applications = await Application.find(filters)
-    res.json(applications)
+    const actor = await Actor.findById(req.headers.actor_id)
+    if (actor) {
+      if (actor.role === RoleEnum.EXPLORER) {
+        const applications = await Application.aggregate([
+          { $match: { explorer: new mongoose.Types.ObjectId(actor._id) } },
+          { $group: { _id: "$status", applications: { $push: "$$ROOT" } } }
+        ]);
+        res.json(applications)
+      } else {
+        res.status(403).send('Actor is not an explorer')
+      }
+    } else {
+      res.status(404).send('Actor not found')
+    }
   } catch (err) {
     res.status(500).send(err)
   }
 }
 
-const createApplication = async (req, res) => {
+export const createApplication = async (req, res) => {
   const newApplication = new Application(req.body)
   try {
     if (await Application.alreadyExists(newApplication.explorer, newApplication.trip)) {
@@ -29,7 +43,7 @@ const createApplication = async (req, res) => {
   }
 }
 
-const readApplication = async (req, res) => {
+export const readApplication = async (req, res) => {
   try {
     const application = await Application.findById(req.params.id)
     if (application) {
@@ -42,8 +56,7 @@ const readApplication = async (req, res) => {
   }
 }
 
-const cancelApplication = async (req, res) => {
-  // pending, due o accepted y trip no started
+export const cancelApplication = async (req, res) => {
   const { id } = req.params;
   try {
     const application = await Application.findById(id);
@@ -68,8 +81,7 @@ const cancelApplication = async (req, res) => {
   }
 };
 
-const acceptApplication = async (req, res) => {
-  // pending y trip no started
+export const acceptApplication = async (req, res) => {
   const { id } = req.params;
   try {
     const application = await Application.findById(id);
@@ -93,8 +105,7 @@ const acceptApplication = async (req, res) => {
   }
 };
 
-const rejectApplication = async (req, res) => {
-  // pending y trip no started
+export const rejectApplication = async (req, res) => {
   const { id } = req.params;
   const { rejectionReason } = req.body;
   try {
@@ -120,8 +131,7 @@ const rejectApplication = async (req, res) => {
   }
 };
 
-const payApplication = async (req, res) => {
-  // due y trip no started
+export const payApplication = async (req, res) => {
   const { id } = req.params;
   try {
     const application = await Application.findById(id);
@@ -146,8 +156,7 @@ const payApplication = async (req, res) => {
   }
 };
 
-const updateApplicationComments = async (req, res) => {
-  // pending y trip no started
+export const updateApplicationComments = async (req, res) => {
   const { id } = req.params
   const { comments } = req.body
   try {
@@ -171,5 +180,3 @@ const updateApplicationComments = async (req, res) => {
     }
   }
 }
-
-export { listApplications, createApplication, readApplication, cancelApplication, acceptApplication, rejectApplication, payApplication, updateApplicationComments }

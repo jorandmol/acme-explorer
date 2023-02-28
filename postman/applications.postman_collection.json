@@ -10,13 +10,18 @@
 			"name": "listApplications",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "actor_id",
+						"value": "63ed27e930e2f4865b4879b5",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}"
@@ -31,11 +36,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}",
@@ -44,7 +48,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63e2386f221c3ab7301b97c0"
+							"value": "63f38500a1322a7f86e360bf"
 						}
 					]
 				}
@@ -58,7 +62,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"explorer\": \"63e143773c3c619deba0bd8a\",\n    \"trip\": \"63e144632ba413df4fa0d9b2\"\n}",
+					"raw": "{\n    \"explorer\": \"63ed27e94fe8c982b12e364a\",\n    \"trip\": \"63f38bf93ff6b85445a656af\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -66,11 +70,10 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}"
@@ -85,11 +88,10 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}/:id/accept",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/accept",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}",
@@ -99,7 +101,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63ed2787cae0b8536028cfa1"
+							"value": "63f38500a1322a7f86e360bf"
 						}
 					]
 				}
@@ -112,21 +114,20 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}/:id/accept",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/cancel",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}",
 						":id",
-						"accept"
+						"cancel"
 					],
 					"variable": [
 						{
 							"key": "id",
-							"value": "63ed2787cae0b8536028cfa1"
+							"value": "63ed27871a2c14ab5ea16301"
 						}
 					]
 				}
@@ -139,21 +140,20 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}/:id/accept",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/pay",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}",
 						":id",
-						"accept"
+						"pay"
 					],
 					"variable": [
 						{
 							"key": "id",
-							"value": "63ed2787cae0b8536028cfa1"
+							"value": "63f38500a1322a7f86e360bf"
 						}
 					]
 				}
@@ -165,22 +165,30 @@
 			"request": {
 				"method": "PATCH",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"rejectionReason\": \"The payment period has expired\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}/:id/accept",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/reject",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}",
 						":id",
-						"accept"
+						"reject"
 					],
 					"variable": [
 						{
 							"key": "id",
-							"value": "63ed2787cae0b8536028cfa1"
+							"value": "63f38500a1322a7f86e360bf"
 						}
 					]
 				}
@@ -202,11 +210,10 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}:{{port}}/{{apiVersion}}/{{path}}/:id/comments",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/comments",
 					"host": [
-						"{{host}}"
+						"{{host}}{{port}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"{{apiVersion}}",
 						"{{path}}",
@@ -216,7 +223,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63ed2787cae0b8536028cfa1"
+							"value": "63ed27871a2c14ab5ea16301"
 						}
 					]
 				}

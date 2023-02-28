@@ -1,16 +1,30 @@
-import { listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication, createTripSponsorship, updateTripSponsorships } from '../controllers/TripController.js'
-import { creationValidator as tripCreationValidator, updateValidator, publishValidator, cancelValidator, sponsorshipsValidator } from '../controllers/validators/TripValidator.js'
+import { searchTrips, listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication } from '../controllers/TripController.js'
+import { creationValidator as tripCreationValidator, updateValidator, publishValidator, cancelValidator } from '../controllers/validators/TripValidator.js'
 import { creationFromTripValidator as appCreationValidator } from '../controllers/validators/ApplicationValidator.js'
-import { updateValidator as sponsorshipCreationValidator } from '../controllers/validators/SponsorshipValidator.js'
 import { filterValidator } from '../controllers/validators/FinderValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
 
   /**
-  * Get a trip
+  * Get trips by filters
   *    Required role: None
-  * Post an actor
+  *
+  * @section trips
+  * @type get 
+  * @url /v1/search
+  */
+  app.route('/v1/search')
+    .get(
+      filterValidator,
+      handleExpressValidation,
+      searchTrips
+    )
+
+  /**
+  * Get manager's trips
+  *    Required role: Manager
+  * Post a trip
   *    RequiredRoles: Manager
   *
   * @section trips
@@ -18,11 +32,8 @@ export default function (app) {
   * @url /v1/trips
   */
   app.route('/v1/trips')
-    .get(
-      filterValidator,
-      handleExpressValidation,
-      listTrips
-    ).post(
+    .get(listTrips)
+    .post(
       tripCreationValidator,
       handleExpressValidation,
       createTrip
@@ -33,9 +44,11 @@ export default function (app) {
   *    RequiredRoles: to be manager who created the trip
   * Get a trip
   *    RequiredRoles: None
-  *
+  * Delete a trip
+  *    RequiredRoles: to be manager who created the trip
+  * 
   * @section trips
-  * @type get put
+  * @type get put delete
   * @url /v1/trips/:id
   */
   app.route('/v1/trips/:id')
@@ -98,34 +111,6 @@ export default function (app) {
     appCreationValidator,
     handleExpressValidation,
     createTripApplication
-  )
-
-  /**
-  *
-  * SPONSORSHIPS
-  *
-  */
-
-  /**
-  * Add new sponsorship
-  *   RequiredRoles: Sponsor
-  *
-  * Update trip's sponsorships
-  *    RequiredRoles: Manager
-  *
-  * @section trips
-  * @type post patch
-  * @url /v1/trips/:id/sponsorships
-  */
-  app.route('/v1/trips/:id/sponsorships')
-  .post(
-    sponsorshipCreationValidator,
-    handleExpressValidation,
-    createTripSponsorship
-  ).patch(
-    sponsorshipsValidator,
-    handleExpressValidation,
-    updateTripSponsorships
   )
 
 }
