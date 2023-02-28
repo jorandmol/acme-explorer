@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "p2o": "node postmanToOpenapi.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,7 @@
   },
   "type": "module",
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "postman-to-openapi": "^3.0.1"
   }
 }
