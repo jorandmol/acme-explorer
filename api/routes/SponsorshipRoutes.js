@@ -1,4 +1,4 @@
-import { createSponsorship, deleteSponsorship, paySponsorship, readSponsorship, updateSponsorship } from '../controllers/SponsorshipController.js'
+import { listSponsorships, createSponsorship, deleteSponsorship, paySponsorship, readSponsorship, updateSponsorship } from '../controllers/SponsorshipController.js'
 import { creationValidator, updateValidator } from '../controllers/validators/SponsorshipValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
@@ -7,12 +7,15 @@ export default function (app) {
   /**
   * Post a sponsorship
   *    RequiredRoles: Sponsor
+  * Get sponsor sponsorships
+  *    RequiredRoles: Sponsor
   *
   * @section sponsorships
-  * @type post
-  * @url /v1/sponsorship
+  * @type get post
+  * @url /v1/sponsorships
   */
-  app.route('/v1/sponsorship')
+  app.route('/v1/sponsorships')
+    .get(listSponsorships)
     .post(
       creationValidator,
       handleExpressValidation,
