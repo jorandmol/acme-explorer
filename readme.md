@@ -16,11 +16,8 @@ BASE_ENDPOINT: `/api/v1`
 - `GET   /actors`
 - `GET   /actors/{id}`
 - `PUT   /actors/{id}`
-- `PATCH /actors/{id}/ban` 
+- `PATCH /actors/{id}/ban`
 - `PATCH /actors/{id}/unban`
-- `GET   /managers/{id}/trips`
-- `GET   /managers/{id}/applications`
-- `GET   /explorers/{id}/applications`
 
 ### trips
 

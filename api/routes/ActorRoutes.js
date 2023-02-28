@@ -1,4 +1,4 @@
-import { listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor, getManagerTrips, getManagerApplications, getExplorerApplications } from '../controllers/ActorController.js'
+import { listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor } from '../controllers/ActorController.js'
 import { creationValidator } from '../controllers/validators/ActorValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
@@ -55,35 +55,5 @@ export default function (app) {
    */
   app.route('/v1/actors/:id/unban')
     .patch(unbanActor)
-
-  /**
-   * Get manager trips
-   * RequiredRoles: to be manager
-   * @section trips
-   * @type get
-   * @url /v1/managers/:id/trips
-   */
-  app.route('/v1/managers/:id/trips')
-    .get(getManagerTrips)
-
-  /**
-   * Get manager applications
-   *
-   * @section applications
-   * @type get
-   * @url /v1/managers/:id/applications
-   */
-  app.route('/v1/managers/:id/applications')
-    .get(getManagerApplications)
-
-     /**
-   * Get explorer applications
-   *
-   * @section applications
-   * @type get
-   * @url /v1/explorers/:id/applications
-   */
-  app.route('/v1/explorers/:id/applications')
-  .get(getExplorerApplications)
 
 }

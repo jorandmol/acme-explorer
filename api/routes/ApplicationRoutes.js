@@ -6,7 +6,7 @@ import { checkTrip } from '../middlewares/ApplicationBusinessRules.js'
 export default function (app) {
   /**
    * Get an application
-   *    Required role: None
+   *    Required role: Explorer
    * Post an application
    *    RequiredRoles: Explorer
    *
