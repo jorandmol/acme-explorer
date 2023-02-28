@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "1bf337e6-b050-4d9e-8c03-bf0811622614",
+		"_postman_id": "9c8f6454-bb78-4e7a-b532-a70ce9212461",
 		"name": "trips",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25718361"
+		"_exporter_id": "24780295"
 	},
 	"item": [
 		{
@@ -12,8 +12,8 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "actorId",
-						"value": "63e143773c3c619deba0bd8b",
+						"key": "actor_id",
+						"value": "63ed27e96f6eb8680cc0b162",
 						"type": "text"
 					}
 				],
@@ -36,7 +36,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/search",
+					"raw": "{{host}}{{port}}/{{apiVersion}}/search?minPrice=100&maxPrice=200",
 					"host": [
 						"{{host}}{{port}}"
 					],
@@ -52,13 +52,11 @@
 						},
 						{
 							"key": "minPrice",
-							"value": "0",
-							"disabled": true
+							"value": "100"
 						},
 						{
 							"key": "maxPrice",
-							"value": "100",
-							"disabled": true
+							"value": "200"
 						},
 						{
 							"key": "minDate",
@@ -111,10 +109,16 @@
 			"name": "createTripApplications",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "actor_id",
+						"value": "63ed27e942d65743deb07310",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"explorer\": \"63e144632ba413df4fa0d9b5\",\n    \"comment\": \"Por favor :(\" \n}",
+					"raw": "{\n    \"comments\": \"Por favor :(\" \n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -256,7 +260,7 @@
 				"header": [
 					{
 						"key": "actor_id",
-						"value": "63e143773c3c619deba0bd8b",
+						"value": "63ed27e96f6eb8680cc0b162",
 						"type": "text"
 					}
 				],
@@ -283,7 +287,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63e144632ba413df4fa0d9b2"
+							"value": "63fddae384ad4f298551eff4"
 						}
 					]
 				}
@@ -297,13 +301,13 @@
 				"header": [
 					{
 						"key": "actor_id",
-						"value": "63e143773c3c619deba0bd8b",
+						"value": "63ed27e96f6eb8680cc0b162",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"cancellationReason\": \"Porque quiero\"\n}",
+					"raw": "{\n    \"cancellationReason\": \"Porque quiero tio, porque me da la gana\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -324,7 +328,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63e144632ba413df4fa0d9b2"
+							"value": "63fddae384ad4f298551eff4"
 						}
 					]
 				}
@@ -338,13 +342,13 @@
 				"header": [
 					{
 						"key": "actor_id",
-						"value": "63e143773c3c619deba0bd8b",
+						"value": "63ed27e96f6eb8680cc0b162",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"creator\": \"63e143773c3c619deba0bd8b\",\n    \"description\": \"description\",\n    \"price\": 0,\n    \"requirements\": \"reequirements\",\n    \"startDate\": \"2023-07-10T13:00:00.000Z\",\n    \"endDate\": \"2023-07-15T13:00:00.000Z\",\n    \"pictures\": [],\n    \"stages\": [],\n    \"sponsorships\": [],\n    \"createdAt\": \"2023-02-06T18:18:11.446Z\",\n    \"updatedAt\": \"2023-02-06T18:18:11.446Z\",\n    \"ticker\": \"230206-NOTT\"\n}",
+					"raw": "{\n        \"_id\": \"63fdd7ab2b7c7cf9b53122ee\",\n    \"title\": \"Title (updated)\",\n    \"description\": \"description\",\n    \"price\": 0,\n    \"requirements\": \"reequirementsitos\",\n    \"startDate\": \"2023-07-10T13:00:00.000Z\",\n    \"endDate\": \"2023-07-15T13:00:00.000Z\",\n    \"publicationDate\": null,\n    \"cancellationDate\": null,\n    \"cancellationReason\": null,\n    \"pictures\": [],\n    \"stages\": [\n        { \"title\": \"Stage1\", \"description\": \"Desc1lololololo\", \"price\": 12},\n        { \"title\": \"Stage2\", \"description\": \"Desc2lololololo\", \"price\": 18}\n    ],\n    \"sponsorships\": [],\n    \"creator\": \"63ed27e96f6eb8680cc0b162\",\n    \"createdAt\": \"2023-02-28T10:30:03.284Z\",\n    \"updatedAt\": \"2023-02-28T10:30:03.284Z\",\n    \"ticker\": \"230228-SVUR\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -364,7 +368,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63e144632ba413df4fa0d9b2"
+							"value": "63fdd7ab2b7c7cf9b53122ee"
 						}
 					]
 				}
@@ -378,7 +382,7 @@
 				"header": [
 					{
 						"key": "actor_id",
-						"value": "63e143773c3c619deba0bd8b",
+						"value": "63ed27e96f6eb8680cc0b162",
 						"type": "text"
 					}
 				],
@@ -395,7 +399,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63e145222ba413df4fa0d9b6"
+							"value": "63fdd7ab2b7c7cf9b53122ee"
 						}
 					]
 				}
@@ -409,7 +413,7 @@
 				"header": [
 					{
 						"key": "actor_id",
-						"value": "63ed27e9319c95803ebcef72",
+						"value": "63ed27e96f6eb8680cc0b162",
 						"type": "text"
 					}
 				],

@@ -11,11 +11,11 @@ const _generateFilter = (filters) => {
   if (keyword) {
     filter = { $text: { $search: keyword }}
   }
-  if (minPrice) {
-    filter = { ...filter, price: { $gte: parseFloat(minPrice) } }
-  }
-  if (maxPrice) {
-    filter = { ...filter, price: { $lte: parseFloat(maxPrice) } }
+  if (minPrice || maxPrice) {
+    const priceFilter = []
+    if (minPrice) { priceFilter.push({ price: { $gte: minPrice } }) }
+    if (maxPrice) { priceFilter.push({ price: { $lte: maxPrice } }) }
+    filter = { ...filter, $and: priceFilter }
   }
   if (minDate) {
     filter = { ...filter, startDate: { $gte: minDate } }
@@ -259,7 +259,7 @@ export const cancelTrip = async (req, res) => {
       res.status(422).send('The trip has already been cancelled')
       return
     }
-    if (trip.publicationDate != null) {
+    if (!trip.publicationDate) {
       res.status(422).send('The trip is not published yet')
       return
     }
@@ -334,6 +334,13 @@ export const createTripApplication = async (req, res) => {
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
+      return
+    }
+
+    const applications = await Application.find({ trip: trip._id })
+    const explorerTripApplicantions = applications.filter(app => app.explorer.toString() === actor._id.toString())
+    if (explorerTripApplicantions.length) {
+      res.status(403).send('There is already another application created by you')
       return
     }
 
