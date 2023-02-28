@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import Trip from './TripModel.js'
 
 const FinderSchema = new mongoose.Schema({
     explorer: {
@@ -25,6 +26,14 @@ const FinderSchema = new mongoose.Schema({
         default: null
     },
     maxDate: {
+        type: Date,
+        default: null
+    },
+    results: {
+        type: [Trip.schema],
+        default: []
+    },
+    expiryDate: {
         type: Date,
         default: null
     }

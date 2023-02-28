@@ -15,6 +15,10 @@ const sponsorshipSchema = new mongoose.Schema({
     link: {
         type: String,
     },
+    financedAmount: {
+        type: Number,
+        required: 'Financed amount is required'
+    },
     paidAt: {
         type: Date,
         default: null
