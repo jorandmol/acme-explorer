@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "d04fcdc5-54e8-470b-ba1d-347d781490e7",
+		"_postman_id": "82da55aa-180c-4db4-a29f-740d3b4c845c",
 		"name": "dataWarehouse",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25718361"
+		"_exporter_id": "24780295"
 	},
 	"item": [
 		{
@@ -12,13 +12,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "localhost:8080/v1/dashboard",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}"
+						"v1",
+						"dashboard"
 					]
 				}
 			},
@@ -30,13 +31,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{pathLatest}}",
+					"raw": "localhost:8080/v1/dashboard/latest",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{pathLatest}}"
+						"v1",
+						"dashboard",
+						"latest"
 					]
 				}
 			},
@@ -57,13 +60,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/rebuild-period",
+					"raw": "localhost:8080/v1/dashboard/rebuild-period",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"dashboard",
 						"rebuild-period"
 					]
 				}
@@ -71,7 +75,7 @@
 			"response": []
 		},
 		{
-			"name": "createCube1",
+			"name": "spentMoneyByExplorer",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -85,20 +89,22 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{cubePath1}}",
+					"raw": "localhost:8080/v1/dashboard/spent-money-by-explorer",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{cubePath1}}"
+						"v1",
+						"dashboard",
+						"spent-money-by-explorer"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "createCube2",
+			"name": "explorersBySpentMoney",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -112,13 +118,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{cubePath2}}",
+					"raw": "localhost:8080/v1/dashboard/explorers-by-spent-money",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{cubePath2}}"
+						"v1",
+						"dashboard",
+						"explorers-by-spent-money"
 					]
 				}
 			},
