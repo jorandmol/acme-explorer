@@ -1,19 +1,84 @@
 import Trip from '../models/TripModel.js'
-import { ObjectId } from 'mongodb'
+import Actor from '../models/ActorModel.js'
+import RoleEnum from '../enum/RoleEnum.js'
+import { ObjectId } from 'mongodb';
 
-const createSponsorship = async (req, res) => {
-  // The sponsor id comes from the logged user
-  const sponsor = new ObjectId('63e144632ba413df4fa0d9b6')
+/*
+* TODO:
+* Extract the check-actor-sponsorship procedure, which is repeated in all functions
+* to a middleware so it's easier to maintain
+*/
+
+export const listSponsorships = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actor_id } = req.headers
+  try {
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.SPONSOR) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+    
+    const sponsorships = await Trip.aggregate(      
+      [
+        {
+          '$unwind': '$sponsorships'
+        }, {
+          '$match': {
+            'sponsorships.sponsor': actor._id
+          }
+        }, {
+          '$project': {
+            '_id': '$sponsorships._id', 
+            'sponsor': '$sponsorships.sponsor', 
+            'banner': '$sponsorships.banner', 
+            'link': '$sponsorships.link', 
+            'paidAt': '$sponsorships.paidAt', 
+            'trip': {
+              '_id': '$_id', 
+              'ticker': '$ticker', 
+              'title': '$title', 
+              'description': '$description'
+            }
+          }
+        }
+      ]
+    )
+
+    res.json(sponsorships)
+  } catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+}
+
+export const createSponsorship = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actor_id } = req.headers
   const { tripId, banner, link } = req.body
   try {
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.SPONSOR) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
     const trip = await Trip.findById(tripId)
     if (!trip) {
       res.status(404).send('Trip not found')
       return
     }
 
-    const newSponsorship = { sponsor, banner, link }
-    trip.sponsorships = [ ...trip.sponsorships, newSponsorship ] 
+    const newSponsorship = { sponsor: actor._id, banner, link }
+    trip.sponsorships = [ ...trip.sponsorships, newSponsorship ]
     const updatedTrip = await Trip.findOneAndUpdate({ _id: tripId }, trip, { new: true })
     res.json(updatedTrip)
   } catch (err) {
@@ -25,13 +90,13 @@ const createSponsorship = async (req, res) => {
   }
 }
 
-const readSponsorship = async (req, res) => {
+export const readSponsorship = async (req, res) => {
   const { id } = req.params
   try {
     const sponsorships = await Trip.aggregate([
-      { $unwind: sponsorships },
+      { $unwind: "$sponsorships" },
       { $match: {
-        "sponshorships._id": id 
+        "sponsorships._id": ObjectId(id)
       }},
       { $project: {
         _id: "$sponsorships._id",
@@ -39,7 +104,12 @@ const readSponsorship = async (req, res) => {
         banner: "$sponsorships.banner",
         link: "$sponsorships.link",
         paidAt: "$sponsorships.paidAt",
-        tripId: "$_id"
+        trip: {
+          _id: "$_id",
+          ticker: "$ticker",
+          title: "$title",
+          description: "$description"
+        }
       }}
     ])
     if (!sponsorships.length) {
@@ -52,15 +122,27 @@ const readSponsorship = async (req, res) => {
   }
 }
 
-// TODO: check if the sponsor logged in is the sponsorship creator
-const updateSponsorship = async (req, res) => {
+export const updateSponsorship = async (req, res) => {
+  // TODO: change this when auth is implemented
   const { id } = req.params
-  const newSponsorship = req.body
+  const { actor_id } = req.headers
+  const { banner, link } = req.body
   try {
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.SPONSOR) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
     const sponsorships = await Trip.aggregate([
-      { $unwind: sponsorships },
+      { $unwind: "$sponsorships" },
       { $match: {
-        "sponshorships._id": id 
+        "sponsorships._id": ObjectId(id),
+        "sponsorships.sponsor": actor._id
       }},
       { $project: {
         _id: "$sponsorships._id",
@@ -76,31 +158,46 @@ const updateSponsorship = async (req, res) => {
       return
     }
 
-    const sponsorship = sponsorships[0]
+    const { tripId, ...sponsorship } = sponsorships[0]
     if (sponsorship.paidAt) {
       res.status(422).send('The sponsorship has already been payed, you can not modify it')
       return
     }
-    const trip = Trip.findById(sponsorship.tripId)
+    const trip = await Trip.findById(tripId)
     if (!trip) { throw new Error('Sponsorship associated with no trip') }
 
-    const prevSponsorships = [ ...trip.sponsorships ].filter(s => s._id !== sponsorship._id)
+    const newSponsorship = { ...sponsorship, banner, link }
+    const prevSponsorships = trip.sponsorships.filter(s => s._id.toString() !== sponsorship._id.toString())
     const newSponsorships = [ ...prevSponsorships, newSponsorship ]
-    const updatedTrip = await Trip.findOneAndUpdate({ _id: sponsorship.tripId }, { $set: {"sponsorships.$": newSponsorships }}, { new: true })
-    res.json({ message: 'Sponsorship successfully deleted from trip ' + updatedTrip._id })
+
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: ObjectId(tripId) }, { $set: {"sponsorships": newSponsorships }}, { new: true })
+    res.json(updatedTrip)
   } catch (err) {
+    console.log(err)
     res.status(500).send(err)
   }
 }
 
-// TODO: check if the sponsor logged in is the sponsorship creator
-const paySponsorship = async (req, res) => {
+export const paySponsorship = async (req, res) => {
+  // TODO: change this when auth is implemented
   const { id } = req.params
+  const { actor_id } = req.headers
   try {
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.SPONSOR) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
     const sponsorships = await Trip.aggregate([
-      { $unwind: sponsorships },
+      { $unwind: "$sponsorships" },
       { $match: {
-        "sponshorships._id": id 
+        "sponsorships._id": ObjectId(id),
+        "sponsorships.sponsor": actor._id
       }},
       { $project: {
         _id: "$sponsorships._id",
@@ -116,32 +213,45 @@ const paySponsorship = async (req, res) => {
       return
     }
 
-    const sponsorship = sponsorships[0]
+    const { tripId, ...sponsorship } = sponsorships[0]
     if (sponsorship.paidAt) {
-      res.status(422).send('The sponsorship has already been payed')
+      res.status(422).send('The sponsorship has already been payed, you can not modify it')
       return
     }
-    const trip = Trip.findById(sponsorship.tripId)
+    const trip = await Trip.findById(tripId)
     if (!trip) { throw new Error('Sponsorship associated with no trip') }
 
     sponsorship.paidAt = new Date()
-    const prevSponsorships = [ ...trip.sponsorships ].filter(s => s._id !== sponsorship._id)
+    const prevSponsorships = trip.sponsorships.filter(s => s._id.toString() !== sponsorship._id.toString())
     const newSponsorships = [ ...prevSponsorships, sponsorship ]
-    const updatedTrip = await Trip.findOneAndUpdate({ _id: sponsorship.tripId }, { $set: {"sponsorships.$": newSponsorships }}, { new: true })
-    res.json({ message: 'Sponsorship successfully deleted from trip ' + updatedTrip._id })
+    
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: ObjectId(tripId) }, { $set: {"sponsorships": newSponsorships }}, { new: true })
+    res.json(updatedTrip)
   } catch (err) {
     res.status(500).send(err)
   }
 }
 
-// TODO: check if the sponsor logged in is the sponsorship creator
-const deleteSponsorship = async (req, res) => {
+export const deleteSponsorship = async (req, res) => {
+  // TODO: change this when auth is implemented
   const { id } = req.params
+  const { actor_id } = req.headers
   try {
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.SPONSOR) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
     const sponsorships = await Trip.aggregate([
-      { $unwind: sponsorships },
+      { $unwind: "$sponsorships" },
       { $match: {
-        "sponshorships._id": id 
+        "sponsorships._id": ObjectId(id),
+        "sponsorships.sponsor": actor._id
       }},
       { $project: {
         _id: "$sponsorships._id",
@@ -157,20 +267,18 @@ const deleteSponsorship = async (req, res) => {
       return
     }
 
-    const sponsorship = sponsorships[0]
+    const { tripId, ...sponsorship } = sponsorships[0]
     if (sponsorship.paidAt) {
-      res.status(422).send('The sponsorship has already been payed, you can not delete it')
+      res.status(422).send('The sponsorship has already been payed, you can not modify it')
       return
     }
-    const trip = Trip.findById(sponsorship.tripId)
+    const trip = await Trip.findById(tripId)
     if (!trip) { throw new Error('Sponsorship associated with no trip') }
 
     const newSponsorships = [ ...trip.sponsorships ].filter(s => s._id !== sponsorship._id)
-    const updatedTrip = await Trip.findOneAndUpdate({ _id: sponsorship.tripId }, { $set: {"sponsorships.$": newSponsorships }}, { new: true })
-    res.json({ message: 'Sponsorship successfully deleted from trip ' + updatedTrip._id })
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: ObjectId(tripId) }, { $set: {"sponsorships": newSponsorships }}, { new: true })
+    res.json({ message: 'Sponsorship successfully deleted from trip ' + updatedTrip.ticker })
   } catch (err) {
     res.status(500).send(err)
   }
 }
-
-export { createSponsorship, readSponsorship, updateSponsorship, paySponsorship, deleteSponsorship}

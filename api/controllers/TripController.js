@@ -1,7 +1,10 @@
 import Trip from '../models/TripModel.js'
+import Actor from '../models/ActorModel.js'
 import Application from '../models/ApplicationModel.js'
 import GloabalConfig from '../models/GlobalConfigModel.js'
 import StatusEnum from '../enum/StatusEnum.js'
+import RoleEnum from '../enum/RoleEnum.js'
+import { ObjectId } from 'mongodb';
 
 const _generateFilter = (filters) => {
   const { keyword, minPrice, maxPrice, minDate, maxDate } = filters
@@ -9,11 +12,11 @@ const _generateFilter = (filters) => {
   if (keyword) {
     filter = { $text: { $search: keyword }}
   }
-  if (minPrice) {
-    filter = { ...filter, price: { $gte: parseFloat(minPrice) } }
-  }
-  if (maxPrice) {
-    filter = { ...filter, price: { $lte: parseFloat(maxPrice) } }
+  if (minPrice || maxPrice) {
+    const priceFilter = []
+    if (minPrice) { priceFilter.push({ price: { $gte: minPrice } }) }
+    if (maxPrice) { priceFilter.push({ price: { $lte: maxPrice } }) }
+    filter = { ...filter, $and: priceFilter }
   }
   if (minDate) {
     filter = { ...filter, startDate: { $gte: minDate } }
@@ -35,7 +38,7 @@ const _getLimit = async () => {
   }
 }
 
-const listTrips = async (req, res) => {
+export const searchTrips = async (req, res) => {
   const filters = _generateFilter(req.query)
   try {
     const limit = await _getLimit()
@@ -46,12 +49,46 @@ const listTrips = async (req, res) => {
   }
 }
 
-const createTrip = async (req, res) => {
+export const listTrips = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actor_id } = req.headers
+  try {
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
+    const trips = await Trip.find({ creator: ObjectId(actor_id) })
+    res.json(trips)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
+export const createTrip = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actor_id } = req.headers
   const newTrip = new Trip(req.body)
-  try{
+  try {
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
+    newTrip.creator = actor._id
     const trip = await newTrip.save()
     res.json(trip)
-  } catch(err){
+  } catch(err) {
     if (err.name === 'ValidationError') {
       res.status(422).send(err)
     } else {
@@ -60,9 +97,10 @@ const createTrip = async (req, res) => {
   }
 }
 
-const readTrip = async (req, res) => {
-  try{
-    const trip = await Trip.findById(req.params.id)
+export const readTrip = async (req, res) => {
+  const { id } = req.params
+  try {
+    const trip = await Trip.findById(id)
     if (trip) {
       res.json(trip)
     } else{
@@ -73,13 +111,29 @@ const readTrip = async (req, res) => {
   }
 }
 
-const updateTrip = async (req, res) => {
+export const updateTrip = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actor_id } = req.headers
   const { id } = req.params
   const newTrip = req.body
   try {
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator.toString() !== actor._id.toString()) {
+      res.status(403).send('Actor does not have the required permissions')
       return
     }
     if (trip.publicationDate) {
@@ -88,14 +142,14 @@ const updateTrip = async (req, res) => {
     }
 
     if (!newTrip.price) {
-      newTrip.price = newStages.map(stage => stage.price).reduce((totalPrice, actualPrice) => totalPrice + actualPrice, 0)
+      newTrip.price = [ ...newTrip.stages ].map(stage => stage.price).reduce((totalPrice, actualPrice) => totalPrice + actualPrice, 0)
     }
 
     // Keep dates null
     newTrip.publicationDate = null
     newTrip.cancellationDate = null
     newTrip.cancellationReason = null
-    const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, newTrip, { new: true })
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: trip._id }, newTrip, { new: true })
     res.json(updatedTrip)
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -106,11 +160,28 @@ const updateTrip = async (req, res) => {
   }
 }
 
-const deleteTrip = async (req, res) => {
+export const deleteTrip = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actor_id } = req.headers
+  const { id } = req.params
   try {
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator.toString() !== actor._id.toString()) {
+      res.status(403).send('Actor does not have the required permissions')
       return
     }
     if (trip.publicationDate) {
@@ -118,7 +189,7 @@ const deleteTrip = async (req, res) => {
       return
     }
 
-    const deletionResponse = await Trip.deleteOne({ _id: req.params.id })
+    const deletionResponse = await Trip.deleteOne({ _id: trip._id })
     if (deletionResponse.deletedCount > 0) {
       res.json({ message: 'Trip successfully deleted' })
     } else {
@@ -129,13 +200,29 @@ const deleteTrip = async (req, res) => {
   }
 }
 
-const publishTrip = async (req, res) => {
+export const publishTrip = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actor_id } = req.headers
   const { id } = req.params
   const { publicationDate } = req.body
   try {
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator.toString() !== actor._id.toString()) {
+      res.status(403).send('Actor does not have the required permissions')
       return
     }
     if (trip.publicationDate) {
@@ -144,7 +231,7 @@ const publishTrip = async (req, res) => {
     }
 
     trip.publicationDate = publicationDate
-    const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, trip, { new: true })
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: trip._id }, trip, { new: true })
     res.json(updatedTrip)
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -155,24 +242,40 @@ const publishTrip = async (req, res) => {
   }
 }
 
-const cancelTrip = async (req, res) => {
+export const cancelTrip = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actor_id } = req.headers
   const { id } = req.params
   const { cancellationReason } = req.body
   try {
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator.toString() !== actor._id.toString()) {
+      res.status(403).send('Actor does not have the required permissions')
       return
     }
     if (trip.cancellationDate) {
       res.status(422).send('The trip has already been cancelled')
       return
     }
-    if (trip.publicationDate != null) {
+    if (!trip.publicationDate) {
       res.status(422).send('The trip is not published yet')
       return
     }
-    const apps = await Application.find({ 'trip': trip._id, 'status': StatusEnum.ACCEPTED })
+    const apps = await Application.find({ trip: trip._id, status: StatusEnum.ACCEPTED })
     if (apps.length > 0) {
       res.status(422).send('The trip has accepted applications, you can not cancel it')
       return
@@ -180,7 +283,7 @@ const cancelTrip = async (req, res) => {
 
     trip.cancellationDate = new Date()
     trip.cancellationReason = cancellationReason
-    const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, trip, { new: true })
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: trip._id }, trip, { new: true })
     res.json(updatedTrip)
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -191,12 +294,29 @@ const cancelTrip = async (req, res) => {
   }
 }
 
-const listTripApplications = async (req, res) => {
+export const listTripApplications = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actor_id } = req.headers
   const { id } = req.params
   try {
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.MANAGER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
+      return
+    }
+    
+    if (trip.creator.toString() !== actor._id.toString()) {
+      res.status(403).send('Actor does not have the required permissions')
       return
     }
 
@@ -207,17 +327,36 @@ const listTripApplications = async (req, res) => {
   }
 }
 
-const createTripApplication = async (req, res) => {
+export const createTripApplication = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actor_id } = req.headers
   const { id } = req.params
-  const newApplication = new Application(req.body)
+  const { comments } = req.body
   try {
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.EXPLORER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+
     const trip = await Trip.findById(id)
     if (!trip) {
       res.status(404).send('Trip not found')
       return
     }
 
-    newApplication.trip = trip._id
+    const applications = await Application.find({ trip: trip._id })
+    const explorerTripApplicantions = applications.filter(app => app.explorer.toString() === actor._id.toString())
+    if (explorerTripApplicantions.length) {
+      res.status(403).send('There is already another application created by you')
+      return
+    }
+
+    const newApplication = new Application({ trip: trip._id, explorer: actor._id, comments })
     const application = await newApplication.save()
     res.json(application)
   } catch(err){
@@ -228,49 +367,3 @@ const createTripApplication = async (req, res) => {
     }
   }
 }
-
-const createTripSponsorship = async (req, res) => {
-  const { id } = req.params
-  const newSponsorship = req.body
-  try {
-    const trip = await Trip.findById(id)
-    if (!trip) {
-      res.status(404).send('Trip not found')
-      return
-    }
-
-    trip.sponsorships = [...trip.sponsorships, newSponsorship]
-    const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, trip, { new: true })
-    res.json(updatedTrip)
-  } catch (err) {
-    if (err.name === 'ValidationError') {
-      res.status(422).send(err)
-    } else {
-      res.status(500).send(err)
-    }
-  }
-}
-
-const updateTripSponsorships = async (req, res) => {
-  const { id } = req.params
-  const { sponsorships } = req.body
-  try {
-    const trip = await Trip.findById(id)
-    if (!trip) {
-      res.status(404).send('Trip not found')
-      return
-    }
-
-    trip.sponsorships = sponsorships
-    const updatedTrip = await Trip.findOneAndUpdate({ _id: id }, trip, { new: true })
-    res.json(updatedTrip)
-  } catch (err) {
-    if (err.name === 'ValidationError') {
-      res.status(422).send(err)
-    } else {
-      res.status(500).send(err)
-    }
-  }
-}
-
-export { listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication, createTripSponsorship, updateTripSponsorships }

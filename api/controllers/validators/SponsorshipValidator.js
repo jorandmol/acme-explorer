@@ -1,13 +1,12 @@
 import { check } from 'express-validator'
 
-const creationValidator = [
-  check('tripId').exists({ checkFalsy: true }).isMongoId(),
-  check('sponsor').exists({ checkFalsy: true }).isMongoId(),
+const updateValidator = [
   check('banner').exists({ checkFalsy: true }).isBase64(),
   check('link').exists({ checkFalsy: true }).isURL()
 ]
 
-const updateValidator = [
+const creationValidator = [
+  check('tripId').exists({ checkFalsy: true }).isMongoId(),
   check('sponsor').exists({ checkFalsy: true }).isMongoId(),
   check('banner').exists({ checkFalsy: true }).isBase64(),
   check('link').exists({ checkFalsy: true }).isURL()

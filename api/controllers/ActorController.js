@@ -1,10 +1,6 @@
 import Actor from '../models/ActorModel.js'
-import Trip from '../models/TripModel.js'
-import Application from '../models/ApplicationModel.js'
-import RoleEnum from '../enum/RoleEnum.js'
-import mongoose from 'mongoose'
 
-const listActors = async (req, res) => {
+export const listActors = async (req, res) => {
   const filters = {}
   try {
     const actors = await Actor.find(filters)
@@ -14,7 +10,7 @@ const listActors = async (req, res) => {
   }
 }
 
-const createActor = async (req, res) => {
+export const createActor = async (req, res) => {
   const newActor = new Actor(req.body)
   try{
     const actor = await newActor.save()
@@ -28,7 +24,7 @@ const createActor = async (req, res) => {
   }
 }
 
-const readActor = async (req, res) => {
+export const readActor = async (req, res) => {
   try{
     const actor = await Actor.findById(req.params.id)
     if (actor) {
@@ -41,7 +37,7 @@ const readActor = async (req, res) => {
   }
 }
 
-const updateActor = async (req, res) => {
+export const updateActor = async (req, res) => {
   const newActor = req.body
   try {
     const actor = await Actor.findOneAndUpdate({ _id: req.params.id }, newActor, { new:true })
@@ -59,7 +55,7 @@ const updateActor = async (req, res) => {
   }
 }
 
-const deleteActor = async (req, res) => {
+export const deleteActor = async (req, res) => {
   try {
     const deletionResponse = await Actor.deleteOne({ _id: req.params.id })
     if (deletionResponse.deletedCount > 0) {
@@ -72,7 +68,7 @@ const deleteActor = async (req, res) => {
   }
 }
 
-const banActor = async (req, res) => {
+export const banActor = async (req, res) => {
   try {
     const actor = await Actor.findById(req.params.id)
     if (actor) {
@@ -87,7 +83,7 @@ const banActor = async (req, res) => {
   }
 }
 
-const unbanActor = async (req, res) => {
+export const unbanActor = async (req, res) => {
   try {
     const actor = await Actor.findById(req.params.id)
     if (actor) {
@@ -101,97 +97,3 @@ const unbanActor = async (req, res) => {
     res.status(500).send(err)
   }
 }
-
-const getManagerTrips = async (req, res) => {
-  try {
-    const actor = await Actor.findById(req.params.id)
-    if (actor) {
-      if (actor.role === RoleEnum.MANAGER) {
-        const trips = await Trip.find({ creator: actor._id })
-        res.json(trips)
-      } else {
-        res.status(403).send('Actor is not a manager')
-      }
-    } else {
-      res.status(404).send('Actor not found')
-    }
-  } catch (err) {
-    res.status(500).send(err)
-  }
-}
-
-const getManagerApplications = async (req, res) => {
-  try {
-    const actor = await Actor.findById(req.params.id)
-    if (actor) {
-      if (actor.role === RoleEnum.MANAGER) {
-        const applications = await Application.find({ trip: { creator: actor._id } })
-        res.json(applications)
-      } else {
-        res.status(403).send('Actor is not a manager')
-      }
-    } else {
-      res.status(404).send('Actor not found')
-    }
-  } catch (err) {
-    res.status(500).send(err)
-  }
-}
-
-const getExplorerApplications = async (req, res) => {
-  try {
-    const actor = await Actor.findById(req.params.id)
-    if (actor) {
-      if (actor.role === RoleEnum.EXPLORER) {
-        const applications = await Application.aggregate([
-          { $match: { explorer: new mongoose.Types.ObjectId(actor._id) } },
-          { $group: { _id: "$status", applications: { $push: "$$ROOT" } } }
-        ]);
-        res.json(applications)
-      } else {
-        res.status(403).send('Actor is not an explorer')
-      }
-    } else {
-      res.status(404).send('Actor not found')
-    }
-  } catch (err) {
-    res.status(500).send(err)
-  }
-}
-
-const listSponsorSponsorships = async (req, res) => {
-  const { id } = req.params
-  try {
-    const actor = await Actor.findById(req.params.id)
-    if (!actor) {
-      res.status(404).send('Actor not found')
-      return
-    }
-    if (actor.role !== RoleEnum.SPONSOR) {
-      res.status(403).send('Actor does not have the required role')
-      return
-    }
-
-    const sponshorships = await Trip.aggregate([
-      { $unwind: sponsorships },
-      { $match: {
-        "sponshorships.sponsor": actor._id 
-      }},
-      { $project: {
-        _id: "$sponsorships._id",
-        sponsor: "$sponsorships.sponsor",
-        banner: "$sponsorships.banner",
-        link: "$sponsorships.link",
-        paidAt: "$sponsorships.paidAt"
-      }}
-    ])
-
-    res.json(sponshorships)
-  } catch (err) {
-    res.status(500).send(err)
-  }
-}
-
-
-
-export {listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor, getManagerTrips, getManagerApplications, getExplorerApplications, listSponsorSponsorships}
