@@ -44,3 +44,5 @@ try {
 }
 
 initializeDataWarehouseJob();
+
+export default app
