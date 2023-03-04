@@ -12,13 +12,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "localhost:8080/v1/sponsorships/:id",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"sponsorships",
 						":id"
 					],
 					"variable": [
@@ -43,13 +43,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "localhost:8080/v1/sponsorships",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}"
+						"v1",
+						"sponsorships"
 					]
 				}
 			},
@@ -67,13 +67,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/pay",
+					"raw": "localhost:8080/v1/sponsorships/:id/pay",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"sponsorships",
 						":id",
 						"pay"
 					],
@@ -108,13 +108,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "localhost:8080/v1/sponsorships/:id",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"sponsorships",
 						":id"
 					],
 					"variable": [
@@ -139,13 +139,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "localhost:8080/v1/sponsorships/:id",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"sponsorships",
 						":id"
 					],
 					"variable": [
@@ -179,13 +179,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "localhost:8080/v1/sponsorships",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}"
+						"v1",
+						"sponsorships"
 					]
 				}
 			},

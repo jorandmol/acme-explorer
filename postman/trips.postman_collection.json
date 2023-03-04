@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9c8f6454-bb78-4e7a-b532-a70ce9212461",
+		"_postman_id": "83074802-359b-4628-ac3f-4a7c256c04d0",
 		"name": "trips",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24780295"
@@ -18,13 +18,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "localhost:8080/v1/trips",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}"
+						"v1",
+						"trips"
 					]
 				}
 			},
@@ -36,19 +37,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/search?minPrice=100&maxPrice=200",
+					"raw": "localhost:8080/v1/search?keyword=test&minPrice=100&maxPrice=200&minDate=2022-12-01&maxDate=2022-12-05",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
+						"v1",
 						"search"
 					],
 					"query": [
 						{
 							"key": "keyword",
-							"value": "test",
-							"disabled": true
+							"value": "test"
 						},
 						{
 							"key": "minPrice",
@@ -60,13 +61,11 @@
 						},
 						{
 							"key": "minDate",
-							"value": "2022-12-01",
-							"disabled": true
+							"value": "2022-12-01"
 						},
 						{
 							"key": "maxDate",
-							"value": "2022-12-05",
-							"disabled": true
+							"value": "2022-12-05"
 						}
 					]
 				}
@@ -85,13 +84,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/applications",
+					"raw": "localhost:8080/v1/trips/:id/applications",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"trips",
 						":id",
 						"applications"
 					],
@@ -126,97 +126,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/applications",
+					"raw": "localhost:8080/v1/trips/:id/applications",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"trips",
 						":id",
 						"applications"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "63e144632ba413df4fa0d9b2"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "addTripSponsorship",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "actor_id",
-						"value": "63e143773c3c619deba0bd8b",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"sponsor\": \"63e144632ba413df4fa0d9b6\",\n    \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n    \"link\": \"https://www.cristianoronaldo.com/#cr7\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/sponsorships",
-					"host": [
-						"{{host}}{{port}}"
-					],
-					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
-						":id",
-						"sponsorships"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "63e144632ba413df4fa0d9b2"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "updateTripSponsorship",
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "actor_id",
-						"value": "63e143773c3c619deba0bd8b",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"sponsorships\": [\n        {\n            \"sponsor\": \"63e144632ba413df4fa0d9b6\",\n            \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n            \"link\": \"https://www.cristianoronaldo.com/#cr7\"\n        }\n    ]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/sponsorships",
-					"host": [
-						"{{host}}{{port}}"
-					],
-					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
-						":id",
-						"sponsorships"
 					],
 					"variable": [
 						{
@@ -234,13 +153,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "localhost:8080/v1/trips/:id",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"trips",
 						":id"
 					],
 					"variable": [
@@ -274,13 +194,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/publish",
+					"raw": "localhost:8080/v1/trips/:id/publish",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"trips",
 						":id",
 						"publish"
 					],
@@ -315,13 +236,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/cancel",
+					"raw": "localhost:8080/v1/trips/:id/cancel",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"trips",
 						":id",
 						"cancel"
 					],
@@ -356,13 +278,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "localhost:8080/v1/trips/:id",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"trips",
 						":id"
 					],
 					"variable": [
@@ -387,13 +310,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "localhost:8080/v1/trips/:id",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"trips",
 						":id"
 					],
 					"variable": [
@@ -427,13 +351,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "localhost:8080/v1/trips",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}"
+						"v1",
+						"trips"
 					]
 				}
 			},

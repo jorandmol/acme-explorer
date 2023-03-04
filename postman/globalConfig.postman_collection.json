@@ -12,13 +12,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "localhost:8080/v1/config",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}"
+						"v1",
+						"config"
 					]
 				}
 			},
@@ -39,13 +39,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "localhost:8080/v1/config",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}"
+						"v1",
+						"config"
 					]
 				}
 			},
