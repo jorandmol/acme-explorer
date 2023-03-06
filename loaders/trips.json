@@ -1,0 +1,1552 @@
+[
+  {
+    "_id": "64061987af37607542ef9ea3",
+    "ticker": "ticker",
+    "creator": "6406198789f8bfea69fcebe6",
+    "title": "Westerville",
+    "description": "Excepteur voluptate deserunt Lorem veniam.",
+    "price": "600.51",
+    "requirements": "Esse qui est sint consequat ullamco nostrud elit excepteur tempor enim adipisicing consectetur esse ipsum.",
+    "startDate": "1972-10-10T14:51:09.277Z",
+    "endDate": "2020-05-20T07:47:22.784Z",
+    "pictures": "",
+    "publicationDate": "1977-03-07T09:25:23.319Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Joes",
+        "description": "Ut labore culpa adipisicing elit sint.",
+        "price": "450.85"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea2333c7c61dd6954f48",
+        "banner": "Nostrud eiusmod ea irure fugiat dolore elit aliquip.",
+        "link": "example.com",
+        "financedAmount": "1109.76",
+        "paidAt": "1977-12-20T06:20:49.142Z"
+      }
+    ]
+  },
+  {
+    "_id": "6406198737382316e2715b05",
+    "ticker": "ticker",
+    "creator": "64061987bc614d24d552bbf0",
+    "title": "Sugartown",
+    "description": "Exercitation ut incididunt enim anim veniam velit est anim anim.",
+    "price": "1679.08",
+    "requirements": "Consequat amet nulla nisi sint esse consequat.",
+    "startDate": "2009-09-01T20:46:29.468Z",
+    "endDate": "1989-05-05T21:39:08.100Z",
+    "pictures": "",
+    "publicationDate": "1995-02-22T06:38:06.854Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Davenport",
+        "description": "Officia eu Lorem laborum aute duis exercitation aute veniam amet est culpa nisi ea.",
+        "price": "1968.97"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23862c50f757eb1f11",
+        "banner": "Reprehenderit mollit consequat enim labore dolore in officia consectetur amet ex sunt anim dolor.",
+        "link": "example.com",
+        "financedAmount": "2468.51",
+        "paidAt": "2011-11-09T18:56:54.517Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987139c9e7a4682d8d6",
+    "ticker": "ticker",
+    "creator": "640619870ed1fc5558239056",
+    "title": "Robinson",
+    "description": "Veniam sit in sunt excepteur eiusmod est id tempor aliqua eiusmod.",
+    "price": "1963.62",
+    "requirements": "Commodo dolor in do culpa ad dolor deserunt magna.",
+    "startDate": "1992-02-20T15:13:37.479Z",
+    "endDate": "1980-10-31T07:44:48.862Z",
+    "pictures": "",
+    "publicationDate": "1997-02-15T02:47:24.973Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Whitehaven",
+        "description": "Anim tempor aliqua cupidatat exercitation voluptate mollit dolor consequat eiusmod proident magna et.",
+        "price": "1750.72"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23ee537081830cd5eb",
+        "banner": "Sit dolor sunt pariatur irure commodo.",
+        "link": "example.com",
+        "financedAmount": "1229.09",
+        "paidAt": "1978-12-08T11:51:00.864Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987b94a4fcb668aaf12",
+    "ticker": "ticker",
+    "creator": "64061987d974d15268e27d56",
+    "title": "Cochranville",
+    "description": "Ut velit sunt minim exercitation esse velit nulla aliquip.",
+    "price": "1101.37",
+    "requirements": "Commodo sunt exercitation pariatur ut enim dolor ex adipisicing.",
+    "startDate": "1975-10-28T12:37:58.617Z",
+    "endDate": "2021-01-22T03:00:10.412Z",
+    "pictures": "",
+    "publicationDate": "1977-09-26T17:58:40.865Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Dargan",
+        "description": "Laboris excepteur magna exercitation laboris eu Lorem sit nostrud magna labore duis.",
+        "price": "4859.33"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea230de9d85989381dfc",
+        "banner": "Eiusmod aute nulla irure ad voluptate aliqua quis nulla.",
+        "link": "example.com",
+        "financedAmount": "2402.14",
+        "paidAt": "2021-09-04T05:45:52.123Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987e13f50861f6acc1b",
+    "ticker": "ticker",
+    "creator": "64061987da6315805ad0dfe4",
+    "title": "Worcester",
+    "description": "Anim aliqua et veniam officia et eiusmod et adipisicing quis eiusmod.",
+    "price": "717.36",
+    "requirements": "Consequat ex esse excepteur consectetur cillum esse commodo quis in elit.",
+    "startDate": "2012-01-05T23:35:20.730Z",
+    "endDate": "1976-12-24T05:47:11.898Z",
+    "pictures": "",
+    "publicationDate": "1989-09-08T14:59:48.328Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Kidder",
+        "description": "Duis ea aliquip adipisicing ipsum.",
+        "price": "3633.95"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23b102549e68b048c8",
+        "banner": "Quis laborum cupidatat ipsum veniam adipisicing eu dolore veniam anim mollit.",
+        "link": "example.com",
+        "financedAmount": "3126.39",
+        "paidAt": "1997-02-13T05:58:01.152Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987b1924eea74a4acbe",
+    "ticker": "ticker",
+    "creator": "640619878867c311dad57967",
+    "title": "Cloverdale",
+    "description": "Amet est dolore dolore elit ut laborum aliquip.",
+    "price": "1328.35",
+    "requirements": "Amet et velit ex commodo minim elit do.",
+    "startDate": "1979-08-15T06:38:56.704Z",
+    "endDate": "1980-02-14T16:30:33.580Z",
+    "pictures": "",
+    "publicationDate": "1976-09-14T02:36:04.578Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Aguila",
+        "description": "Id culpa id incididunt ipsum sit laborum labore laboris nostrud quis anim anim fugiat cupidatat.",
+        "price": "363.58"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23813ead982b547e04",
+        "banner": "Aliqua cupidatat in et consectetur exercitation nostrud do do do magna tempor tempor ullamco nulla.",
+        "link": "example.com",
+        "financedAmount": "2564.17",
+        "paidAt": "2019-06-04T07:13:17.088Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987ec5efb42096a703e",
+    "ticker": "ticker",
+    "creator": "6406198720378ee4d6e8cfcd",
+    "title": "Newcastle",
+    "description": "Laboris laborum dolore tempor ad nulla elit sit veniam duis deserunt eu est velit.",
+    "price": "1364.41",
+    "requirements": "Lorem reprehenderit sunt labore adipisicing sunt culpa incididunt proident non nulla dolor ullamco.",
+    "startDate": "1977-02-21T17:19:39.006Z",
+    "endDate": "2019-03-05T08:35:09.163Z",
+    "pictures": "",
+    "publicationDate": "1975-02-17T11:58:40.249Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Talpa",
+        "description": "Consectetur eu magna velit occaecat incididunt mollit aliquip minim velit amet in consequat tempor adipisicing.",
+        "price": "1993.62"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea239c3738930590d298",
+        "banner": "Sit labore in ex aute laborum quis dolor voluptate.",
+        "link": "example.com",
+        "financedAmount": "1167.61",
+        "paidAt": "1995-08-12T06:31:36.444Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987e377c7a913901467",
+    "ticker": "ticker",
+    "creator": "640619874b69798578689a38",
+    "title": "Ronco",
+    "description": "Aute nostrud cillum dolore eu minim sint laborum commodo.",
+    "price": "775.67",
+    "requirements": "Fugiat commodo deserunt mollit cupidatat aliqua est amet reprehenderit magna Lorem enim esse fugiat.",
+    "startDate": "2000-02-16T04:14:16.723Z",
+    "endDate": "1981-02-22T10:15:46.299Z",
+    "pictures": "",
+    "publicationDate": "1971-06-26T06:10:09.864Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Thomasville",
+        "description": "Ut reprehenderit duis proident deserunt ea eiusmod dolore Lorem aliquip irure magna dolor.",
+        "price": "681.35"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea2352177eac0d2ff22c",
+        "banner": "Elit tempor aliqua consectetur esse ullamco.",
+        "link": "example.com",
+        "financedAmount": "2285.56",
+        "paidAt": "1970-06-28T22:37:52.032Z"
+      }
+    ]
+  },
+  {
+    "_id": "640619871f8d96d18372bd61",
+    "ticker": "ticker",
+    "creator": "640619873f53cb87fcf60ecf",
+    "title": "Shelby",
+    "description": "Consectetur amet fugiat dolor culpa excepteur commodo sunt cupidatat velit.",
+    "price": "1844.78",
+    "requirements": "Aute excepteur deserunt voluptate proident laboris reprehenderit fugiat pariatur duis dolor in nostrud irure.",
+    "startDate": "2022-05-21T21:08:51.807Z",
+    "endDate": "1982-12-12T03:05:35.124Z",
+    "pictures": "",
+    "publicationDate": "2013-11-22T08:25:43.612Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Springville",
+        "description": "Ea mollit quis adipisicing sit sint do veniam.",
+        "price": "6301.21"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea239494220dfa1d6677",
+        "banner": "Quis in do enim nulla mollit nisi occaecat laboris et est cupidatat commodo labore commodo.",
+        "link": "example.com",
+        "financedAmount": "3144.64",
+        "paidAt": "1988-06-05T14:09:30.064Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987fb70536585cfff90",
+    "ticker": "ticker",
+    "creator": "640619870c728550c3765550",
+    "title": "Valmy",
+    "description": "Consectetur sunt velit ullamco sunt ullamco exercitation laborum deserunt aute cillum aliqua.",
+    "price": "1087.88",
+    "requirements": "Excepteur aliquip qui aliqua laboris officia occaecat magna deserunt voluptate ad aliqua.",
+    "startDate": "2014-02-25T05:35:00.725Z",
+    "endDate": "2011-01-27T14:06:02.705Z",
+    "pictures": "",
+    "publicationDate": "1996-12-20T15:50:27.622Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Frystown",
+        "description": "Cupidatat est culpa dolor id ut incididunt nostrud nostrud exercitation officia excepteur incididunt.",
+        "price": "3141.96"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23e02f5bfbedffb6c3",
+        "banner": "Culpa veniam quis mollit culpa.",
+        "link": "example.com",
+        "financedAmount": "1475.83",
+        "paidAt": "2002-04-20T11:58:45.900Z"
+      }
+    ]
+  },
+  {
+    "_id": "640619875596e255620d84e5",
+    "ticker": "ticker",
+    "creator": "64061987a2c9a9f5e24106fc",
+    "title": "Cliff",
+    "description": "Non ea irure duis culpa do amet officia laborum nostrud nulla laboris tempor labore laboris.",
+    "price": "1095.86",
+    "requirements": "Nisi non esse labore et occaecat deserunt Lorem.",
+    "startDate": "2009-07-29T20:45:36.603Z",
+    "endDate": "1989-04-13T07:43:12.623Z",
+    "pictures": "",
+    "publicationDate": "2008-03-13T12:39:23.036Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Edgar",
+        "description": "Aliqua et reprehenderit ipsum commodo aute.",
+        "price": "6519.96"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea237338efbc9358f723",
+        "banner": "Dolor anim occaecat pariatur duis est amet labore id veniam.",
+        "link": "example.com",
+        "financedAmount": "1753.17",
+        "paidAt": "1999-12-10T15:46:38.429Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987e43036a09c0efdea",
+    "ticker": "ticker",
+    "creator": "6406198783e7567c38a19a76",
+    "title": "Edinburg",
+    "description": "Minim qui irure dolore ullamco fugiat irure sunt occaecat tempor.",
+    "price": "1543.12",
+    "requirements": "Voluptate aliquip nostrud excepteur ut eiusmod mollit sit voluptate magna ullamco elit.",
+    "startDate": "1979-04-07T01:58:01.909Z",
+    "endDate": "2016-02-01T23:49:43.267Z",
+    "pictures": "",
+    "publicationDate": "2019-05-27T12:37:33.857Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Hartsville/Hartley",
+        "description": "Lorem est dolor est ut laboris nisi nulla laboris laboris quis fugiat deserunt sunt duis.",
+        "price": "6294.79"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23f75bd76df0098037",
+        "banner": "Occaecat qui nostrud qui laborum pariatur laboris excepteur do eiusmod cupidatat reprehenderit labore.",
+        "link": "example.com",
+        "financedAmount": "3223.37",
+        "paidAt": "2011-04-10T20:09:23.118Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987ede2d3e8001bf9a8",
+    "ticker": "ticker",
+    "creator": "640619879ebf9155c7a4a874",
+    "title": "Walton",
+    "description": "Voluptate ut veniam do magna veniam nisi amet voluptate id veniam sint sit ea.",
+    "price": "1255.55",
+    "requirements": "Reprehenderit deserunt dolor quis deserunt veniam Lorem.",
+    "startDate": "1983-02-24T09:01:00.945Z",
+    "endDate": "2020-02-27T05:01:09.645Z",
+    "pictures": "",
+    "publicationDate": "2001-08-07T17:06:15.386Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Rosine",
+        "description": "Dolor in esse sint irure.",
+        "price": "7409.04"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea2343a2bf3e75d65915",
+        "banner": "Cillum ex commodo laboris culpa nulla ad in.",
+        "link": "example.com",
+        "financedAmount": "2019.42",
+        "paidAt": "1991-03-27T23:34:43.360Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987070b8d02d95c50b3",
+    "ticker": "ticker",
+    "creator": "640619878d23596721ccb24d",
+    "title": "Greenfields",
+    "description": "Laboris aute do labore dolor magna enim occaecat sint.",
+    "price": "634.95",
+    "requirements": "Sunt ut ullamco enim officia nostrud cillum ex enim et eu nulla.",
+    "startDate": "1977-10-30T22:53:23.961Z",
+    "endDate": "1980-02-12T16:00:39.997Z",
+    "pictures": "",
+    "publicationDate": "1979-11-09T20:47:48.883Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Juarez",
+        "description": "Officia cillum do qui duis.",
+        "price": "1567.95"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea2332688be8151d4b8d",
+        "banner": "Dolor commodo laboris laborum adipisicing commodo nulla amet ex aliqua ex mollit dolore.",
+        "link": "example.com",
+        "financedAmount": "3339.33",
+        "paidAt": "2009-10-28T03:24:23.136Z"
+      }
+    ]
+  },
+  {
+    "_id": "6406198721f7e33e49bf9d87",
+    "ticker": "ticker",
+    "creator": "64061987791cddefcb201323",
+    "title": "Fairforest",
+    "description": "Anim aliquip ad culpa culpa sunt amet deserunt.",
+    "price": "629.11",
+    "requirements": "Est laboris ea cupidatat sit tempor ea quis id.",
+    "startDate": "2010-02-22T11:09:01.861Z",
+    "endDate": "2012-11-30T18:58:22.655Z",
+    "pictures": "",
+    "publicationDate": "1988-01-24T16:10:35.815Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Kenmar",
+        "description": "Quis aliquip minim adipisicing consectetur proident.",
+        "price": "910.83"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23bb3cbcf94914bbd3",
+        "banner": "Laboris labore incididunt ipsum proident esse velit eiusmod.",
+        "link": "example.com",
+        "financedAmount": "1632.12",
+        "paidAt": "1983-12-08T00:19:18.736Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987ab8c1271c3b3f940",
+    "ticker": "ticker",
+    "creator": "64061987f8ce689eabaff2d8",
+    "title": "Fedora",
+    "description": "Eu dolor incididunt excepteur magna in ea.",
+    "price": "1765.34",
+    "requirements": "Proident amet enim et excepteur consectetur Lorem id proident reprehenderit est et et ut commodo.",
+    "startDate": "2020-01-10T21:43:45.066Z",
+    "endDate": "1972-06-05T04:13:11.259Z",
+    "pictures": "",
+    "publicationDate": "2019-03-08T10:16:11.426Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Newkirk",
+        "description": "Do Lorem Lorem excepteur sint id fugiat pariatur.",
+        "price": "1781.44"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23eaa17eec4697112e",
+        "banner": "Minim et consectetur tempor labore minim consectetur dolore in occaecat velit enim ipsum sint qui.",
+        "link": "example.com",
+        "financedAmount": "3232.16",
+        "paidAt": "1978-04-27T02:57:18.439Z"
+      }
+    ]
+  },
+  {
+    "_id": "640619875e00a036e39c583d",
+    "ticker": "ticker",
+    "creator": "640619870fb21ce64ed0ff57",
+    "title": "Summerset",
+    "description": "Velit non nulla aute ut fugiat qui qui sunt culpa sint sint nisi voluptate.",
+    "price": "1001.23",
+    "requirements": "Esse labore proident occaecat aliquip velit minim.",
+    "startDate": "2006-07-06T09:47:47.228Z",
+    "endDate": "2001-12-07T16:12:51.958Z",
+    "pictures": "",
+    "publicationDate": "2010-05-14T05:17:37.527Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Kansas",
+        "description": "Sint sunt quis non exercitation occaecat dolore velit consectetur proident fugiat.",
+        "price": "6746.15"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23421a96831fa2483c",
+        "banner": "Officia non ipsum laborum ullamco et mollit anim laboris et irure dolor qui.",
+        "link": "example.com",
+        "financedAmount": "2461.47",
+        "paidAt": "1978-07-22T17:13:16.851Z"
+      }
+    ]
+  },
+  {
+    "_id": "6406198783c2618b5dc94f1d",
+    "ticker": "ticker",
+    "creator": "640619877212ed1135988c71",
+    "title": "Saranap",
+    "description": "Exercitation magna qui reprehenderit dolore ullamco excepteur ea eiusmod Lorem.",
+    "price": "1491.33",
+    "requirements": "Deserunt occaecat laboris est culpa in nulla consequat sit.",
+    "startDate": "1981-11-01T11:14:21.443Z",
+    "endDate": "1999-02-14T23:36:01.120Z",
+    "pictures": "",
+    "publicationDate": "1971-04-17T20:02:52.876Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Healy",
+        "description": "Consequat labore tempor voluptate laboris mollit Lorem aliqua cupidatat adipisicing incididunt magna.",
+        "price": "5041.15"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea231798771a08990bb5",
+        "banner": "Excepteur occaecat irure enim commodo veniam elit exercitation ad.",
+        "link": "example.com",
+        "financedAmount": "3841.23",
+        "paidAt": "1995-07-05T15:17:06.574Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987f4b059f73f3c3925",
+    "ticker": "ticker",
+    "creator": "640619872c23557b8e141aae",
+    "title": "Alafaya",
+    "description": "Excepteur deserunt ad amet id pariatur exercitation quis irure Lorem.",
+    "price": "1763.15",
+    "requirements": "Ea anim deserunt laborum pariatur elit labore consectetur laboris proident minim.",
+    "startDate": "1994-06-03T18:02:28.051Z",
+    "endDate": "2011-10-16T20:25:49.215Z",
+    "pictures": "",
+    "publicationDate": "1984-10-23T12:22:12.284Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Farmers",
+        "description": "Qui ullamco minim amet ipsum eiusmod eu nostrud do ullamco.",
+        "price": "284.16"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23bc839be21dd82c25",
+        "banner": "Ullamco occaecat adipisicing laboris laborum quis incididunt reprehenderit aliquip irure reprehenderit ipsum.",
+        "link": "example.com",
+        "financedAmount": "3726.43",
+        "paidAt": "1978-04-27T03:17:22.449Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987ca239bf5a1aaa0cb",
+    "ticker": "ticker",
+    "creator": "6406198760523d734dad6096",
+    "title": "Sparkill",
+    "description": "Id mollit non sit adipisicing sunt qui.",
+    "price": "631.03",
+    "requirements": "Id enim eu qui deserunt ullamco et tempor ut nostrud ullamco veniam do minim veniam.",
+    "startDate": "1999-11-03T21:37:48.330Z",
+    "endDate": "1973-05-16T05:00:21.451Z",
+    "pictures": "",
+    "publicationDate": "2002-08-11T05:12:12.872Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Wollochet",
+        "description": "Anim voluptate exercitation in eu velit enim cillum elit dolor ut.",
+        "price": "1180.81"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea233942e62bc81c8732",
+        "banner": "Occaecat nisi fugiat ipsum officia.",
+        "link": "example.com",
+        "financedAmount": "1043.87",
+        "paidAt": "1997-05-18T05:49:28.114Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987c821d2e533310297",
+    "ticker": "ticker",
+    "creator": "64061987970888fc99c8cefc",
+    "title": "Springhill",
+    "description": "Eu aute proident officia ex aliqua velit.",
+    "price": "1676.06",
+    "requirements": "Aliquip occaecat incididunt laboris occaecat ea ad pariatur ex aliquip et enim labore.",
+    "startDate": "1984-04-13T12:36:28.084Z",
+    "endDate": "2015-08-07T21:30:54.918Z",
+    "pictures": "",
+    "publicationDate": "1988-05-08T17:48:23.472Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Graball",
+        "description": "Sit ullamco nulla aliquip amet esse velit Lorem labore officia voluptate ex.",
+        "price": "4081.97"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea231aefcc2310718064",
+        "banner": "Anim incididunt reprehenderit sit et qui officia in irure mollit deserunt dolore ad adipisicing.",
+        "link": "example.com",
+        "financedAmount": "2004.73",
+        "paidAt": "2006-12-14T05:34:03.598Z"
+      }
+    ]
+  },
+  {
+    "_id": "6406198702ed9d26afead394",
+    "ticker": "ticker",
+    "creator": "6406198795e9d9e6c4c174a4",
+    "title": "Roeville",
+    "description": "Amet reprehenderit cillum aliquip enim veniam culpa aute nulla mollit reprehenderit laboris veniam sint.",
+    "price": "1450.97",
+    "requirements": "Consectetur cupidatat labore ex occaecat duis ad dolor.",
+    "startDate": "1999-10-07T23:33:14.868Z",
+    "endDate": "1990-07-15T19:12:10.583Z",
+    "pictures": "",
+    "publicationDate": "2015-10-20T21:31:30.609Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Frizzleburg",
+        "description": "Proident est quis nostrud voluptate magna eu ipsum veniam cillum dolore quis culpa.",
+        "price": "6581.27"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23e234a7846b70f9be",
+        "banner": "Veniam adipisicing elit consectetur commodo pariatur aute.",
+        "link": "example.com",
+        "financedAmount": "1182.36",
+        "paidAt": "2015-04-19T03:29:41.550Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987438147f03331028c",
+    "ticker": "ticker",
+    "creator": "640619879b132a949d484c6e",
+    "title": "Rehrersburg",
+    "description": "Lorem proident excepteur ullamco quis irure sit laboris commodo occaecat.",
+    "price": "1479.71",
+    "requirements": "Velit sint sunt Lorem est et pariatur Lorem culpa cupidatat.",
+    "startDate": "1971-04-02T16:36:35.106Z",
+    "endDate": "1972-08-06T22:54:34.727Z",
+    "pictures": "",
+    "publicationDate": "2008-03-01T18:32:20.687Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Whipholt",
+        "description": "Reprehenderit sunt amet laboris cillum culpa aliquip.",
+        "price": "1354.21"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea2385f3001d83981c8a",
+        "banner": "Velit id aliquip ut irure.",
+        "link": "example.com",
+        "financedAmount": "1595.22",
+        "paidAt": "1998-04-23T04:17:17.068Z"
+      }
+    ]
+  },
+  {
+    "_id": "6406198782b3d6b667264c7c",
+    "ticker": "ticker",
+    "creator": "640619874502072f1c605beb",
+    "title": "Brule",
+    "description": "Veniam quis ex id nostrud id ullamco quis dolor et Lorem est et.",
+    "price": "1723.74",
+    "requirements": "Ut cillum ut exercitation eiusmod ipsum aliquip elit reprehenderit.",
+    "startDate": "1978-08-24T07:26:28.991Z",
+    "endDate": "1997-10-06T13:39:08.962Z",
+    "pictures": "",
+    "publicationDate": "2000-09-29T22:17:48.900Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Harold",
+        "description": "Velit magna adipisicing sint ut excepteur sint incididunt.",
+        "price": "6062.51"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea235a1ba66eca8e7bdc",
+        "banner": "Deserunt labore in pariatur est dolore ad eiusmod velit est in.",
+        "link": "example.com",
+        "financedAmount": "1312.83",
+        "paidAt": "2001-01-24T03:37:11.926Z"
+      }
+    ]
+  },
+  {
+    "_id": "640619873310097f94eb802b",
+    "ticker": "ticker",
+    "creator": "64061987046231d73c703ffe",
+    "title": "Fillmore",
+    "description": "Cupidatat mollit proident Lorem aliquip ad elit irure nulla consectetur magna dolor ea minim ipsum.",
+    "price": "1987.87",
+    "requirements": "Ut consequat cillum aliquip do do nostrud magna.",
+    "startDate": "1997-02-20T07:34:55.635Z",
+    "endDate": "1982-11-08T12:52:32.332Z",
+    "pictures": "",
+    "publicationDate": "2019-10-14T01:41:44.437Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Windsor",
+        "description": "Veniam nulla elit tempor id enim Lorem irure consequat Lorem deserunt magna.",
+        "price": "244.76"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23df3764d699c4c6ee",
+        "banner": "Nulla duis tempor laboris cillum eiusmod esse deserunt.",
+        "link": "example.com",
+        "financedAmount": "1289.67",
+        "paidAt": "1993-04-13T12:55:56.824Z"
+      }
+    ]
+  },
+  {
+    "_id": "640619873165d442d13c5c0b",
+    "ticker": "ticker",
+    "creator": "6406198712ac719502e9defb",
+    "title": "Churchill",
+    "description": "Deserunt proident officia enim ex nulla.",
+    "price": "1124.69",
+    "requirements": "Reprehenderit deserunt mollit aliqua sunt eiusmod exercitation amet nulla.",
+    "startDate": "2016-08-04T06:08:22.376Z",
+    "endDate": "1982-03-05T16:05:39.976Z",
+    "pictures": "",
+    "publicationDate": "1972-10-29T19:23:35.444Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Mappsville",
+        "description": "Nisi exercitation nisi excepteur occaecat labore dolore reprehenderit cillum ullamco quis.",
+        "price": "2843.21"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23ed3cfc1c8d7f09cc",
+        "banner": "Cillum nostrud nisi mollit ipsum ad do laborum reprehenderit ex aute.",
+        "link": "example.com",
+        "financedAmount": "1853.89",
+        "paidAt": "2022-08-12T13:42:01.734Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987b5f34b696cb83f9c",
+    "ticker": "ticker",
+    "creator": "64061987668825ad7e0e9aca",
+    "title": "Whitewater",
+    "description": "Quis sunt exercitation magna ullamco quis laborum in excepteur officia mollit et consequat.",
+    "price": "1826.79",
+    "requirements": "Aute non est consequat dolor labore aliquip duis exercitation sit.",
+    "startDate": "1996-07-03T03:54:30.771Z",
+    "endDate": "1985-02-08T17:53:56.112Z",
+    "pictures": "",
+    "publicationDate": "1981-12-09T09:35:57.448Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Rosewood",
+        "description": "Culpa laborum amet laboris qui laboris.",
+        "price": "479.27"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23c08c6bdbf0d49bc4",
+        "banner": "Quis ex laboris laboris ullamco commodo id velit velit proident sit eu.",
+        "link": "example.com",
+        "financedAmount": "3521.56",
+        "paidAt": "1974-10-16T04:32:19.162Z"
+      }
+    ]
+  },
+  {
+    "_id": "6406198747b8d3f343bf3641",
+    "ticker": "ticker",
+    "creator": "64061987c8273a1125de9b08",
+    "title": "Stewart",
+    "description": "Dolore quis ipsum culpa do.",
+    "price": "1064.56",
+    "requirements": "In in dolore duis velit Lorem aliquip.",
+    "startDate": "1972-10-23T17:56:32.108Z",
+    "endDate": "1976-09-06T07:34:52.648Z",
+    "pictures": "",
+    "publicationDate": "2006-06-04T13:16:51.708Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Nescatunga",
+        "description": "Ex eiusmod Lorem magna velit ad magna occaecat ad aliqua.",
+        "price": "5155.25"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23125899dda498c681",
+        "banner": "Adipisicing deserunt ex consectetur nisi dolore ex voluptate ad non cupidatat consequat elit ipsum exercitation.",
+        "link": "example.com",
+        "financedAmount": "2215.87",
+        "paidAt": "2010-02-09T12:42:25.597Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987ae8193bc4a2fb55f",
+    "ticker": "ticker",
+    "creator": "64061987c8cccae4c98a5fdf",
+    "title": "Blende",
+    "description": "Eiusmod nostrud esse quis mollit labore reprehenderit mollit mollit.",
+    "price": "1765.33",
+    "requirements": "Magna id id enim sunt quis enim ut nisi amet fugiat eu irure.",
+    "startDate": "1976-01-15T07:37:48.754Z",
+    "endDate": "2010-06-25T03:51:02.797Z",
+    "pictures": "",
+    "publicationDate": "2021-04-13T10:29:02.987Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Gerber",
+        "description": "Proident enim cupidatat id sint mollit aliquip commodo.",
+        "price": "5803.19"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea235ea0183fcc051809",
+        "banner": "Consectetur nisi ipsum ipsum adipisicing labore.",
+        "link": "example.com",
+        "financedAmount": "2611.66",
+        "paidAt": "2009-10-06T00:44:36.498Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987ce76172d9c35dbf5",
+    "ticker": "ticker",
+    "creator": "64061987bf13622c269780f3",
+    "title": "Yogaville",
+    "description": "Culpa tempor cillum velit mollit incididunt tempor pariatur.",
+    "price": "846.22",
+    "requirements": "Velit esse ullamco duis id anim id nisi in Lorem quis consectetur.",
+    "startDate": "2018-03-19T10:19:02.818Z",
+    "endDate": "2008-07-07T20:15:34.055Z",
+    "pictures": "",
+    "publicationDate": "2000-03-19T09:41:14.829Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Edmund",
+        "description": "Deserunt sint sint non dolore.",
+        "price": "5688.81"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23a7e82b2d5c5420cd",
+        "banner": "Incididunt est commodo labore eiusmod et et non fugiat eu fugiat sit aute fugiat eiusmod.",
+        "link": "example.com",
+        "financedAmount": "2907.37",
+        "paidAt": "1993-10-26T08:38:14.333Z"
+      }
+    ]
+  },
+  {
+    "_id": "6406198727275e5a69894605",
+    "ticker": "ticker",
+    "creator": "64061987b4f27578ccfb4137",
+    "title": "Lodoga",
+    "description": "Exercitation labore adipisicing pariatur amet proident ad dolore adipisicing esse cupidatat laboris.",
+    "price": "1847.84",
+    "requirements": "Magna ad ullamco voluptate reprehenderit ipsum incididunt.",
+    "startDate": "1985-10-31T22:42:43.993Z",
+    "endDate": "1994-03-10T04:56:19.771Z",
+    "pictures": "",
+    "publicationDate": "1986-09-06T04:23:26.587Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Belmont",
+        "description": "Lorem elit commodo irure cupidatat fugiat.",
+        "price": "2854.01"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea232056f5f864f0e262",
+        "banner": "Fugiat magna quis et tempor deserunt ea ut magna ut tempor.",
+        "link": "example.com",
+        "financedAmount": "3984.16",
+        "paidAt": "2020-06-02T13:03:40.976Z"
+      }
+    ]
+  },
+  {
+    "_id": "640619875a86c51401c03008",
+    "ticker": "ticker",
+    "creator": "6406198713e495432ce4902d",
+    "title": "Fairlee",
+    "description": "Reprehenderit velit eiusmod adipisicing nostrud elit exercitation culpa exercitation occaecat sunt officia voluptate et.",
+    "price": "1020.57",
+    "requirements": "Ex amet eiusmod id dolor sint aute veniam dolor.",
+    "startDate": "1996-12-07T05:15:17.703Z",
+    "endDate": "2014-12-20T04:12:03.717Z",
+    "pictures": "",
+    "publicationDate": "1994-01-19T14:10:16.889Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Sardis",
+        "description": "Est exercitation quis ad cillum proident ipsum.",
+        "price": "7813.32"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23392fda0a9dffc29d",
+        "banner": "Est mollit Lorem adipisicing nulla.",
+        "link": "example.com",
+        "financedAmount": "1200.31",
+        "paidAt": "1997-01-18T04:19:14.993Z"
+      }
+    ]
+  },
+  {
+    "_id": "640619878fa93425da4e4c3d",
+    "ticker": "ticker",
+    "creator": "64061987f1501f88e0311809",
+    "title": "Lydia",
+    "description": "Nostrud qui nulla labore et cupidatat.",
+    "price": "1008.84",
+    "requirements": "Tempor tempor mollit proident esse enim do irure proident cupidatat.",
+    "startDate": "2017-08-22T01:56:54.092Z",
+    "endDate": "1997-11-14T18:14:41.151Z",
+    "pictures": "",
+    "publicationDate": "1985-03-31T22:51:35.896Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Belfair",
+        "description": "Elit Lorem proident elit eiusmod magna laborum ut incididunt proident nisi voluptate id sunt.",
+        "price": "3055.22"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23866de1b5db9180a7",
+        "banner": "Non pariatur esse cillum anim aute deserunt nisi ullamco adipisicing occaecat et.",
+        "link": "example.com",
+        "financedAmount": "1548.12",
+        "paidAt": "1993-01-29T06:02:45.824Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987e652e496146ef969",
+    "ticker": "ticker",
+    "creator": "640619875dfe0b9ea7615d73",
+    "title": "Welch",
+    "description": "Nulla consectetur fugiat cillum aute deserunt proident eiusmod do elit exercitation irure enim.",
+    "price": "775.21",
+    "requirements": "Et cupidatat ex dolore nisi aliquip consectetur sunt quis minim sit pariatur.",
+    "startDate": "2018-04-05T22:23:05.135Z",
+    "endDate": "2010-05-20T22:38:16.507Z",
+    "pictures": "",
+    "publicationDate": "2008-08-31T20:44:58.484Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Boomer",
+        "description": "Sint nulla pariatur fugiat qui labore occaecat anim eu elit ad esse voluptate voluptate aliqua.",
+        "price": "6335.03"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23bb11bd19a4e97eee",
+        "banner": "Enim esse laborum Lorem incididunt ut veniam velit amet duis consequat do non dolore.",
+        "link": "example.com",
+        "financedAmount": "1782.64",
+        "paidAt": "1975-01-31T23:56:19.541Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987efca69523653107e",
+    "ticker": "ticker",
+    "creator": "6406198774cc5daee5102531",
+    "title": "Marenisco",
+    "description": "Aliqua sunt velit amet sint sint excepteur sit ad do.",
+    "price": "1687.47",
+    "requirements": "Exercitation qui ullamco sunt laborum mollit incididunt id.",
+    "startDate": "2004-01-31T05:41:07.515Z",
+    "endDate": "2004-07-30T16:13:56.679Z",
+    "pictures": "",
+    "publicationDate": "1993-10-24T18:58:18.704Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Forbestown",
+        "description": "Et nulla ea non irure ipsum enim aliquip sunt ut dolore et enim aliquip.",
+        "price": "1687.71"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23710059b7880a0eeb",
+        "banner": "Duis ipsum ex esse exercitation ipsum deserunt minim anim exercitation magna.",
+        "link": "example.com",
+        "financedAmount": "1923.32",
+        "paidAt": "2008-06-22T14:37:19.352Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987d90ac50ed4979777",
+    "ticker": "ticker",
+    "creator": "6406198761684dec0aec4e79",
+    "title": "Winfred",
+    "description": "Adipisicing ea proident tempor laboris mollit veniam exercitation commodo deserunt laboris id.",
+    "price": "1179.99",
+    "requirements": "Reprehenderit eiusmod eu ex incididunt id pariatur proident veniam mollit ullamco.",
+    "startDate": "2022-07-11T12:23:21.227Z",
+    "endDate": "2010-04-20T02:26:45.687Z",
+    "pictures": "",
+    "publicationDate": "1999-01-25T10:12:39.692Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Drytown",
+        "description": "Amet nisi ipsum labore pariatur sunt irure do dolore quis fugiat duis in.",
+        "price": "6845.92"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea234bed9562e918d557",
+        "banner": "Minim sunt consectetur enim ullamco cupidatat labore culpa ullamco dolor dolor anim occaecat esse.",
+        "link": "example.com",
+        "financedAmount": "3952.03",
+        "paidAt": "1984-03-12T19:50:55.052Z"
+      }
+    ]
+  },
+  {
+    "_id": "6406198749f8c0cace59350c",
+    "ticker": "ticker",
+    "creator": "6406198776ddbc5c96f3d2ce",
+    "title": "Edgar",
+    "description": "Velit exercitation officia ex pariatur voluptate Lorem reprehenderit voluptate eu ut aliquip.",
+    "price": "692.86",
+    "requirements": "Enim in tempor nulla est non proident.",
+    "startDate": "1974-04-26T18:17:35.029Z",
+    "endDate": "1981-10-02T07:42:18.920Z",
+    "pictures": "",
+    "publicationDate": "2005-05-03T01:18:40.933Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Bowden",
+        "description": "Occaecat ea magna do consectetur.",
+        "price": "736.76"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23c51a5d85a228c38a",
+        "banner": "Adipisicing minim occaecat ipsum exercitation.",
+        "link": "example.com",
+        "financedAmount": "1890.41",
+        "paidAt": "2011-07-18T22:17:34.765Z"
+      }
+    ]
+  },
+  {
+    "_id": "6406198728eaff57b1fefe97",
+    "ticker": "ticker",
+    "creator": "64061987247592be6567f9bb",
+    "title": "Bergoo",
+    "description": "Cillum incididunt qui nostrud amet pariatur labore magna excepteur.",
+    "price": "940.94",
+    "requirements": "Consectetur et mollit ea occaecat elit duis sit laborum labore.",
+    "startDate": "1991-10-11T13:50:35.127Z",
+    "endDate": "1999-03-10T06:49:09.930Z",
+    "pictures": "",
+    "publicationDate": "2005-08-07T01:15:18.249Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Morgandale",
+        "description": "Sunt reprehenderit amet tempor consequat.",
+        "price": "6888.18"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23ee29ebdca4c15c1f",
+        "banner": "Anim consequat fugiat tempor enim deserunt qui qui magna.",
+        "link": "example.com",
+        "financedAmount": "1031.55",
+        "paidAt": "1975-01-21T01:21:10.056Z"
+      }
+    ]
+  },
+  {
+    "_id": "6406198740272d589e56ed60",
+    "ticker": "ticker",
+    "creator": "640619872594c84135f161be",
+    "title": "Winston",
+    "description": "Labore ullamco qui exercitation ex ipsum laborum aliqua adipisicing qui.",
+    "price": "634.08",
+    "requirements": "Exercitation fugiat sint pariatur exercitation nulla nostrud magna non eu.",
+    "startDate": "2021-06-08T05:10:01.464Z",
+    "endDate": "1989-12-20T12:07:57.754Z",
+    "pictures": "",
+    "publicationDate": "2004-05-08T04:59:29.399Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Eden",
+        "description": "Sit et proident quis tempor adipisicing voluptate occaecat eu consequat Lorem commodo.",
+        "price": "6939.31"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23a7ac99723ce9ab0a",
+        "banner": "Commodo eiusmod elit duis ea tempor et irure laborum in.",
+        "link": "example.com",
+        "financedAmount": "1195.65",
+        "paidAt": "2015-03-13T04:24:57.314Z"
+      }
+    ]
+  },
+  {
+    "_id": "640619878dbcc84750d901ca",
+    "ticker": "ticker",
+    "creator": "640619877daaddaad18c6bd2",
+    "title": "Ventress",
+    "description": "Velit reprehenderit in aute nisi laborum consectetur cillum cillum ut aliqua laboris.",
+    "price": "1679.71",
+    "requirements": "Eiusmod Lorem labore reprehenderit sit incididunt minim elit culpa cupidatat.",
+    "startDate": "1991-07-31T17:17:23.818Z",
+    "endDate": "2008-04-21T14:51:00.655Z",
+    "pictures": "",
+    "publicationDate": "1979-12-23T07:47:44.781Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Wiscon",
+        "description": "Velit aliqua ullamco culpa irure sint.",
+        "price": "6824.96"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea237f502122ec4d5100",
+        "banner": "Excepteur aute esse mollit culpa laborum fugiat ex amet.",
+        "link": "example.com",
+        "financedAmount": "1888.63",
+        "paidAt": "1987-01-10T03:54:48.059Z"
+      }
+    ]
+  },
+  {
+    "_id": "640619871fa47c0e20930665",
+    "ticker": "ticker",
+    "creator": "64061987563fac9e76dd05ff",
+    "title": "Wawona",
+    "description": "Laboris sit commodo et excepteur fugiat sunt occaecat tempor excepteur et velit.",
+    "price": "1597.38",
+    "requirements": "Aute tempor ea cupidatat qui laborum sunt do quis irure.",
+    "startDate": "2016-12-11T17:52:05.277Z",
+    "endDate": "1997-09-29T16:48:42.222Z",
+    "pictures": "",
+    "publicationDate": "1995-12-27T07:02:42.608Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Worton",
+        "description": "Nostrud aliquip deserunt et proident duis ad mollit deserunt consequat exercitation occaecat id.",
+        "price": "4871.38"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea2379af9a27b920862c",
+        "banner": "Nisi enim nisi Lorem ex excepteur non velit do dolor anim dolor exercitation enim non.",
+        "link": "example.com",
+        "financedAmount": "3243.31",
+        "paidAt": "2013-01-02T18:40:36.877Z"
+      }
+    ]
+  },
+  {
+    "_id": "640619870513cc928b21b297",
+    "ticker": "ticker",
+    "creator": "6406198798b4a967652f58dd",
+    "title": "Herbster",
+    "description": "Voluptate ad nostrud elit amet cupidatat et enim.",
+    "price": "1749.51",
+    "requirements": "Ullamco mollit laborum enim sint reprehenderit consectetur sunt.",
+    "startDate": "1991-11-26T08:22:43.406Z",
+    "endDate": "1992-09-24T13:08:06.191Z",
+    "pictures": "",
+    "publicationDate": "1990-10-26T18:03:39.105Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Dahlen",
+        "description": "Nisi ex nisi labore exercitation consectetur eiusmod officia eu dolor veniam consequat labore minim amet.",
+        "price": "7843.32"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23f2563470a70760e8",
+        "banner": "Fugiat eiusmod nostrud duis quis duis minim Lorem eu nostrud duis.",
+        "link": "example.com",
+        "financedAmount": "3371.53",
+        "paidAt": "1996-06-14T15:17:07.249Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987e30b5867b5185166",
+    "ticker": "ticker",
+    "creator": "64061987bbdd5cd843b836a8",
+    "title": "Springville",
+    "description": "Ullamco esse eiusmod laboris aliqua laborum ullamco officia veniam id eu consectetur fugiat eiusmod.",
+    "price": "1153.48",
+    "requirements": "Ipsum ut consectetur est reprehenderit ullamco veniam.",
+    "startDate": "2008-10-06T00:47:39.507Z",
+    "endDate": "1991-06-19T20:33:49.857Z",
+    "pictures": "",
+    "publicationDate": "2019-12-13T11:09:22.761Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Glendale",
+        "description": "In nostrud nulla ipsum ex mollit aliqua laboris officia occaecat duis quis enim.",
+        "price": "2689.06"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea2328223d54d8e8b721",
+        "banner": "Minim nisi quis est ut aliqua dolore.",
+        "link": "example.com",
+        "financedAmount": "3995.68",
+        "paidAt": "2005-06-11T04:18:12.337Z"
+      }
+    ]
+  },
+  {
+    "_id": "640619878f0b886cdc92dd4d",
+    "ticker": "ticker",
+    "creator": "64061987717b805746c327ee",
+    "title": "Robinette",
+    "description": "Ullamco nisi mollit eu nostrud cupidatat ipsum adipisicing.",
+    "price": "1130.69",
+    "requirements": "Et do sit fugiat culpa tempor.",
+    "startDate": "1989-02-08T11:45:04.857Z",
+    "endDate": "1984-06-14T06:01:37.881Z",
+    "pictures": "",
+    "publicationDate": "2019-11-28T13:19:57.265Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Herald",
+        "description": "Aliquip nostrud magna qui voluptate aliqua reprehenderit nisi consequat amet adipisicing.",
+        "price": "533.37"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23943b7e4d345a1767",
+        "banner": "Mollit dolore proident excepteur officia.",
+        "link": "example.com",
+        "financedAmount": "3045.51",
+        "paidAt": "2009-10-03T04:39:26.064Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987153c0aa1fb61451f",
+    "ticker": "ticker",
+    "creator": "6406198746abd32a80ebafa2",
+    "title": "Edmund",
+    "description": "Elit non dolore ea do duis fugiat aliqua.",
+    "price": "1973.06",
+    "requirements": "Magna cillum dolore exercitation consectetur consectetur aliqua ut cillum.",
+    "startDate": "2022-06-21T14:23:16.995Z",
+    "endDate": "2003-02-22T14:53:22.008Z",
+    "pictures": "",
+    "publicationDate": "1976-11-17T04:03:31.563Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Cotopaxi",
+        "description": "Et qui elit exercitation culpa sit dolore aute.",
+        "price": "3765.77"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea2359f348a73ad988de",
+        "banner": "Quis in mollit voluptate incididunt ut occaecat id et minim adipisicing excepteur reprehenderit non.",
+        "link": "example.com",
+        "financedAmount": "3087.52",
+        "paidAt": "1982-07-06T13:00:37.683Z"
+      }
+    ]
+  },
+  {
+    "_id": "640619871860b4af280df0e0",
+    "ticker": "ticker",
+    "creator": "64061987d9a8c9dfb53d6e5d",
+    "title": "Sunnyside",
+    "description": "Tempor consequat fugiat fugiat enim in quis dolore aliquip.",
+    "price": "1380.96",
+    "requirements": "Reprehenderit cillum non aliquip et occaecat labore irure do mollit laboris.",
+    "startDate": "1982-01-06T14:36:47.822Z",
+    "endDate": "2019-11-25T07:40:42.901Z",
+    "pictures": "",
+    "publicationDate": "1976-05-12T14:36:06.882Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Tuskahoma",
+        "description": "Dolore duis labore reprehenderit laboris laboris proident et occaecat esse cillum aute.",
+        "price": "2667.46"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23f2f81daa2d63714d",
+        "banner": "Quis magna officia duis est mollit aliqua ipsum.",
+        "link": "example.com",
+        "financedAmount": "1304.52",
+        "paidAt": "1976-07-06T15:29:44.180Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987b448b6cbcd1d85ce",
+    "ticker": "ticker",
+    "creator": "640619871e8522f48c32e89f",
+    "title": "Brutus",
+    "description": "Est ullamco officia cupidatat minim nostrud consequat et commodo occaecat deserunt sunt reprehenderit.",
+    "price": "1154.08",
+    "requirements": "Quis deserunt consequat incididunt labore do cupidatat.",
+    "startDate": "1988-12-06T23:49:54.262Z",
+    "endDate": "2013-12-10T00:18:15.087Z",
+    "pictures": "",
+    "publicationDate": "1981-08-31T11:20:35.641Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Clarktown",
+        "description": "Deserunt consectetur proident eu nulla qui quis aliqua cillum laborum ex.",
+        "price": "3361.14"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea2383a491ef1ec29bf0",
+        "banner": "Non non excepteur ullamco aute ullamco ut amet Lorem anim sunt officia magna adipisicing.",
+        "link": "example.com",
+        "financedAmount": "2771.21",
+        "paidAt": "2008-03-28T08:40:43.609Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987b54876e934fded5a",
+    "ticker": "ticker",
+    "creator": "64061987076f89376a46656e",
+    "title": "Richford",
+    "description": "Proident ea amet exercitation voluptate.",
+    "price": "1513.21",
+    "requirements": "Amet cupidatat sit ad sit nisi nisi do labore et duis laboris.",
+    "startDate": "1997-04-19T13:14:13.547Z",
+    "endDate": "2006-12-27T19:38:27.834Z",
+    "pictures": "",
+    "publicationDate": "1972-06-18T00:01:18.817Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Hiseville",
+        "description": "Aute consequat velit laboris veniam non.",
+        "price": "4636.52"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea237d72b6763bdb3466",
+        "banner": "Duis deserunt id dolore esse.",
+        "link": "example.com",
+        "financedAmount": "2887.12",
+        "paidAt": "2017-11-20T19:46:25.972Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987496620b1c3dd99c3",
+    "ticker": "ticker",
+    "creator": "64061987bd5c7caca19a49b8",
+    "title": "Sidman",
+    "description": "Et nostrud proident laborum consectetur mollit proident elit consectetur do aute aliqua reprehenderit non.",
+    "price": "1478.32",
+    "requirements": "Exercitation pariatur in non ex nisi laboris cillum.",
+    "startDate": "2002-04-15T23:05:55.971Z",
+    "endDate": "1975-04-22T04:23:16.480Z",
+    "pictures": "",
+    "publicationDate": "1975-03-01T18:02:11.622Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Brooktrails",
+        "description": "Commodo labore ea eiusmod enim laborum incididunt ipsum exercitation qui ut reprehenderit.",
+        "price": "7816.35"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea23b2961fb86d6c161d",
+        "banner": "Et excepteur velit fugiat veniam duis aliquip nostrud dolore ad tempor consequat laborum.",
+        "link": "example.com",
+        "financedAmount": "2302.74",
+        "paidAt": "1985-07-28T10:25:44.307Z"
+      }
+    ]
+  },
+  {
+    "_id": "64061987059d0e784ae70d18",
+    "ticker": "ticker",
+    "creator": "6406198719c98a8749537ef5",
+    "title": "Clinton",
+    "description": "Officia esse enim commodo laboris laborum do ad.",
+    "price": "694.27",
+    "requirements": "Sunt do irure fugiat ex ut.",
+    "startDate": "1973-03-13T00:52:07.943Z",
+    "endDate": "1976-02-01T23:25:52.373Z",
+    "pictures": "",
+    "publicationDate": "2011-11-06T06:12:09.854Z",
+    "cancellationDate": null,
+    "cancellationReason": "",
+    "stages": [
+      {
+        "title": "Beaulieu",
+        "description": "Deserunt incididunt veniam labore nostrud in minim aliqua excepteur non.",
+        "price": "6131.51"
+      }
+    ],
+    "sponsorships": [
+      {
+        "sponsor": "6404ea235c8f1ca6ef0720b6",
+        "banner": "Mollit quis eu anim qui cillum aliquip ullamco sunt occaecat ipsum cillum id.",
+        "link": "example.com",
+        "financedAmount": "1120.16",
+        "paidAt": "1998-10-15T02:46:20.305Z"
+      }
+    ]
+  }
+]
