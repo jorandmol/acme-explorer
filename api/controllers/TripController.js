@@ -1,6 +1,7 @@
 import Trip from '../models/TripModel.js'
 import Actor from '../models/ActorModel.js'
 import Application from '../models/ApplicationModel.js'
+import Finder from '../models/FinderModel.js'
 import GloabalConfig from '../models/GlobalConfigModel.js'
 import StatusEnum from '../enum/StatusEnum.js'
 import RoleEnum from '../enum/RoleEnum.js'
@@ -10,7 +11,7 @@ const _generateFilter = (filters) => {
   const { keyword, minPrice, maxPrice, minDate, maxDate } = filters
   let filter = {}
   if (keyword) {
-    filter = { $text: { $search: keyword }}
+    filter = { $text: { $search: keyword } }
   }
   if (minPrice || maxPrice) {
     const priceFilter = []
@@ -39,12 +40,67 @@ const _getLimit = async () => {
 }
 
 export const searchTrips = async (req, res) => {
+  // TODO: change this when auth is implemented
+  const { actor_id } = req.headers
   const filters = _generateFilter(req.query)
   try {
-    const limit = await _getLimit()
-    const trips = await Trip.find(filters).limit(limit)
-    res.json(trips)
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.EXPLORER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+    let finder = await Finder.find({ explorer_id: actor_id }).sort("-createdAt").limit(1);
+    if (finder?.length) {
+      finder = finder[0]
+      if (finder.expiryDate && finder.expiryDate > new Date() &&
+        ((req.query.keyword && finder.keyword === req.query.keyword) || (!req.query.keyword && finder.keyword === null)) &&
+        ((req.query.minPrice && finder.minPrice === req.query.minPrice) || (!req.query.minPrice && finder.minPrice === null)) &&
+        ((req.query.maxPrice && finder.maxPrice === req.query.maxPrice) || (!req.query.maxPrice && finder.maxPrice === null)) &&
+        ((req.query.minDate && finder.minDate === req.query.minDate) || (!req.query.minDate && finder.minDate === null)) &&
+        ((req.query.maxDate && finder.maxDate === req.query.maxDate) || (!req.query.maxDate && finder.maxDate === null))) {
+        res.json(finder.results)
+        console.log(finder)
+        return
+      } else {
+        const limit = await _getLimit()
+        const trips = await Trip.find(filters).limit(limit)
+        const newFinder = new Finder({
+          explorer: ObjectId(actor_id),
+          keyword: req.query?.keyword || null,
+          minPrice: req.query?.minPrice || null,
+          maxPrice: req.query?.maxPrice || null,
+          minDate: req.query?.minDate || null,
+          maxDate: req.query?.maxDate || null,
+          results: trips,
+          expiryDate: new Date(Date.now() + 3600000)
+        })
+        await newFinder.save()
+        res.json(trips)
+        return
+      }
+    } else {
+      const limit = await _getLimit()
+      const trips = await Trip.find(filters).limit(limit)
+      const newFinder = new Finder({
+        explorer: ObjectId(actor_id),
+        keyword: req.query?.keyword || null,
+        minPrice: req.query?.minPrice || null,
+        maxPrice: req.query?.maxPrice || null,
+        minDate: req.query?.minDate || null,
+        maxDate: req.query?.maxDate || null,
+        results: trips,
+        expiryDate: new Date(Date.now() + 3600000)
+      })
+      await newFinder.save()
+      res.json(trips)
+      return
+    }
   } catch (err) {
+    console.error(err)
     res.status(500).send(err)
   }
 }
@@ -88,7 +144,7 @@ export const createTrip = async (req, res) => {
     newTrip.creator = actor._id
     const trip = await newTrip.save()
     res.json(trip)
-  } catch(err) {
+  } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(422).send(err)
     } else {
@@ -103,7 +159,7 @@ export const readTrip = async (req, res) => {
     const trip = await Trip.findById(id)
     if (trip) {
       res.json(trip)
-    } else{
+    } else {
       res.status(404).send('Trip not found')
     }
   } catch (err) {
@@ -142,7 +198,7 @@ export const updateTrip = async (req, res) => {
     }
 
     if (!newTrip.price) {
-      newTrip.price = [ ...newTrip.stages ].map(stage => stage.price).reduce((totalPrice, actualPrice) => totalPrice + actualPrice, 0)
+      newTrip.price = [...newTrip.stages].map(stage => stage.price).reduce((totalPrice, actualPrice) => totalPrice + actualPrice, 0)
     }
 
     // Keep dates null
@@ -314,7 +370,7 @@ export const listTripApplications = async (req, res) => {
       res.status(404).send('Trip not found')
       return
     }
-    
+
     if (trip.creator.toString() !== actor._id.toString()) {
       res.status(403).send('Actor does not have the required permissions')
       return
@@ -359,7 +415,7 @@ export const createTripApplication = async (req, res) => {
     const newApplication = new Application({ trip: trip._id, explorer: actor._id, comments })
     const application = await newApplication.save()
     res.json(application)
-  } catch(err){
+  } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(422).send(err)
     } else {

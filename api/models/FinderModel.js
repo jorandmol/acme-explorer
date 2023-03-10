@@ -39,6 +39,8 @@ const FinderSchema = new mongoose.Schema({
     }
 }, { timestamps: true })
 
+FinderSchema.index({ explorer: 1, createdAt: 1 })
+
 const model = mongoose.model('Finder', FinderSchema)
 
 export const schema = model.schema
