@@ -14,6 +14,7 @@ import dataWarehouseRoutes from './api/routes/DataWarehouseRoutes.js'
 import { initializeDataWarehouseJob } from "./api/services/DataWarehouseServiceProvider.js";
 import loginRoutes from './api/routes/LoginRoutes.js'
 import admin from 'firebase-admin';
+import serviceAccount from './firebase.js'
 
 dotenv.config()
 
@@ -22,7 +23,6 @@ const port = 8080
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-var serviceAccount = require("./firebase.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   // databaseURL: 'https://acmeexplorer.firebaseio.com'
