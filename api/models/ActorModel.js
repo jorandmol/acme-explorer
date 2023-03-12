@@ -38,7 +38,17 @@ const ActorSchema = new mongoose.Schema({
         reason: {
             type: String,
         }
-    }
+    },
+    validated: {
+      type: Boolean,
+      default: false
+    },
+    customToken: {
+      type: String
+    },
+    idToken: {
+      type: String
+    },
 }, { timestamps: true })
 
 const model = mongoose.model('Actor', ActorSchema)

@@ -108,3 +108,5 @@ public/restaurantImages/*
 public/restaurants/*
 
 data
+
+firebase.json
