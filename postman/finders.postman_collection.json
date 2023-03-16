@@ -12,13 +12,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "localhost:8080/v1/finders",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}"
+						"v1",
+						"finders"
 					]
 				}
 			},
@@ -30,13 +30,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "localhost:8080/v1/finders/:id",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"finders",
 						":id"
 					],
 					"variable": [
@@ -64,13 +64,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "localhost:8080/v1/finders/:id",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"finders",
 						":id"
 					],
 					"variable": [
@@ -89,13 +89,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "localhost:8080/v1/finders/:id",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"finders",
 						":id"
 					],
 					"variable": [
@@ -123,13 +123,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "localhost:8080/v1/finders",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}"
+						"v1",
+						"finders"
 					]
 				}
 			},

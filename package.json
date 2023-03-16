@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "mocha --exit"
+    "test": "mocha --exit",
+    "p2o": "node postmanToOpenapi.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,7 +19,9 @@
     "express": "^4.18.2",
     "express-validator": "^6.14.3",
     "mongoose": "^6.8.4",
-    "nanoid": "^4.0.0"
+    "nanoid": "^4.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.2"
   },
   "type": "module",
   "devDependencies": {
@@ -26,6 +29,7 @@
     "chai-http": "^4.3.0",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.20",
-    "sinon": "^15.0.1"
+    "sinon": "^15.0.1",
+    "postman-to-openapi": "^3.0.1"
   }
 }

@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  title: dataWarehouse
+  version: 1.0.0
+servers:
+  - url: localhost://
+paths:
+  /v1/dashboard:
+    get:
+      tags:
+        - dataWarehouse
+      summary: readDataWarehouse
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/dashboard/latest:
+    get:
+      tags:
+        - dataWarehouse
+      summary: readLatestDataWarehouse
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/dashboard/rebuild-period:
+    patch:
+      tags:
+        - dataWarehouse
+      summary: updateRebuildPeriod
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                period: 30
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/dashboard/spent-money-by-explorer:
+    post:
+      tags:
+        - dataWarehouse
+      summary: spentMoneyByExplorer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                explorer: 63ed27e96bb6772e5dab87ad
+                period: M06
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/dashboard/explorers-by-spent-money:
+    post:
+      tags:
+        - dataWarehouse
+      summary: explorersBySpentMoney
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                period: M36
+                theta: gte
+                v: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
