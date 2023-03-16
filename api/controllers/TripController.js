@@ -42,7 +42,7 @@ export const searchTrips = async (req, res) => {
   const filters = _generateFilter(req.query)
   try {
     const limit = await _getLimit()
-    const trips = await Trip.find(filters).limit(limit)
+    const trips = await Trip.findByFilters(filters, limit)
     res.json(trips)
   } catch (err) {
     res.status(500).send(err)
@@ -349,9 +349,8 @@ export const createTripApplication = async (req, res) => {
       return
     }
 
-    const applications = await Application.find({ trip: trip._id })
-    const explorerTripApplicantions = applications.filter(app => app.explorer.toString() === actor._id.toString())
-    if (explorerTripApplicantions.length) {
+    const explorerTripApplications = await Application.find({ trip: trip._id, explorer: actor._id })
+    if (explorerTripApplications.length) {
       res.status(403).send('There is already another application created by you')
       return
     }

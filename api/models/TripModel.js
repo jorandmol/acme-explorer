@@ -122,6 +122,10 @@ tripSchema.pre('save', function (callback) {
     callback()
 })
 
+tripSchema.statics.findByFilters = function(filters, limit = 10) {
+    return this.find(filters).limit(limit)
+}
+
 const model = mongoose.model('Trip', tripSchema)
 
 export const schema = model.schema
