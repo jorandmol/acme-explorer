@@ -351,7 +351,7 @@ export const createTripApplication = async (req, res) => {
 
     const explorerTripApplications = await Application.find({ trip: trip._id, explorer: actor._id })
     if (explorerTripApplications.length) {
-      res.status(403).send('There is already another application created by you')
+      res.status(409).send('There is already another application created by this user')
       return
     }
 

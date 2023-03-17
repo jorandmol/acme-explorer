@@ -495,7 +495,7 @@ describe('Trips', () => {
           done()
         })
     })
-    it('Should return 403', done => {
+    it('Should return 409', done => {
       sinon.stub(Actor, 'findById').returns(Promise.resolve(explorer1))
       sinon.stub(Application, 'find').returns(Promise.resolve([appl1]))
       chai
@@ -504,8 +504,8 @@ describe('Trips', () => {
         .set({ actor_id: explorer1._id.toString() })
         .send(comments)
         .end((err, res) => {
-          expect(res).to.have.status(403)
-          expect(res.text).to.be.eq('There is already another application created by you')
+          expect(res).to.have.status(409)
+          expect(res.text).to.be.eq('There is already another application created by this user')
           done()
         })
     })
