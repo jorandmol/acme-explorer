@@ -39,10 +39,6 @@ const ActorSchema = new mongoose.Schema({
             type: String,
         }
     },
-    validated: {
-      type: Boolean,
-      default: false
-    },
     customToken: {
       type: String
     },

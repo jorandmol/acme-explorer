@@ -1,5 +1,6 @@
 import Actor from '../models/ActorModel.js'
 import admin from 'firebase-admin';
+import roleEnum from '../enum/RoleEnum.js';
 
 const getUserId = async (idToken) => {
   console.log('idToken: ' + idToken)
@@ -49,24 +50,7 @@ const verifyUser = function (requiredRoles) {
         } else {
           console.log('The actor exists in our DB')
           console.log('actor: ' + actor)
-          let isAuth = false
-          for (let i = 0; i < requiredRoles.length; i++) {
-            for (let j = 0; j < actor.role.length; j++) {
-              if (requiredRoles[i] === actor.role[j]) {
-                if (requiredRoles[i] === 'CLERK') {
-                  if (actor.validated === true) isAuth = true
-                } else {
-                  isAuth = true
-                }
-              }
-            }
-          }
-          if (isAuth) {
-            return callback(null, actor)
-          } else {
-            res.status(403) // an access token is valid, but requires more privileges
-            res.json({ message: 'The actor has not the required roles', error: err })
-          }
+          return callback(null, actor)
         }
       })
     }).catch(function (err) {

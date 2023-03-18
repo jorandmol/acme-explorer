@@ -79,7 +79,7 @@ export class AuthService implements OnInit {
                 reject(error);
               });
           } else {
-            reject('Only validated clerks can log in');
+            reject('Only explorers can log in');
           }
         }, error => { reject(error); console.log(error); })
         .catch(error => {

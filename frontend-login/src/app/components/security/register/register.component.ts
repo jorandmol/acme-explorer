@@ -28,8 +28,7 @@ export class RegisterComponent {
       password: [''],
       phone: [''],
       address: [''],
-      role: [''],
-      validated: ['true']
+      role: ['']
     });
   }
 

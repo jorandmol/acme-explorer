@@ -14,9 +14,6 @@ export const login = async (req, res) => {
     } else if (!actor) { // an access token isn’t provided, or is invalid
       res.status(401)
       res.json({ message: 'forbidden', error: err })
-    } else if ((actor.validated === false)) { // an access token is valid, but requires a validated actor
-      res.status(403)
-      res.json({ message: 'forbidden', error: err })
     } else {
       // Make sure the password is correct
       actor.verifyPassword(password, async function (err, isMatch) {
@@ -132,23 +129,6 @@ export const updateVerifiedActor = async (req, res) => {
       }
     }
   })
-}
-
-export const validateActor = async (req, res) => {
-  // Check that the user is an Administrator and if not: res.status(403);
-  // "an access token is valid, but requires more privileges"
-  try {
-    const actor = await Actor.findOneAndUpdate({ _id: req.params.actorId }, { validated: 'true' }, { new: true })
-    if (actor) {
-      res.json(actor)
-    }
-    else {
-      res.status(404).send("Actor not found")
-    }
-  }
-  catch (err) {
-    res.status(500).send(err)
-  }
 }
 
 export const deleteActor = async (req, res) => {
