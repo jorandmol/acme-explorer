@@ -13,7 +13,8 @@ const mongoDBCredentials = (mongoDBUser && mongoDBPass) ? mongoDBUser + ':' + mo
 const mongoDBHostname = process.env.DATABASE_HOST || 'localhost'
 const mongoDBPort = process.env.DATABASE_PORT || '27017'
 
-const mongoDBURI = process.env.DATABASE_URI || 'mongodb://' + mongoDBCredentials + mongoDBHostname + ':' + mongoDBPort + '/' + mongoDBName
+const mongoDBURI = process.env.DATABASE_URI || 'mongodb://' + mongoDBCredentials + mongoDBHostname + ':' + mongoDBPort
+
 const mongoDBOptions = {
     dbName,
     connectTimeoutMS: 10000,
@@ -23,6 +24,7 @@ const mongoDBOptions = {
     useUnifiedTopology: true
 }
 const initMongoDBConnection = async () => {
+    console.error(mongoDBURI)
     // mongoose.set('debug', true); //util para ver detalle de las operaciones que se realizan contra mongodb
     // Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
     // by default, you need to set it to false.

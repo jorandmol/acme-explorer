@@ -1,0 +1,29 @@
+{
+  "_id": "63ed27e96f6eb8680cc0b162",
+  "title": "Title (updated)",
+  "description": "description",
+  "requirements": "reequirementsitos",
+  "startDate": "2023-07-10T13:00:00.000Z",
+  "endDate": "2023-07-15T13:00:00.000Z",
+  "publicationDate": null,
+  "cancellationDate": null,
+  "cancellationReason": null,
+  "pictures": [],
+  "stages": [
+    {
+      "title": "Stage1",
+      "description": "Desc1lololololo",
+      "price": 12
+    },
+    {
+      "title": "Stage2",
+      "description": "Desc2lololololo",
+      "price": 18
+    }
+  ],
+  "sponsorships": [],
+  "creator": "63ed27e96f6eb8680cc0b163",
+  "createdAt": "2023-02-28T10:30:03.284Z",
+  "updatedAt": "2023-02-28T10:30:03.284Z",
+  "ticker": "230228-SVUR"
+}

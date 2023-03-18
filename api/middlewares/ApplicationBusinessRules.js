@@ -25,7 +25,7 @@ export const checkTrip = async (req, res, next) => {
       } else if (trip && trip.startDate < new Date()) {
         res.status(400).send({ message: "Trip has already started" });
 
-      } else if (trip.status === StatusEnum.CANCELLED) {
+      } else if (trip.cancellationDate) {
         res.status(400).send({ message: "Trip has been cancelled" });
 
       } else {
