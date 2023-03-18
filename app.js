@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { json } from 'express'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import initMongoDBConnection from './api/config/mongoose.js'
@@ -14,7 +14,7 @@ import dataWarehouseRoutes from './api/routes/DataWarehouseRoutes.js'
 import { initializeDataWarehouseJob } from "./api/services/DataWarehouseServiceProvider.js";
 import loginRoutes from './api/routes/LoginRoutes.js'
 import admin from 'firebase-admin';
-import serviceAccount from './firebase.js'
+import serviceAccount from './firebase.json' assert { type: "json" }
 
 dotenv.config()
 
