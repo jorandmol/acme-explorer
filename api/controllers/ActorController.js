@@ -1,5 +1,6 @@
 import Actor from '../models/ActorModel.js'
 import admin from 'firebase-admin';
+import roleEnum from '../enum/RoleEnum.js';
 
 export const login = async (req, res) => {
   console.log('starting login an actor')
@@ -13,7 +14,7 @@ export const login = async (req, res) => {
     } else if (!actor) { // an access token isn’t provided, or is invalid
       res.status(401)
       res.json({ message: 'forbidden', error: err })
-    } else if ((actor.role.includes('CLERK')) && (actor.validated === false)) { // an access token is valid, but requires more privileges
+    } else if ((actor.validated === false)) { // an access token is valid, but requires a validated actor
       res.status(403)
       res.json({ message: 'forbidden', error: err })
     } else {
@@ -94,7 +95,7 @@ export const updateActor = async (req, res) => {
 }
 
 export const updateVerifiedActor = async (req, res) => {
-  // Customer and Clerks can update theirselves, administrators can update any actor
+  // Explorers can update theirselves, administrators can update any actor
   console.log('Starting to update the verified actor...')
   Actor.findById(req.params.actorId, async function (err, actor) {
     if (err) {
@@ -102,7 +103,7 @@ export const updateVerifiedActor = async (req, res) => {
     } else {
       console.log('actor: ' + actor)
       const idToken = req.headers.idtoken // WE NEED the FireBase custom token in the req.header... it is created by FireBase!!
-      if (actor.role.includes('CUSTOMER') || actor.role.includes('CLERK')) {
+      if (actor.role.includes(roleEnum.EXPLORER)) {
         const authenticatedUserId = await getUserId(idToken)
 
         if (authenticatedUserId == req.params.actorId) {
@@ -117,7 +118,7 @@ export const updateVerifiedActor = async (req, res) => {
           res.status(403) // Auth error
           res.send('The Actor is trying to update an Actor that is not himself!')
         }
-      } else if (actor.role.includes('ADMINISTRATOR')) {
+      } else if (actor.role.includes(roleEnum.ADMINISTRATOR)) {
         Actor.findOneAndUpdate({ _id: req.params.actorId }, req.body, { new: true }, function (err, actor) {
           if (err) {
             res.send(err)
