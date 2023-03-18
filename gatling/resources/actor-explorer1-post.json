@@ -1,0 +1,13 @@
+{
+    "_id": "63ed27e96f6eb8680cc0b164",
+    "name": "Pep",
+    "surname": "Rodríguez",
+    "email": "pep@gmail.com",
+    "password": "123456789abcde",
+    "phone": "+34674747478",
+    "address": "13 Rue del percebe",
+    "role": "explorer",
+    "createdAt": "2023-03-18T17:45:36.186Z",
+    "updatedAt": "2023-03-18T17:45:36.186Z",
+    "__v": 0
+  }
