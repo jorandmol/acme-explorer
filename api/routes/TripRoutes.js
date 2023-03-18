@@ -11,7 +11,7 @@ export default function (app) {
   *    Required role: None
   *
   * @section trips
-  * @type get 
+  * @type get
   * @url /v1/search
   */
   app.route('/v1/search')
@@ -46,7 +46,7 @@ export default function (app) {
   *    RequiredRoles: None
   * Delete a trip
   *    RequiredRoles: to be manager who created the trip
-  * 
+  *
   * @section trips
   * @type get put delete
   * @url /v1/trips/:id

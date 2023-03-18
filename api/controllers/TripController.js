@@ -29,20 +29,59 @@ const _generateFilter = (filters) => {
   return filter
 }
 
-const _getLimit = async () => {
+const _getConfig = async () => {
   try {
     const config = await GloabalConfig.findOne()
-    return config?.numResults || 10
+    return {
+      numResults: config?.numResults || 10,
+      cacheLifetime: config?.cacheLifetime || 3600
+    }
   } catch (err) {
     console.error(err)
-    return 10
+    return {
+      numResults: 10,
+      cacheLifetime: 3600
+    }
+  }
+}
+
+const _isSameFinder = (finder, query) => {
+  const { keyword, minPrice, maxPrice, minDate, maxDate } = query
+  if (((keyword && finder.keyword === keyword) || (!keyword && finder.keyword === null)) &&
+    ((minPrice && finder.minPrice === parseInt(minPrice)) || (!minPrice && finder.minPrice === null)) &&
+    ((maxPrice && finder.maxPrice === parseInt(maxPrice)) || (!maxPrice && finder.maxPrice === null)) &&
+    ((minDate && Date(finder.minDate) === Date(minDate)) || (!minDate && finder.minDate === null)) &&
+    ((maxDate && Date(finder.maxDate) === Date(maxDate)) || (!maxDate && finder.maxDate === null))) {
+    return true
+  }
+  return false
+}
+
+const _findTrips = async (actorId, query) => {
+  try {
+    const filters = _generateFilter(query)
+    const config = await _getConfig()
+    const trips = await Trip.find(filters).limit(config.limit)
+    const newFinder = new Finder({
+      explorer: ObjectId(actorId),
+      keyword: query?.keyword || null,
+      minPrice: query?.minPrice ? parseInt(query.minPrice) : null,
+      maxPrice: query?.maxPrice ? parseInt(query.maxPrice) : null,
+      minDate: query?.minDate || null,
+      maxDate: query?.maxDate || null,
+      results: trips,
+      expiryDate: new Date(Date.now() + config.cacheLifetime * 1000)
+    })
+    await newFinder.save()
+    return trips
+  } catch (err) {
+    console.error(err)
   }
 }
 
 export const searchTrips = async (req, res) => {
   // TODO: change this when auth is implemented
   const { actor_id } = req.headers
-  const filters = _generateFilter(req.query)
   try {
     const actor = await Actor.findById(actor_id)
     if (!actor) {
@@ -56,47 +95,21 @@ export const searchTrips = async (req, res) => {
     let finder = await Finder.find({ explorer_id: actor_id }).sort("-createdAt").limit(1);
     if (finder?.length) {
       finder = finder[0]
-      if (finder.expiryDate && finder.expiryDate > new Date() &&
-        ((req.query.keyword && finder.keyword === req.query.keyword) || (!req.query.keyword && finder.keyword === null)) &&
-        ((req.query.minPrice && finder.minPrice === req.query.minPrice) || (!req.query.minPrice && finder.minPrice === null)) &&
-        ((req.query.maxPrice && finder.maxPrice === req.query.maxPrice) || (!req.query.maxPrice && finder.maxPrice === null)) &&
-        ((req.query.minDate && finder.minDate === req.query.minDate) || (!req.query.minDate && finder.minDate === null)) &&
-        ((req.query.maxDate && finder.maxDate === req.query.maxDate) || (!req.query.maxDate && finder.maxDate === null))) {
+      console.log(finder.expiryDate, new Date())
+      if (_isSameFinder(finder, req.query) && finder.expiryDate && finder.expiryDate > new Date()) {
         res.json(finder.results)
-        console.log(finder)
+        console.log("Cached finder returned")
         return
       } else {
-        const limit = await _getLimit()
-        const trips = await Trip.find(filters).limit(limit)
-        const newFinder = new Finder({
-          explorer: ObjectId(actor_id),
-          keyword: req.query?.keyword || null,
-          minPrice: req.query?.minPrice || null,
-          maxPrice: req.query?.maxPrice || null,
-          minDate: req.query?.minDate || null,
-          maxDate: req.query?.maxDate || null,
-          results: trips,
-          expiryDate: new Date(Date.now() + 3600000)
-        })
-        await newFinder.save()
+        const trips = await _findTrips(actor_id, req.query)
         res.json(trips)
+        console.log("New finder created, old one expired or different")
         return
       }
     } else {
-      const limit = await _getLimit()
-      const trips = await Trip.find(filters).limit(limit)
-      const newFinder = new Finder({
-        explorer: ObjectId(actor_id),
-        keyword: req.query?.keyword || null,
-        minPrice: req.query?.minPrice || null,
-        maxPrice: req.query?.maxPrice || null,
-        minDate: req.query?.minDate || null,
-        maxDate: req.query?.maxDate || null,
-        results: trips,
-        expiryDate: new Date(Date.now() + 3600000)
-      })
-      await newFinder.save()
+      const trips = await _findTrips(actor_id, req.query)
       res.json(trips)
+      console.log("New finder created, no old one found")
       return
     }
   } catch (err) {
