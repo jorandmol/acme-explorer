@@ -5,7 +5,6 @@ import sinon from 'sinon'
 import Trip from '../api/models/TripModel.js'
 import Application from '../api/models/ApplicationModel.js'
 import Actor from '../api/models/ActorModel.js'
-import GlobalConfig from '../api/models/GlobalConfigModel.js'
 import { ObjectId } from 'mongodb';
 import RoleEnum from '../api/enum/RoleEnum.js'
 import StatusEnum from '../api/enum/StatusEnum.js'
