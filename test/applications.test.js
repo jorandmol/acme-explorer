@@ -9,8 +9,6 @@ import { ObjectId } from 'mongodb';
 import RoleEnum from '../api/enum/RoleEnum.js'
 import StatusEnum from '../api/enum/StatusEnum.js'
 
-const PATH = '/v1/applications'
-
 const manager1 = {
   _id: ObjectId('63ed27e96f6eb8680cc0b162'),
   role: RoleEnum.MANAGER

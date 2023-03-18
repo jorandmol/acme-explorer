@@ -6,8 +6,6 @@ import Actor from '../api/models/ActorModel.js'
 import { ObjectId } from 'mongodb';
 import RoleEnum from '../api/enum/RoleEnum.js'
 
-const PATH = '/v1/applications'
-
 const actor1 = {
   _id: ObjectId('63ed27e9820b1504a034abb2'),
   name: 'Middleton',
