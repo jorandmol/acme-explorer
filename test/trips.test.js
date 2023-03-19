@@ -3,6 +3,7 @@ import chai from 'chai'
 import chaiHttp from 'chai-http'
 import sinon from 'sinon'
 import Trip from '../api/models/TripModel.js'
+import Finder from '../api/models/FinderModel.js'
 import Application from '../api/models/ApplicationModel.js'
 import Actor from '../api/models/ActorModel.js'
 import GlobalConfig from '../api/models/GlobalConfigModel.js'
@@ -17,6 +18,15 @@ const manager1 = {
 const explorer1 = {
   _id: ObjectId('63ed27e96f6eb8680cc0b163'),
   role: RoleEnum.EXPLORER
+}
+const finder1 = {
+  _id: ObjectId('63ed2787c617b43b603f7a5e'),
+  keyword: 'Title',
+  minPrice: 200,
+  maxPrice: 600,
+  minDate: new Date('2023-02-08'),
+  maxDate: new Date('2023-02-12'),
+  __v: 0
 }
 const trip1 = {
   _id: ObjectId('63f38c8febcc5d77c3637ba6'),
@@ -61,7 +71,9 @@ describe('Trips', () => {
   describe('GET /search', () => {
     const endpoint = '/v1/search'
     it('Should return OK', done => {
-      sinon.stub(GlobalConfig, 'findOne').returns(Promise.resolve({ numResults: 10 }))
+      sinon.stub(Actor, 'findById').returns(Promise.resolve(explorer1))
+      sinon.stub(GlobalConfig, 'findOne').returns(Promise.resolve({ numResults: 10, cacheLifetime: 3600 }))
+      sinon.stub(Finder, 'findByExplorer').returns(Promise.resolve([new Finder(finder1)]))
       sinon.stub(Trip, 'findByFilters').returns(Promise.resolve([trip1]))
       chai
         .request(app)
@@ -73,7 +85,9 @@ describe('Trips', () => {
         })
     })
     it('Should return 500', done => {
-      sinon.stub(GlobalConfig, 'findOne').returns(Promise.resolve({ numResults: 10 }))
+      sinon.stub(Actor, 'findById').returns(Promise.resolve(explorer1))
+      sinon.stub(GlobalConfig, 'findOne').returns(Promise.resolve({ numResults: 10, cacheLifetime: 3600 }))
+      sinon.stub(Finder, 'findByExplorer').returns(Promise.resolve([new Finder(finder1)]))
       sinon.stub(Trip, 'findByFilters').throws(new Error('error'))
       chai
         .request(app)

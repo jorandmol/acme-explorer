@@ -61,7 +61,7 @@ const _findTrips = async (actorId, query) => {
   try {
     const filters = _generateFilter(query)
     const config = await _getConfig()
-    const trips = await Trip.find(filters).limit(config.limit)
+    const trips = await Trip.findByFilters(filters, config.limit)
     const newFinder = new Finder({
       explorer: ObjectId(actorId),
       keyword: query?.keyword || null,
@@ -75,7 +75,7 @@ const _findTrips = async (actorId, query) => {
     await newFinder.save()
     return trips
   } catch (err) {
-    console.error(err)
+    throw err
   }
 }
 
@@ -92,7 +92,7 @@ export const searchTrips = async (req, res) => {
       res.status(403).send('Actor does not have the required role')
       return
     }
-    let finder = await Finder.find({ explorer_id: actor_id }).sort("-createdAt").limit(1);
+    let finder = await Finder.findByExplorer(actor_id);
     if (finder?.length) {
       finder = finder[0]
       console.log(finder.expiryDate, new Date())
