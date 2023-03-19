@@ -4,14 +4,8 @@ import GloabalConfig from '../models/GlobalConfigModel.js'
 import RoleEnum from '../enum/RoleEnum.js'
 import { ObjectId } from 'mongodb';
 
-/*
-* TODO:
-* Extract the check-actor-sponsorship procedure, which is repeated in all functions
-* to a middleware so it's easier to maintain
-*/
-
 export const listSponsorships = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   try {
     const actor = await Actor.findById(actor_id)
@@ -59,7 +53,7 @@ export const listSponsorships = async (req, res) => {
 }
 
 export const createSponsorship = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const { tripId, banner, link } = req.body
   try {
@@ -126,7 +120,7 @@ export const readSponsorship = async (req, res) => {
 }
 
 export const updateSponsorship = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { id } = req.params
   const { actor_id } = req.headers
   try {
@@ -181,7 +175,7 @@ export const updateSponsorship = async (req, res) => {
 }
 
 export const paySponsorship = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { id } = req.params
   const { actor_id } = req.headers
   let { financedAmount } = req.body
@@ -242,7 +236,7 @@ export const paySponsorship = async (req, res) => {
 }
 
 export const deleteSponsorship = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { id } = req.params
   const { actor_id } = req.headers
   try {

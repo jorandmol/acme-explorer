@@ -2,17 +2,20 @@ import * as applicationController from '../controllers/ApplicationController.js'
 import { creationValidator, updateCommentsValidator, rejectionValidator } from '../controllers/validators/ApplicationValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 import { checkTrip } from '../middlewares/ApplicationBusinessRules.js'
+import { verifyUser } from '../middlewares/AuthMiddleware.js'
+import RoleEnum from '../enum/RoleEnum.js'
 
 export default function (app) {
+
   /**
-   * Get an application
+   * Get explorer applications
    *    Required role: Explorer
    * Post an application
    *    RequiredRoles: Explorer
    *
    * @section applications
    * @type get post
-   * @url /v1/applications
+   * @url /applications
    */
   app.route('/v1/applications')
     .get(applicationController.listApplications)
@@ -22,17 +25,28 @@ export default function (app) {
       checkTrip,
       applicationController.createApplication
     )
+  app.route('/v2/applications')
+    .get(verifyUser([RoleEnum.EXPLORER]), applicationController.listApplications) // TODO: Quitar la comprobación del actor (llega por req)
+    .post(
+      verifyUser([RoleEnum.EXPLORER]),
+      creationValidator,
+      handleExpressValidation,
+      checkTrip,
+      applicationController.createApplication
+    )
 
   /**
    * Get an application
-   *    RequiredRoles: None
+   *    RequiredRoles: to be the trip creator or the explorer who created the application 
    *
    * @section applications
    * @type get
-   * @url /v1/applications/:id
+   * @url /applications/:id
    */
   app.route('/v1/applications/:id')
     .get(applicationController.readApplication)
+    app.route('/v2/applications/:id')
+    .get(verifyUser([RoleEnum.MANAGER, RoleEnum.EXPLORER]), applicationController.readApplication) // TODO: Comprobar que quien lo está leyendo es el dueño de la trip o el explorer asociado
 
   /**
    * Cancel an application
@@ -40,13 +54,19 @@ export default function (app) {
    *
    * @section applications
    * @type patch
-   * @url /v1/applications/:id/cancel
+   * @url /applications/:id/cancel
    *
    */
   app.route('/v1/applications/:id/cancel')
     .patch(
       checkTrip,
       applicationController.cancelApplication
+    )
+  app.route('/v2/applications/:id/cancel')
+    .patch(
+      verifyUser([RoleEnum.EXPLORER]),
+      checkTrip,
+      applicationController.cancelApplication // TODO: Comprobar que sea el usuario que la ha creado
     )
 
   /**
@@ -55,13 +75,19 @@ export default function (app) {
    *
    * @section applications
    * @type patch
-   * @url /v1/applications/:id/accept
+   * @url /applications/:id/accept
    *
    */
   app.route('/v1/applications/:id/accept')
     .patch(
       checkTrip,
       applicationController.acceptApplication
+    )
+  app.route('/v2/applications/:id/accept')
+    .patch(
+      verifyUser([RoleEnum.MANAGER]),
+      checkTrip,
+      applicationController.acceptApplication // TODO: Comprobar que sea el manager que ha creado la trip
     )
 
   /**
@@ -70,7 +96,7 @@ export default function (app) {
    *
    * @section applications
    * @type patch
-   * @url /v1/applications/:id/reject
+   * @url /applications/:id/reject
    *
    */
   app.route('/v1/applications/:id/reject')
@@ -80,6 +106,14 @@ export default function (app) {
       checkTrip,
       applicationController.rejectApplication
     )
+  app.route('/v2/applications/:id/reject')
+    .patch(
+      verifyUser([RoleEnum.MANAGER]),
+      rejectionValidator,
+      handleExpressValidation,
+      checkTrip,
+      applicationController.rejectApplication // TODO: Comprobar que sea el manager que ha creado la trip
+    )
 
   /**
    * Pay an application
@@ -87,13 +121,19 @@ export default function (app) {
    *
    * @section applications
    * @type patch
-   * @url /v1/applications/:id/pay
+   * @url /applications/:id/pay
    *
    */
   app.route('/v1/applications/:id/pay')
     .patch(
       checkTrip,
       applicationController.payApplication
+    )
+  app.route('/v2/applications/:id/pay')
+    .patch(
+      verifyUser([RoleEnum.EXPLORER]),
+      checkTrip,
+      applicationController.payApplication // TODO: Comprobar que sea el explorer que ha creado la application
     )
 
   /**
@@ -102,7 +142,7 @@ export default function (app) {
    *
    * @section applications
    * @type patch
-   * @url /v1/applications/:id/comment
+   * @url /applications/:id/comment
    *
    */
   app.route('/v1/applications/:id/comments')
@@ -112,6 +152,13 @@ export default function (app) {
       checkTrip,
       applicationController.updateApplicationComments
     )
-
+  app.route('/v2/applications/:id/comments')
+    .patch(
+      verifyUser([RoleEnum.EXPLORER]),
+      updateCommentsValidator,
+      handleExpressValidation,
+      checkTrip,
+      applicationController.updateApplicationComments // TODO: Comprobar que sea el explorer que ha creado la application
+    )
 
 }

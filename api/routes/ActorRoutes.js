@@ -1,5 +1,7 @@
 import * as actorController from '../controllers/ActorController.js'
 import { creationValidator } from '../controllers/validators/ActorValidator.js'
+import RoleEnum from '../enum/RoleEnum.js'
+import { verifyUser } from '../middlewares/AuthMiddleware.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
@@ -9,22 +11,24 @@ export default function (app) {
   *
   * @section actors
   * @type get
-  * @url /v1/actors/login/
+  * @url /actors/login/
   * @param {string} email
   * @param {string} password
   */
   app.route('/v1/login/')
     .post(actorController.login)
+  app.route('/v2/login/')
+    .post(actorController.login)
 
   /**
-  * Get an actor
-  *    Required role: None
+  * Get actors
+  *    Required role: Admin
   * Post an actor
-  *    RequiredRoles: Manager
+  *    RequiredRoles: None
   *
   * @section actors
   * @type get post
-  * @url /v1/actors
+  * @url /actors
   */
   app.route('/v1/actors')
     .get(actorController.listActors)
@@ -33,40 +37,58 @@ export default function (app) {
       handleExpressValidation,
       actorController.createActor
     )
+  app.route('/v2/actors')
+    .get(
+      verifyUser([RoleEnum.ADMINISTRATOR]), actorController.listActors)
+    .post(
+      creationValidator,
+      handleExpressValidation,
+      actorController.createActor
+    )
 
   /**
   * Put an actor
-  *    RequiredRoles: to be manager
+  *    RequiredRoles: to be admin or the same user
+  * Delete an actor
+  *    RequiredRoles: to be admin or the same user
   * Get an actor
   *    RequiredRoles: None
   *
   * @section actors
   * @type get put
-  * @url /v1/actors/:id
+  * @url /actors/:id
   */
   app.route('/v1/actors/:id')
     .get(actorController.readActor)
     .put(actorController.updateActor)
     .delete(actorController.deleteActor)
+  app.route('/v2/actors/:id')
+    .get(actorController.readActor)
+    .put(verifyUser(Object.values(RoleEnum)), actorController.updateActor) // TODO: Nueva función de controlador que revise que el usuario es admin o es el mismo que quiere editar
+    .delete(verifyUser([RoleEnum.ADMINISTRATOR]), actorController.deleteActor)
 
   /**
    * Ban an actor
-   *   RequiredRoles: to be manager
+   *   RequiredRoles: to be admin
    * @section actors
    * @type patch
-   * @url /v1/actors/:id/ban
+   * @url /actors/:id/ban
    */
   app.route('/v1/actors/:id/ban')
     .patch(actorController.banActor)
+  app.route('/v2/actors/:id/ban')
+    .patch(verifyUser([RoleEnum.ADMINISTRATOR]), actorController.banActor)
 
   /**
    * Unban an actor
-   *  RequiredRoles: to be manager
+   *  RequiredRoles: to be admin
    * @section actors
    * @type patch
-   * @url /v1/actors/:id/unban
+   * @url /actors/:id/unban
    */
   app.route('/v1/actors/:id/unban')
     .patch(actorController.unbanActor)
+  app.route('/v2/actors/:id/unban')
+    .patch(verifyUser([RoleEnum.ADMINISTRATOR]), actorController.unbanActor)
 
 }

@@ -50,7 +50,7 @@ export const searchTrips = async (req, res) => {
 }
 
 export const listTrips = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   try {
     const actor = await Actor.findById(actor_id)
@@ -71,7 +71,7 @@ export const listTrips = async (req, res) => {
 }
 
 export const createTrip = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const newTrip = new Trip(req.body)
   try {
@@ -112,7 +112,7 @@ export const readTrip = async (req, res) => {
 }
 
 export const updateTrip = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const { id } = req.params
   const newTrip = req.body
@@ -161,7 +161,7 @@ export const updateTrip = async (req, res) => {
 }
 
 export const deleteTrip = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const { id } = req.params
   try {
@@ -201,7 +201,7 @@ export const deleteTrip = async (req, res) => {
 }
 
 export const publishTrip = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const { id } = req.params
   const { publicationDate } = req.body
@@ -243,7 +243,7 @@ export const publishTrip = async (req, res) => {
 }
 
 export const cancelTrip = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const { id } = req.params
   const { cancellationReason } = req.body
@@ -295,7 +295,7 @@ export const cancelTrip = async (req, res) => {
 }
 
 export const listTripApplications = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const { id } = req.params
   try {
@@ -328,7 +328,7 @@ export const listTripApplications = async (req, res) => {
 }
 
 export const createTripApplication = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const { id } = req.params
   const { comments } = req.body

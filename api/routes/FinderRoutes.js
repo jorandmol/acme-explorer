@@ -2,6 +2,11 @@ import * as finderController from '../controllers/FinderController.js'
 import { creationValidator } from '../controllers/validators/FinderValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
+/**
+ * Finder no tiene versión dos porque no requiere rutas
+ * Estas son legacy 
+ */
+
 export default function (app) {
   /**
   * Get an finder

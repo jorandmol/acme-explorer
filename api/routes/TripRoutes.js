@@ -3,6 +3,8 @@ import { creationValidator as tripCreationValidator, updateValidator, publishVal
 import { creationFromTripValidator as appCreationValidator } from '../controllers/validators/ApplicationValidator.js'
 import { filterValidator } from '../controllers/validators/FinderValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
+import { verifyUser } from '../middlewares/AuthMiddleware.js'
+import RoleEnum from '../enum/RoleEnum.js'
 
 export default function (app) {
 
@@ -12,13 +14,19 @@ export default function (app) {
   *
   * @section trips
   * @type get 
-  * @url /v1/search
+  * @url /search
   */
   app.route('/v1/search')
     .get(
       filterValidator,
       handleExpressValidation,
       tripsController.searchTrips
+    )
+  app.route('/v2/search')
+    .get(
+      filterValidator,
+      handleExpressValidation,
+      tripsController.searchTrips // TODO: Añadir versión que reciba el token y lo descodifique (tener en cuenta que es accesible para usuarios no logueados)
     )
 
   /**
@@ -29,7 +37,7 @@ export default function (app) {
   *
   * @section trips
   * @type get post
-  * @url /v1/trips
+  * @url /trips
   */
   app.route('/v1/trips')
     .get(tripsController.listTrips)
@@ -37,6 +45,14 @@ export default function (app) {
       tripCreationValidator,
       handleExpressValidation,
       tripsController.createTrip
+    )
+  app.route('/v2/trips')
+    .get(verifyUser([RoleEnum.MANAGER]), tripsController.listTrips) // TODO: Nueva forma cambiando la autenticación
+    .post(
+      verifyUser([RoleEnum.MANAGER]),
+      tripCreationValidator,
+      handleExpressValidation,
+      tripsController.createTrip // TODO: Nueva forma cambiando la autenticación
     )
 
   /**
@@ -49,7 +65,7 @@ export default function (app) {
   * 
   * @section trips
   * @type get put delete
-  * @url /v1/trips/:id
+  * @url /trips/:id
   */
   app.route('/v1/trips/:id')
     .get(tripsController.readTrip)
@@ -58,6 +74,14 @@ export default function (app) {
       handleExpressValidation,
       tripsController.updateTrip
     ).delete(tripsController.deleteTrip)
+  app.route('/v2/trips/:id')
+    .get(tripsController.readTrip)
+    .put(
+      verifyUser([RoleEnum.MANAGER]),
+      updateValidator,
+      handleExpressValidation,
+      tripsController.updateTrip // TODO: Nueva forma cambiando la autenticación
+    ).delete(verifyUser([RoleEnum.MANAGER]), tripsController.deleteTrip) // TODO: Nueva forma cambiando la autenticación
 
   /**
   * Publish a trip
@@ -65,13 +89,20 @@ export default function (app) {
   *
   * @section trips
   * @type patch
-  * @url /v1/trips/:id/publish
+  * @url /trips/:id/publish
   */
   app.route('/v1/trips/:id/publish')
     .patch(
       publishValidator,
       handleExpressValidation,
       tripsController.publishTrip
+    )
+  app.route('/v2/trips/:id/publish')
+    .patch(
+      verifyUser([RoleEnum.MANAGER]),
+      publishValidator,
+      handleExpressValidation,
+      tripsController.publishTrip // TODO: Nueva forma cambiando la autenticación
     )
 
   /**
@@ -80,13 +111,20 @@ export default function (app) {
   *
   * @section trips
   * @type patch
-  * @url /v1/trips/:id/cancel
+  * @url /trips/:id/cancel
   */
   app.route('/v1/trips/:id/cancel')
     .patch(
       cancelValidator,
       handleExpressValidation,
       tripsController.cancelTrip
+    )
+  app.route('/v2/trips/:id/cancel')
+    .patch(
+      verifyUser([RoleEnum.MANAGER]),
+      cancelValidator,
+      handleExpressValidation,
+      tripsController.cancelTrip // TODO: Nueva forma cambiando la autenticación
     )
 
   /**
@@ -103,7 +141,7 @@ export default function (app) {
   *
   * @section trips
   * @type get post
-  * @url /v1/trips/:id/applications
+  * @url /trips/:id/applications
   */
   app.route('/v1/trips/:id/applications')
   .get(tripsController.listTripApplications)
@@ -111,6 +149,14 @@ export default function (app) {
     appCreationValidator,
     handleExpressValidation,
     tripsController.createTripApplication
+  )
+  app.route('/v2/trips/:id/applications')
+  .get(verifyUser([RoleEnum.MANAGER]), tripsController.listTripApplications) // TODO: Nueva forma cambiando la autenticación
+  .post(
+    verifyUser([RoleEnum.MANAGER]),
+    appCreationValidator,
+    handleExpressValidation,
+    tripsController.createTripApplication // TODO: Nueva forma cambiando la autenticación
   )
 
 }

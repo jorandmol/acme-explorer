@@ -3,6 +3,8 @@ import { rebuildPeriodValidator, spentMoneyByExplorerValidator, explorersBySpent
 import handleExpressValidation from "../middlewares/ValidationHandlingMiddleware.js"
 import { periodDecoder } from "../middlewares/CubePeriodDecoder.js"
 import { operationParser } from '../middlewares/OperationParser.js'
+import { verifyUser } from '../middlewares/AuthMiddleware.js'
+import RoleEnum from '../enum/RoleEnum.js'
 
 export default function (app) {
 
@@ -15,6 +17,8 @@ export default function (app) {
   */
   app.route('/v1/dashboard')
     .get(dataWarehouseController.listIndicators)
+  app.route('/v2/dashboard')
+    .get(verifyUser([RoleEnum.ADMINISTRATOR]), dataWarehouseController.listIndicators)
 
   /**
    * Get a list of last computed indicator
@@ -25,6 +29,8 @@ export default function (app) {
   */
   app.route("/v1/dashboard/latest")
     .get(dataWarehouseController.lastIndicator)
+  app.route("/v2/dashboard/latest")
+    .get(verifyUser([RoleEnum.ADMINISTRATOR]), dataWarehouseController.lastIndicator)
 
   /**
    * Update computation period for rebuilding
@@ -36,6 +42,13 @@ export default function (app) {
   */
   app.route('/v1/dashboard/rebuild-period')
     .patch(
+      rebuildPeriodValidator,
+      handleExpressValidation,
+      dataWarehouseController.rebuildPeriod
+    )
+  app.route('/v2/dashboard/rebuild-period')
+    .patch(
+      verifyUser([RoleEnum.ADMINISTRATOR]),
       rebuildPeriodValidator,
       handleExpressValidation,
       dataWarehouseController.rebuildPeriod
@@ -54,6 +67,13 @@ export default function (app) {
       handleExpressValidation,
       periodDecoder,
       dataWarehouseController.spentMoneyByExplorer)
+  app.route('/v2/dashboard/spent-money-by-explorer')
+    .post(
+      verifyUser([RoleEnum.ADMINISTRATOR]),
+      spentMoneyByExplorerValidator,
+      handleExpressValidation,
+      periodDecoder,
+      dataWarehouseController.spentMoneyByExplorer)
 
   /**
    * Get a list of explorers ids and the amount of money that they spent in a period
@@ -64,6 +84,14 @@ export default function (app) {
   */
   app.route('/v1/dashboard/explorers-by-spent-money')
     .post(
+      explorersBySpentMoneyValidator,
+      handleExpressValidation,
+      periodDecoder,
+      operationParser,
+      dataWarehouseController.explorersBySpentMoney)
+  app.route('/v2/dashboard/explorers-by-spent-money')
+    .post(
+      verifyUser([RoleEnum.ADMINISTRATOR]),
       explorersBySpentMoneyValidator,
       handleExpressValidation,
       periodDecoder,

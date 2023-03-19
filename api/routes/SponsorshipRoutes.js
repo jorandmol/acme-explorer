@@ -1,5 +1,6 @@
 import * as sponsorshipController from '../controllers/SponsorshipController.js'
 import { creationValidator, updateValidator } from '../controllers/validators/SponsorshipValidator.js'
+import RoleEnum from '../enum/RoleEnum.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
@@ -12,7 +13,7 @@ export default function (app) {
   *
   * @section sponsorships
   * @type get post
-  * @url /v1/sponsorships
+  * @url /sponsorships
   */
   app.route('/v1/sponsorships')
     .get(sponsorshipController.listSponsorships)
@@ -20,6 +21,14 @@ export default function (app) {
       creationValidator,
       handleExpressValidation,
       sponsorshipController.createSponsorship
+    )
+  app.route('/v2/sponsorships')
+    .get(verifyUser([RoleEnum.SPONSOR]), sponsorshipController.listSponsorships) // TODO: Nueva función quitando toda la comprubación del usuario
+    .post(
+      verifyUser([RoleEnum.SPONSOR]),
+      creationValidator,
+      handleExpressValidation,
+      sponsorshipController.createSponsorship // TODO: Nueva función quitando toda la comprubación del usuario
     )
 
   /**
@@ -32,7 +41,7 @@ export default function (app) {
   *
   * @section sponsorships
   * @type get put delete
-  * @url /v1/sponsorships/:id
+  * @url /sponsorships/:id
   */
   app.route('/v1/sponsorships/:id')
     .get(sponsorshipController.readSponsorship)
@@ -41,6 +50,14 @@ export default function (app) {
       handleExpressValidation,
       sponsorshipController.updateSponsorship
     ).delete(sponsorshipController.deleteSponsorship)
+  app.route('/v2/sponsorships/:id')
+    .get(sponsorshipController.readSponsorship)
+    .put(
+      verifyUser([RoleEnum.SPONSOR]),
+      updateValidator,
+      handleExpressValidation,
+      sponsorshipController.updateSponsorship // TODO: Nueva función quitando toda la comprobación del usuario
+    ).delete(verifyUser([RoleEnum.SPONSOR]), sponsorshipController.deleteSponsorship) // TODO: Nueva función quitando toda la comprobación del usuario
 
   /**
   * Pay a sponsorship
@@ -48,9 +65,11 @@ export default function (app) {
   *
   * @section sponsorships
   * @type patch
-  * @url /v1/sponsorships/:id/pay
+  * @url /sponsorships/:id/pay
   */
   app.route('/v1/sponsorships/:id/pay')
     .patch(sponsorshipController.paySponsorship)
+  app.route('/v2/sponsorships/:id/pay')
+    .patch(verifyUser([RoleEnum.SPONSOR]), sponsorshipController.paySponsorship) // TODO: Nueva función quitando toda la comprobación del usuario
 
 }
