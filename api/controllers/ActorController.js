@@ -97,9 +97,11 @@ export const updateActorAuth = async (req, res) => {
     const actor = req.actor
     if (actor) {
       // check that the actor is the same as the one in the token or is an admin
-      if (req.actor._id === actor._id || req.actor.role === RoleEnum.ADMIN) {
-        res.json(actor)
+      if (req.actor._id === newActor._id || req.actor.role === RoleEnum.ADMINISTRATOR) {
+        const updatedActor = await Actor.findOneAndUpdate({ _id: req.params.id }, newActor, { new:true })
+        res.json(updatedActor)
       } else {
+        console.log(req.actor.role)
         res.status(403).send('Forbidden')
       }
     } else{
