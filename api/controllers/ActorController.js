@@ -1,14 +1,12 @@
 import Actor from '../models/ActorModel.js'
 import admin from 'firebase-admin';
-import roleEnum from '../enum/RoleEnum.js';
 
 export const login = async (req, res) => {
   console.log('starting login an actor')
-  const emailParam = req.query.email
-  const password = req.query.password
+  const { email, password } = req.body
   let customToken
 
-  Actor.findOne({ email: emailParam }, function (err, actor) {
+  Actor.findOne({ email: email }, function (err, actor) {
     if (err) { // No actor found with that email as username
       res.send(err)
     } else if (!actor) { // an access token isn’t provided, or is invalid
@@ -89,46 +87,6 @@ export const updateActor = async (req, res) => {
       res.status(500).send(err)
     }
   }
-}
-
-export const updateVerifiedActor = async (req, res) => {
-  // Explorers can update theirselves, administrators can update any actor
-  console.log('Starting to update the verified actor...')
-  Actor.findById(req.params.actorId, async function (err, actor) {
-    if (err) {
-      res.send(err)
-    } else {
-      console.log('actor: ' + actor)
-      const idToken = req.headers.idtoken // WE NEED the FireBase custom token in the req.header... it is created by FireBase!!
-      if (actor.role.includes(roleEnum.EXPLORER)) {
-        const authenticatedUserId = await getUserId(idToken)
-
-        if (authenticatedUserId == req.params.actorId) {
-          Actor.findOneAndUpdate({ _id: req.params.actorId }, req.body, { new: true }, function (err, actor) {
-            if (err) {
-              res.send(err)
-            } else {
-              res.json(actor)
-            }
-          })
-        } else {
-          res.status(403) // Auth error
-          res.send('The Actor is trying to update an Actor that is not himself!')
-        }
-      } else if (actor.role.includes(roleEnum.ADMINISTRATOR)) {
-        Actor.findOneAndUpdate({ _id: req.params.actorId }, req.body, { new: true }, function (err, actor) {
-          if (err) {
-            res.send(err)
-          } else {
-            res.json(actor)
-          }
-        })
-      } else {
-        res.status(405) // Not allowed
-        res.send('The Actor has unidentified roles')
-      }
-    }
-  })
 }
 
 export const deleteActor = async (req, res) => {

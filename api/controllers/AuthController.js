@@ -1,7 +1,7 @@
 import Actor from '../models/ActorModel.js'
 import admin from 'firebase-admin';
-import roleEnum from '../enum/RoleEnum.js';
 
+// TODO: Move this function to middleware
 const getUserId = async (idToken) => {
   console.log('idToken: ' + idToken)
 
@@ -24,6 +24,7 @@ const getUserId = async (idToken) => {
   }
 }
 
+// TODO: Move this function to middleware
 const verifyUser = function (requiredRoles) {
   return function (req, res, callback) {
     console.log('starting verifying idToken')

@@ -12,5 +12,5 @@ export default function (app) {
    * @param {string} password
    */
   app.route('/v1/login/')
-    .get(login)
+    .post(login)
 }
