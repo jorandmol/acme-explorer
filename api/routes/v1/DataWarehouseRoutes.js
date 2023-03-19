@@ -1,8 +1,8 @@
-import { listIndicators, lastIndicator, spentMoneyByExplorer, explorersBySpentMoney, rebuildPeriod } from '../controllers/DataWarehouseController.js'
-import { rebuildPeriodValidator, spentMoneyByExplorerValidator, explorersBySpentMoneyValidator } from '../controllers/validators/DataWarehouseValidator.js'
-import handleExpressValidation from "../middlewares/ValidationHandlingMiddleware.js"
-import { periodDecoder } from "../middlewares/CubePeriodDecoder.js"
-import { operationParser } from '../middlewares/OperationParser.js'
+import { listIndicators, lastIndicator, spentMoneyByExplorer, explorersBySpentMoney, rebuildPeriod } from '../../controllers/DataWarehouseController.js'
+import { rebuildPeriodValidator, spentMoneyByExplorerValidator, explorersBySpentMoneyValidator } from '../../controllers/validators/DataWarehouseValidator.js'
+import handleExpressValidation from "../../middlewares/ValidationHandlingMiddleware.js"
+import { periodDecoder } from "../../middlewares/CubePeriodDecoder.js"
+import { operationParser } from '../../middlewares/OperationParser.js'
 
 export default function (app) {
 

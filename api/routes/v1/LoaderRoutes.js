@@ -1,4 +1,4 @@
-import { storeJsonInsertMany } from '../controllers/LoaderController.js'
+import { storeJsonInsertMany } from '../../controllers/LoaderController.js'
 
 export default function (app) {
 

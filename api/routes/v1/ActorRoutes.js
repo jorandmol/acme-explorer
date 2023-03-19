@@ -1,6 +1,6 @@
-import { listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor } from '../controllers/ActorController.js'
-import { creationValidator } from '../controllers/validators/ActorValidator.js'
-import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
+import { listActors, createActor, readActor, updateActor, deleteActor, banActor, unbanActor } from '../../controllers/ActorController.js'
+import { creationValidator } from '../../controllers/validators/ActorValidator.js'
+import handleExpressValidation from '../../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
   /**

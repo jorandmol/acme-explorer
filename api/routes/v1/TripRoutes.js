@@ -1,8 +1,8 @@
-import { searchTrips, listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication } from '../controllers/TripController.js'
-import { creationValidator as tripCreationValidator, updateValidator, publishValidator, cancelValidator } from '../controllers/validators/TripValidator.js'
-import { creationFromTripValidator as appCreationValidator } from '../controllers/validators/ApplicationValidator.js'
-import { filterValidator } from '../controllers/validators/FinderValidator.js'
-import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
+import { searchTrips, listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication } from '../../controllers/TripController.js'
+import { creationValidator as tripCreationValidator, updateValidator, publishValidator, cancelValidator } from '../../controllers/validators/TripValidator.js'
+import { creationFromTripValidator as appCreationValidator } from '../../controllers/validators/ApplicationValidator.js'
+import { filterValidator } from '../../controllers/validators/FinderValidator.js'
+import handleExpressValidation from '../../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
 

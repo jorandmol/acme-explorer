@@ -1,6 +1,6 @@
-import { listSponsorships, createSponsorship, deleteSponsorship, paySponsorship, readSponsorship, updateSponsorship } from '../controllers/SponsorshipController.js'
-import { creationValidator, updateValidator } from '../controllers/validators/SponsorshipValidator.js'
-import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
+import { listSponsorships, createSponsorship, deleteSponsorship, paySponsorship, readSponsorship, updateSponsorship } from '../../controllers/SponsorshipController.js'
+import { creationValidator, updateValidator } from '../../controllers/validators/SponsorshipValidator.js'
+import handleExpressValidation from '../../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
 

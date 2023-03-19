@@ -1,7 +1,7 @@
-import { listApplications, createApplication, readApplication, cancelApplication, acceptApplication, rejectApplication, payApplication, updateApplicationComments} from '../controllers/ApplicationController.js'
-import { creationValidator, updateCommentsValidator, rejectionValidator } from '../controllers/validators/ApplicationValidator.js'
-import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
-import { checkTrip } from '../middlewares/ApplicationBusinessRules.js'
+import { listApplications, createApplication, readApplication, cancelApplication, acceptApplication, rejectApplication, payApplication, updateApplicationComments} from '../../controllers/ApplicationController.js'
+import { creationValidator, updateCommentsValidator, rejectionValidator } from '../../controllers/validators/ApplicationValidator.js'
+import handleExpressValidation from '../../middlewares/ValidationHandlingMiddleware.js'
+import { checkTrip } from '../../middlewares/ApplicationBusinessRules.js'
 
 export default function (app) {
   /**

@@ -24,7 +24,6 @@ const mongoDBOptions = {
     useUnifiedTopology: true
 }
 const initMongoDBConnection = async () => {
-    console.error(mongoDBURI)
     // mongoose.set('debug', true); //util para ver detalle de las operaciones que se realizan contra mongodb
     // Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
     // by default, you need to set it to false.

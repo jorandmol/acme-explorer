@@ -1,6 +1,6 @@
-import { listFinders, createFinder, readFinder, updateFinder, deleteFinder } from '../controllers/FinderController.js'
-import { creationValidator } from '../controllers/validators/FinderValidator.js'
-import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
+import { listFinders, createFinder, readFinder, updateFinder, deleteFinder } from '../../controllers/FinderController.js'
+import { creationValidator } from '../../controllers/validators/FinderValidator.js'
+import handleExpressValidation from '../../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
   /**

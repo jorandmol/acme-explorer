@@ -1,4 +1,4 @@
-import { login } from '../controllers/ActorController.js';
+import { login } from '../../controllers/ActorController.js';
 
 export default function (app) {
 

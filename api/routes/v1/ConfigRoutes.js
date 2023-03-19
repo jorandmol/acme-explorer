@@ -1,6 +1,6 @@
-import { listConfig, updateConfig } from '../controllers/ConfigController.js'
-import { configValidator } from '../controllers/validators/ConfigValidator.js'
-import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
+import { listConfig, updateConfig } from '../../controllers/ConfigController.js'
+import { configValidator } from '../../controllers/validators/ConfigValidator.js'
+import handleExpressValidation from '../../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
   /**

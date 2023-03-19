@@ -4,16 +4,16 @@ import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import initMongoDBConnection from './api/config/mongoose.js'
 import swagger from './swagger.js'
-import applicationRoutes from './api/routes/ApplicationRoutes.js'
-import tripRoutes from './api/routes/TripRoutes.js'
-import actorRoutes from './api/routes/ActorRoutes.js'
-import finderRoutes from './api/routes/FinderRoutes.js'
-import configRoutes from './api/routes/ConfigRoutes.js'
-import loaderRoutes from './api/routes/LoaderRoutes.js'
-import sponsorshipRoutes from './api/routes/SponsorshipRoutes.js'
-import dataWarehouseRoutes from './api/routes/DataWarehouseRoutes.js'
+import applicationRoutesV1 from './api/routes/v1/ApplicationRoutes.js'
+import tripRoutesV1 from './api/routes/v1/TripRoutes.js'
+import actorRoutesV1 from './api/routes/v1/ActorRoutes.js'
+import finderRoutesV1 from './api/routes/v1/FinderRoutes.js'
+import configRoutesV1 from './api/routes/v1/ConfigRoutes.js'
+import loaderRoutesV1 from './api/routes/v1/LoaderRoutes.js'
+import sponsorshipRoutesV1 from './api/routes/v1/SponsorshipRoutes.js'
+import dataWarehouseRoutesV1 from './api/routes/v1/DataWarehouseRoutes.js'
+import loginRoutesV1 from './api/routes/v1/LoginRoutes.js'
 import { initializeDataWarehouseJob } from "./api/services/DataWarehouseServiceProvider.js";
-import loginRoutes from './api/routes/LoginRoutes.js'
 import admin from 'firebase-admin';
 import serviceAccount from './firebase.json' assert { type: "json" }
 
@@ -35,15 +35,15 @@ app.get('/', function (req, res) {
     res.send('Welcome to ACME-Explorer RESTful API')
 })
 
-applicationRoutes(app)
-tripRoutes(app)
-actorRoutes(app)
-sponsorshipRoutes(app)
-finderRoutes(app)
-configRoutes(app)
-loaderRoutes(app)
-dataWarehouseRoutes(app)
-loginRoutes(app)
+applicationRoutesV1(app)
+tripRoutesV1(app)
+actorRoutesV1(app)
+sponsorshipRoutesV1(app)
+finderRoutesV1(app)
+configRoutesV1(app)
+loaderRoutesV1(app)
+dataWarehouseRoutesV1(app)
+loginRoutesV1(app)
 
 swagger(app)
 
