@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "cron": "^2.2.0",
     "dateformat": "^5.0.3",
     "dotenv": "^16.0.3",
@@ -30,7 +31,7 @@
     "chai-http": "^4.3.0",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.20",
-    "sinon": "^15.0.1",
-    "postman-to-openapi": "^3.0.1"
+    "postman-to-openapi": "^3.0.1",
+    "sinon": "^15.0.1"
   }
 }

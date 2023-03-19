@@ -1,4 +1,5 @@
-import express, { json } from 'express'
+import express from 'express'
+import cors from 'cors'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import initMongoDBConnection from './api/config/mongoose.js'
@@ -22,6 +23,7 @@ const app = express()
 const port = 8080
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use(cors())
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
