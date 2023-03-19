@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bdf64a7a-82bb-4596-b259-b28117ee87aa",
+		"_postman_id": "f9b492e5-625a-4041-8fde-b9a8be6864d6",
 		"name": "actors",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24780295"
@@ -14,8 +14,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/actors",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"actors"
@@ -32,8 +33,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/actors/:id",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"actors",
@@ -66,8 +68,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/actors/:id",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"actors",
@@ -91,8 +94,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/actors/:id",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"actors",
@@ -125,11 +129,103 @@
 				"url": {
 					"raw": "localhost:8080/v1/actors",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "banActor",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"date\": \"2023-07-10 15:00:00.000\",\n    \"reason\": \"Fraude fiscal\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/actors/:id/ban",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"actors",
+						":id",
+						"ban"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63e2732f60ea8efc059fb802"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unbanActor",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/actors/:id/unban",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"actors",
+						":id",
+						"unban"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63e2732f60ea8efc059fb802"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"pepefon@gmail.com\",\n    \"password\": 12345678\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"login"
 					]
 				}
 			},

@@ -37,7 +37,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/v1/search?keyword=test&minPrice=100&maxPrice=200&minDate=2022-12-01&maxDate=2022-12-05",
+					"raw": "localhost:8080/v1/search",
 					"host": [
 						"localhost"
 					],
@@ -49,23 +49,28 @@
 					"query": [
 						{
 							"key": "keyword",
-							"value": "test"
+							"value": "test",
+							"disabled": true
 						},
 						{
 							"key": "minPrice",
-							"value": "100"
+							"value": "100",
+							"disabled": true
 						},
 						{
 							"key": "maxPrice",
-							"value": "200"
+							"value": "200",
+							"disabled": true
 						},
 						{
 							"key": "minDate",
-							"value": "2022-12-01"
+							"value": "2022-12-01",
+							"disabled": true
 						},
 						{
 							"key": "maxDate",
-							"value": "2022-12-05"
+							"value": "2022-12-05",
+							"disabled": true
 						}
 					]
 				}

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "78a0b6c7-2c0c-421b-98ec-8cd87c185e62",
+		"_postman_id": "49e09f61-180a-463e-bc70-0bc82caeb989",
 		"name": "finders",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24780295"
@@ -14,8 +14,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/finders",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"finders"
@@ -32,8 +33,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/finders/:id",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"finders",
@@ -66,8 +68,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/finders/:id",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"finders",
@@ -91,8 +94,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/finders/:id",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"finders",
@@ -125,8 +129,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/finders",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"finders"

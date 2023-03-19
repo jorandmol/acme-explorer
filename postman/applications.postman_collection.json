@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "4a90b003-430e-4f92-ae11-724495ff121f",
+		"_postman_id": "adc7a949-aa0c-454c-9859-4f470282e83c",
 		"name": "applications",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25718361"
+		"_exporter_id": "24780295"
 	},
 	"item": [
 		{
@@ -20,8 +20,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/applications",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"applications"
@@ -38,8 +39,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/applications/:id",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"applications",
@@ -72,8 +74,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/applications",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"applications"
@@ -90,8 +93,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/applications/:id/accept",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"applications",
@@ -116,8 +120,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/applications/:id/cancel",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"applications",
@@ -142,8 +147,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/applications/:id/pay",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"applications",
@@ -177,8 +183,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/applications/:id/reject",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"applications",
@@ -212,8 +219,9 @@
 				"url": {
 					"raw": "localhost:8080/v1/applications/:id/comments",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"applications",

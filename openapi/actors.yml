@@ -99,3 +99,65 @@ paths:
           description: Successful response
           content:
             application/json: {}
+  /v1/actors/{id}/ban:
+    patch:
+      tags:
+        - actors
+      summary: banActor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                date: '2023-07-10 15:00:00.000'
+                reason: Fraude fiscal
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63e2732f60ea8efc059fb802
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/actors/{id}/unban:
+    patch:
+      tags:
+        - actors
+      summary: unbanActor
+      requestBody:
+        content: {}
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63e2732f60ea8efc059fb802
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/login:
+    post:
+      tags:
+        - actors
+      summary: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: pepefon@gmail.com
+                password: 12345678
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

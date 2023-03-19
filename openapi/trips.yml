@@ -52,32 +52,6 @@ paths:
       tags:
         - trips
       summary: search
-      parameters:
-        - name: keyword
-          in: query
-          schema:
-            type: string
-          example: test
-        - name: minPrice
-          in: query
-          schema:
-            type: integer
-          example: '100'
-        - name: maxPrice
-          in: query
-          schema:
-            type: integer
-          example: '200'
-        - name: minDate
-          in: query
-          schema:
-            type: string
-          example: '2022-12-01'
-        - name: maxDate
-          in: query
-          schema:
-            type: string
-          example: '2022-12-05'
       responses:
         '200':
           description: Successful response
