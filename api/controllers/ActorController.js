@@ -1,4 +1,38 @@
 import Actor from '../models/ActorModel.js'
+import admin from 'firebase-admin';
+
+export const login = async (req, res) => {
+  console.log('starting login an actor')
+  const { email, password } = req.body
+  let customToken
+
+  Actor.findOne({ email: email }, function (err, actor) {
+    if (err) { // No actor found with that email as username
+      res.send(err)
+    } else if (!actor) { // an access token isn’t provided, or is invalid
+      res.status(401)
+      res.json({ message: 'forbidden', error: err })
+    } else {
+      // Make sure the password is correct
+      actor.verifyPassword(password, async function (err, isMatch) {
+        if (err) {
+          res.send(err)
+        } else if (!isMatch) { // Password did not match
+          res.status(401) // an access token isn’t provided, or is invalid
+          res.json({ message: 'forbidden', error: err })
+        } else {
+          try {
+            customToken = await admin.auth().createCustomToken(actor.email)
+          } catch (error) {
+            console.log('Error creating custom token:', error)
+          }
+          actor.customToken = customToken
+          res.json(actor)
+        }
+      })
+    }
+  })
+}
 
 export const listActors = async (req, res) => {
   const filters = {}
