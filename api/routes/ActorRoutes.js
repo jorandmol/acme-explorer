@@ -64,7 +64,7 @@ export default function (app) {
     .delete(actorController.deleteActor)
   app.route('/v2/actors/:id')
     .get(actorController.readActor)
-    .put(verifyUser(Object.values(RoleEnum)), actorController.updateActor) // TODO: Nueva función de controlador que revise que el usuario es admin o es el mismo que quiere editar
+    .put(verifyUser(Object.values(RoleEnum)), actorController.updateActorAuth)
     .delete(verifyUser([RoleEnum.ADMINISTRATOR]), actorController.deleteActor)
 
   /**

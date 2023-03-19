@@ -26,7 +26,7 @@ export default function (app) {
       applicationController.createApplication
     )
   app.route('/v2/applications')
-    .get(verifyUser([RoleEnum.EXPLORER]), applicationController.listApplications) // TODO: Quitar la comprobación del actor (llega por req)
+    .get(verifyUser([RoleEnum.EXPLORER]), applicationController.listApplicationsAuth)
     .post(
       verifyUser([RoleEnum.EXPLORER]),
       creationValidator,
@@ -46,7 +46,7 @@ export default function (app) {
   app.route('/v1/applications/:id')
     .get(applicationController.readApplication)
     app.route('/v2/applications/:id')
-    .get(verifyUser([RoleEnum.MANAGER, RoleEnum.EXPLORER]), applicationController.readApplication) // TODO: Comprobar que quien lo está leyendo es el dueño de la trip o el explorer asociado
+    .get(verifyUser([RoleEnum.MANAGER, RoleEnum.EXPLORER]), applicationController.readApplicationAuth)
 
   /**
    * Cancel an application
@@ -66,7 +66,7 @@ export default function (app) {
     .patch(
       verifyUser([RoleEnum.EXPLORER]),
       checkTrip,
-      applicationController.cancelApplication // TODO: Comprobar que sea el usuario que la ha creado
+      applicationController.cancelApplicationAuth
     )
 
   /**
@@ -87,7 +87,7 @@ export default function (app) {
     .patch(
       verifyUser([RoleEnum.MANAGER]),
       checkTrip,
-      applicationController.acceptApplication // TODO: Comprobar que sea el manager que ha creado la trip
+      applicationController.acceptApplicationAuth
     )
 
   /**
@@ -112,7 +112,7 @@ export default function (app) {
       rejectionValidator,
       handleExpressValidation,
       checkTrip,
-      applicationController.rejectApplication // TODO: Comprobar que sea el manager que ha creado la trip
+      applicationController.rejectApplicationAuth
     )
 
   /**
@@ -133,7 +133,7 @@ export default function (app) {
     .patch(
       verifyUser([RoleEnum.EXPLORER]),
       checkTrip,
-      applicationController.payApplication // TODO: Comprobar que sea el explorer que ha creado la application
+      applicationController.payApplicationAuth
     )
 
   /**
@@ -158,7 +158,7 @@ export default function (app) {
       updateCommentsValidator,
       handleExpressValidation,
       checkTrip,
-      applicationController.updateApplicationComments // TODO: Comprobar que sea el explorer que ha creado la application
+      applicationController.updateApplicationCommentsAuth
     )
 
 }

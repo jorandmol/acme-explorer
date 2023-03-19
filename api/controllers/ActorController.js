@@ -1,5 +1,6 @@
 import Actor from '../models/ActorModel.js'
 import admin from 'firebase-admin';
+import RoleEnum from '../enum/RoleEnum.js'
 
 export const login = async (req, res) => {
   console.log('starting login an actor')
@@ -77,6 +78,30 @@ export const updateActor = async (req, res) => {
     const actor = await Actor.findOneAndUpdate({ _id: req.params.id }, newActor, { new:true })
     if (actor) {
       res.json(actor)
+    } else{
+      res.status(404).send('Actor not found')
+    }
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
+
+// function that check that the actor is the same as the one in the token or is an admin
+export const updateActorAuth = async (req, res) => {
+  const newActor = req.body
+  try {
+    const actor = req.actor
+    if (actor) {
+      // check that the actor is the same as the one in the token or is an admin
+      if (req.actor._id === actor._id || req.actor.role === RoleEnum.ADMIN) {
+        res.json(actor)
+      } else {
+        res.status(403).send('Forbidden')
+      }
     } else{
       res.status(404).send('Actor not found')
     }

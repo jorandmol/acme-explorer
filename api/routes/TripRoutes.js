@@ -47,12 +47,12 @@ export default function (app) {
       tripsController.createTrip
     )
   app.route('/v2/trips')
-    .get(verifyUser([RoleEnum.MANAGER]), tripsController.listTrips) // TODO: Nueva forma cambiando la autenticación
+    .get(verifyUser([RoleEnum.MANAGER]), tripsController.listTrips)
     .post(
       verifyUser([RoleEnum.MANAGER]),
       tripCreationValidator,
       handleExpressValidation,
-      tripsController.createTrip // TODO: Nueva forma cambiando la autenticación
+      tripsController.createTripAuth
     )
 
   /**
@@ -80,8 +80,8 @@ export default function (app) {
       verifyUser([RoleEnum.MANAGER]),
       updateValidator,
       handleExpressValidation,
-      tripsController.updateTrip // TODO: Nueva forma cambiando la autenticación
-    ).delete(verifyUser([RoleEnum.MANAGER]), tripsController.deleteTrip) // TODO: Nueva forma cambiando la autenticación
+      tripsController.updateTripAuth
+    ).delete(verifyUser([RoleEnum.MANAGER]), tripsController.deleteTripAuth)
 
   /**
   * Publish a trip
@@ -102,7 +102,7 @@ export default function (app) {
       verifyUser([RoleEnum.MANAGER]),
       publishValidator,
       handleExpressValidation,
-      tripsController.publishTrip // TODO: Nueva forma cambiando la autenticación
+      tripsController.publishTripAuth
     )
 
   /**
@@ -124,7 +124,7 @@ export default function (app) {
       verifyUser([RoleEnum.MANAGER]),
       cancelValidator,
       handleExpressValidation,
-      tripsController.cancelTrip // TODO: Nueva forma cambiando la autenticación
+      tripsController.cancelTripAuth
     )
 
   /**
@@ -151,12 +151,12 @@ export default function (app) {
     tripsController.createTripApplication
   )
   app.route('/v2/trips/:id/applications')
-  .get(verifyUser([RoleEnum.MANAGER]), tripsController.listTripApplications) // TODO: Nueva forma cambiando la autenticación
+  .get(verifyUser([RoleEnum.MANAGER]), tripsController.listTripApplicationsAuth)
   .post(
     verifyUser([RoleEnum.MANAGER]),
     appCreationValidator,
     handleExpressValidation,
-    tripsController.createTripApplication // TODO: Nueva forma cambiando la autenticación
+    tripsController.createTripApplicationAuth
   )
 
 }
