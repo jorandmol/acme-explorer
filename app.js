@@ -13,6 +13,15 @@ import loaderRoutesV1 from './api/routes/v1/LoaderRoutes.js'
 import sponsorshipRoutesV1 from './api/routes/v1/SponsorshipRoutes.js'
 import dataWarehouseRoutesV1 from './api/routes/v1/DataWarehouseRoutes.js'
 import loginRoutesV1 from './api/routes/v1/LoginRoutes.js'
+import applicationRoutesV2 from './api/routes/v2/ApplicationRoutes.js'
+import tripRoutesV2 from './api/routes/v2/TripRoutes.js'
+import actorRoutesV2 from './api/routes/v2/ActorRoutes.js'
+import finderRoutesV2 from './api/routes/v2/FinderRoutes.js'
+import configRoutesV2 from './api/routes/v2/ConfigRoutes.js'
+import loaderRoutesV2 from './api/routes/v2/LoaderRoutes.js'
+import sponsorshipRoutesV2 from './api/routes/v2/SponsorshipRoutes.js'
+import dataWarehouseRoutesV2 from './api/routes/v2/DataWarehouseRoutes.js'
+import loginRoutesV2 from './api/routes/v2/LoginRoutes.js'
 import { initializeDataWarehouseJob } from "./api/services/DataWarehouseServiceProvider.js";
 import admin from 'firebase-admin';
 import serviceAccount from './firebase.json' assert { type: "json" }
@@ -44,6 +53,16 @@ configRoutesV1(app)
 loaderRoutesV1(app)
 dataWarehouseRoutesV1(app)
 loginRoutesV1(app)
+
+applicationRoutesV2(app)
+tripRoutesV2(app)
+actorRoutesV2(app)
+sponsorshipRoutesV2(app)
+finderRoutesV2(app)
+configRoutesV2(app)
+loaderRoutesV2(app)
+dataWarehouseRoutesV2(app)
+loginRoutesV2(app)
 
 swagger(app)
 
