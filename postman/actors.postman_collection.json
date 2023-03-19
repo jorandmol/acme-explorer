@@ -10,15 +10,21 @@
 			"name": "listActors",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/actors",
+					"raw": "localhost:8080/v2/actors",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"actors"
 					]
 				}
@@ -29,15 +35,21 @@
 			"name": "readActor",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/actors/:id",
+					"raw": "localhost:8080/v2/actors/:id",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"actors",
 						":id"
 					],
@@ -55,7 +67,13 @@
 			"name": "updateActor",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"name\": \"Pepardo\",\n    \"surname\": \"Rodríguez\",\n    \"email\": \"la_presion@gmail.com\",\n    \"password\": \"LOL123456789abcde\",\n    \"phone\": \"+34674747478\",\n    \"address\": \"15 Rue del percebe\",\n    \"role\": \"explorer\"\n}",
@@ -66,13 +84,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/actors/:id",
+					"raw": "localhost:8080/v2/actors/:id",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"actors",
 						":id"
 					],
@@ -90,15 +108,21 @@
 			"name": "deleteActor",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/actors/:id",
+					"raw": "localhost:8080/v2/actors/:id",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"actors",
 						":id"
 					],
@@ -116,7 +140,13 @@
 			"name": "createActor",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"name\": \"Pepardo\",\n    \"surname\": \"Rodríguez\",\n    \"email\": \"pep_la_presion@gmail.com\",\n    \"password\": \"123456789abcde\",\n    \"phone\": \"+34674747478\",\n    \"address\": \"13 Rue del percebe\",\n    \"role\": \"explorer\"\n}",
@@ -127,13 +157,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/actors",
+					"raw": "localhost:8080/v2/actors",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"actors"
 					]
 				}
@@ -144,7 +174,13 @@
 			"name": "banActor",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"date\": \"2023-07-10 15:00:00.000\",\n    \"reason\": \"Fraude fiscal\"\n}",
@@ -155,13 +191,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/actors/:id/ban",
+					"raw": "localhost:8080/v2/actors/:id/ban",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"actors",
 						":id",
 						"ban"
@@ -180,15 +216,21 @@
 			"name": "unbanActor",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/actors/:id/unban",
+					"raw": "localhost:8080/v2/actors/:id/unban",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"actors",
 						":id",
 						"unban"
@@ -207,7 +249,13 @@
 			"name": "login",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"email\": \"pepefon@gmail.com\",\n    \"password\": 12345678\n}",
@@ -218,13 +266,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/login",
+					"raw": "localhost:8080/v2/login",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"login"
 					]
 				}

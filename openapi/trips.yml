@@ -5,17 +5,17 @@ info:
 servers:
   - url: localhost://
 paths:
-  /v1/trips:
+  /v2/trips:
     get:
       tags:
         - trips
       summary: listTrips
       parameters:
-        - name: actor_id
+        - name: idtoken
           in: header
           schema:
             type: string
-          example: 63ed27e96f6eb8680cc0b162
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
@@ -37,37 +37,43 @@ paths:
                 startDate: '2023-07-10 15:00:00.000'
                 endDate: '2023-07-15 15:00:00.000'
       parameters:
-        - name: actor_id
+        - name: idtoken
           in: header
           schema:
             type: string
-          example: 63ed27e96f6eb8680cc0b162
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /v1/search:
+  /v2/search:
     get:
       tags:
         - trips
       summary: search
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /v1/trips/{id}/applications:
+  /v2/trips/{id}/applications:
     get:
       tags:
         - trips
       summary: listTripApplications
       parameters:
-        - name: actor_id
+        - name: idtoken
           in: header
           schema:
             type: string
-          example: 63ed27e96f6eb8680cc0b162
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -107,12 +113,17 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/trips/{id}:
+  /v2/trips/{id}:
     get:
       tags:
         - trips
       summary: readTrip
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -158,11 +169,11 @@ paths:
                 updatedAt: '2023-02-28T10:30:03.284Z'
                 ticker: 230228-SVUR
       parameters:
-        - name: actor_id
+        - name: idtoken
           in: header
           schema:
             type: string
-          example: 63ed27e96f6eb8680cc0b162
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -179,11 +190,11 @@ paths:
         - trips
       summary: deleteTrip
       parameters:
-        - name: actor_id
+        - name: idtoken
           in: header
           schema:
             type: string
-          example: 63ed27e96f6eb8680cc0b162
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -195,7 +206,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/trips/{id}/publish:
+  /v2/trips/{id}/publish:
     patch:
       tags:
         - trips
@@ -208,11 +219,11 @@ paths:
               example:
                 publicationDate: '2023-06-10T13:00:00.000Z'
       parameters:
-        - name: actor_id
+        - name: idtoken
           in: header
           schema:
             type: string
-          example: 63ed27e96f6eb8680cc0b162
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -224,7 +235,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/trips/{id}/cancel:
+  /v2/trips/{id}/cancel:
     patch:
       tags:
         - trips
@@ -237,11 +248,11 @@ paths:
               example:
                 cancellationReason: Porque quiero tio, porque me da la gana
       parameters:
-        - name: actor_id
+        - name: idtoken
           in: header
           schema:
             type: string
-          example: 63ed27e96f6eb8680cc0b162
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:

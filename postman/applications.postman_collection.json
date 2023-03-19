@@ -12,19 +12,19 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e930e2f4865b4879b5",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/v1/applications",
+					"raw": "localhost:8080/v2/applications",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"applications"
 					]
 				}
@@ -35,15 +35,21 @@
 			"name": "readApplication",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/applications/:id",
+					"raw": "localhost:8080/v2/applications/:id",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"applications",
 						":id"
 					],
@@ -61,7 +67,13 @@
 			"name": "createApplication",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"explorer\": \"63ed27e94fe8c982b12e364a\",\n    \"trip\": \"63f38bf93ff6b85445a656af\"\n}",
@@ -72,13 +84,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/applications",
+					"raw": "localhost:8080/v2/applications",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"applications"
 					]
 				}
@@ -89,15 +101,21 @@
 			"name": "acceptApplication",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/applications/:id/accept",
+					"raw": "localhost:8080/v2/applications/:id/accept",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"applications",
 						":id",
 						"accept"
@@ -116,15 +134,21 @@
 			"name": "cancelApplication",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/applications/:id/cancel",
+					"raw": "localhost:8080/v2/applications/:id/cancel",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"applications",
 						":id",
 						"cancel"
@@ -143,15 +167,21 @@
 			"name": "payApplication",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/applications/:id/pay",
+					"raw": "localhost:8080/v2/applications/:id/pay",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"applications",
 						":id",
 						"pay"
@@ -170,7 +200,13 @@
 			"name": "rejectApplication",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n   \"rejectionReason\": \"The payment period has expired\"\r\n}",
@@ -181,13 +217,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/applications/:id/reject",
+					"raw": "localhost:8080/v2/applications/:id/reject",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"applications",
 						":id",
 						"reject"
@@ -206,7 +242,13 @@
 			"name": "updateApplicationComments",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n   \"comments\": \"nada que comentar\"\n}",
@@ -217,13 +259,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/applications/:id/comments",
+					"raw": "localhost:8080/v2/applications/:id/comments",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"applications",
 						":id",
 						"comments"

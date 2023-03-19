@@ -5,11 +5,17 @@ info:
 servers:
   - url: localhost://
 paths:
-  /v1/config:
+  /v2/config:
     get:
       tags:
         - globalConfig
       summary: listConfig
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
@@ -30,6 +36,12 @@ paths:
                 numResults: 10
                 sponsorshipFlatRate: 0.15
                 dataWhRefresh: 30
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response

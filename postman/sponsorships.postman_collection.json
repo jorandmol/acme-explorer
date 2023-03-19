@@ -10,15 +10,21 @@
 			"name": "readSponsorship",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/sponsorships/:id",
+					"raw": "localhost:8080/v2/sponsorships/:id",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"sponsorships",
 						":id"
 					],
@@ -38,19 +44,19 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e9db335a31d53ee505",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/v1/sponsorships",
+					"raw": "localhost:8080/v2/sponsorships",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"sponsorships"
 					]
 				}
@@ -63,19 +69,19 @@
 				"method": "PATCH",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e9db335a31d53ee505",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/v1/sponsorships/:id/pay",
+					"raw": "localhost:8080/v2/sponsorships/:id/pay",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"sponsorships",
 						":id",
 						"pay"
@@ -96,8 +102,8 @@
 				"method": "PUT",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e9db335a31d53ee505",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
@@ -111,13 +117,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/sponsorships/:id",
+					"raw": "localhost:8080/v2/sponsorships/:id",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"sponsorships",
 						":id"
 					],
@@ -137,19 +143,19 @@
 				"method": "DELETE",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e9db335a31d53ee505",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/v1/sponsorships/:id",
+					"raw": "localhost:8080/v2/sponsorships/:id",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"sponsorships",
 						":id"
 					],
@@ -169,8 +175,8 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e9db335a31d53ee505",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
@@ -184,13 +190,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/sponsorships",
+					"raw": "localhost:8080/v2/sponsorships",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"sponsorships"
 					]
 				}

@@ -10,15 +10,21 @@
 			"name": "listFinders",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/finders",
+					"raw": "localhost:8080/v2/finders",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"finders"
 					]
 				}
@@ -29,15 +35,21 @@
 			"name": "readFinder",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/finders/:id",
+					"raw": "localhost:8080/v2/finders/:id",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"finders",
 						":id"
 					],
@@ -55,7 +67,13 @@
 			"name": "updateFinder",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"explorer\": \"63e262f4bf4a27df6302e042\",\n    \"minPrice\": 2,\n    \"maxPrice\": 2300,\n    \"keyword\": \"pepe-leches\"\n}",
@@ -66,13 +84,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/finders/:id",
+					"raw": "localhost:8080/v2/finders/:id",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"finders",
 						":id"
 					],
@@ -90,15 +108,21 @@
 			"name": "deleteFinder",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/finders/:id",
+					"raw": "localhost:8080/v2/finders/:id",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"finders",
 						":id"
 					],
@@ -116,7 +140,13 @@
 			"name": "createFinder",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"explorer\": \"63e262f4bf4a27df6302e042\",\n    \"keyword\": \"test\",\n    \"minPrice\": 23,\n    \"maxPrice\": 2300\n}",
@@ -127,13 +157,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/finders",
+					"raw": "localhost:8080/v2/finders",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"finders"
 					]
 				}

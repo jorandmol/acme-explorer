@@ -5,11 +5,17 @@ info:
 servers:
   - url: localhost://
 paths:
-  /v1/finders:
+  /v2/finders:
     get:
       tags:
         - finders
       summary: listFinders
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
@@ -29,17 +35,28 @@ paths:
                 keyword: test
                 minPrice: 23
                 maxPrice: 2300
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /v1/finders/{id}:
+  /v2/finders/{id}:
     get:
       tags:
         - finders
       summary: readFinder
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -66,6 +83,11 @@ paths:
                 maxPrice: 2300
                 keyword: pepe-leches
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -82,6 +104,11 @@ paths:
         - finders
       summary: deleteFinder
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:

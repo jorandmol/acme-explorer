@@ -10,15 +10,21 @@
 			"name": "listConfig",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/config",
+					"raw": "localhost:8080/v2/config",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"config"
 					]
 				}
@@ -29,7 +35,13 @@
 			"name": "updateConfig",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n   \"defaultLanguage\": \"en\",\n    \"cacheLifetime\": 3600,\n    \"numResults\": 10,\n    \"sponsorshipFlatRate\": 0.15,\n    \"dataWhRefresh\": 30\n}",
@@ -40,13 +52,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/config",
+					"raw": "localhost:8080/v2/config",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"config"
 					]
 				}
