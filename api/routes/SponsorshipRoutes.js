@@ -1,6 +1,7 @@
 import * as sponsorshipController from '../controllers/SponsorshipController.js'
 import { creationValidator, updateValidator } from '../controllers/validators/SponsorshipValidator.js'
 import RoleEnum from '../enum/RoleEnum.js'
+import { verifyUser } from '../middlewares/AuthMiddleware.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
