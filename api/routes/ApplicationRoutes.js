@@ -1,7 +1,7 @@
-import { listApplications, createApplication, readApplication, cancelApplication, acceptApplication, rejectApplication, payApplication, updateApplicationComments} from '../../controllers/ApplicationController.js'
-import { creationValidator, updateCommentsValidator, rejectionValidator } from '../../controllers/validators/ApplicationValidator.js'
-import handleExpressValidation from '../../middlewares/ValidationHandlingMiddleware.js'
-import { checkTrip } from '../../middlewares/ApplicationBusinessRules.js'
+import * as applicationController from '../controllers/ApplicationController.js'
+import { creationValidator, updateCommentsValidator, rejectionValidator } from '../controllers/validators/ApplicationValidator.js'
+import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
+import { checkTrip } from '../middlewares/ApplicationBusinessRules.js'
 
 export default function (app) {
   /**
@@ -15,12 +15,12 @@ export default function (app) {
    * @url /v1/applications
    */
   app.route('/v1/applications')
-    .get(listApplications)
+    .get(applicationController.listApplications)
     .post(
       creationValidator,
       handleExpressValidation,
       checkTrip,
-      createApplication
+      applicationController.createApplication
     )
 
   /**
@@ -32,7 +32,7 @@ export default function (app) {
    * @url /v1/applications/:id
    */
   app.route('/v1/applications/:id')
-    .get(readApplication)
+    .get(applicationController.readApplication)
 
   /**
    * Cancel an application
@@ -46,7 +46,7 @@ export default function (app) {
   app.route('/v1/applications/:id/cancel')
     .patch(
       checkTrip,
-      cancelApplication
+      applicationController.cancelApplication
     )
 
   /**
@@ -61,7 +61,7 @@ export default function (app) {
   app.route('/v1/applications/:id/accept')
     .patch(
       checkTrip,
-      acceptApplication
+      applicationController.acceptApplication
     )
 
   /**
@@ -78,7 +78,7 @@ export default function (app) {
       rejectionValidator,
       handleExpressValidation,
       checkTrip,
-      rejectApplication
+      applicationController.rejectApplication
     )
 
   /**
@@ -93,7 +93,7 @@ export default function (app) {
   app.route('/v1/applications/:id/pay')
     .patch(
       checkTrip,
-      payApplication
+      applicationController.payApplication
     )
 
   /**
@@ -110,7 +110,7 @@ export default function (app) {
       updateCommentsValidator,
       handleExpressValidation,
       checkTrip,
-      updateApplicationComments
+      applicationController.updateApplicationComments
     )
 
 

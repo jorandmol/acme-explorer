@@ -1,8 +1,8 @@
-import { searchTrips, listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication } from '../../controllers/TripController.js'
-import { creationValidator as tripCreationValidator, updateValidator, publishValidator, cancelValidator } from '../../controllers/validators/TripValidator.js'
-import { creationFromTripValidator as appCreationValidator } from '../../controllers/validators/ApplicationValidator.js'
-import { filterValidator } from '../../controllers/validators/FinderValidator.js'
-import handleExpressValidation from '../../middlewares/ValidationHandlingMiddleware.js'
+import * as tripsController from '../controllers/TripController.js'
+import { creationValidator as tripCreationValidator, updateValidator, publishValidator, cancelValidator } from '../controllers/validators/TripValidator.js'
+import { creationFromTripValidator as appCreationValidator } from '../controllers/validators/ApplicationValidator.js'
+import { filterValidator } from '../controllers/validators/FinderValidator.js'
+import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
 
@@ -18,7 +18,7 @@ export default function (app) {
     .get(
       filterValidator,
       handleExpressValidation,
-      searchTrips
+      tripsController.searchTrips
     )
 
   /**
@@ -32,11 +32,11 @@ export default function (app) {
   * @url /v1/trips
   */
   app.route('/v1/trips')
-    .get(listTrips)
+    .get(tripsController.listTrips)
     .post(
       tripCreationValidator,
       handleExpressValidation,
-      createTrip
+      tripsController.createTrip
     )
 
   /**
@@ -52,12 +52,12 @@ export default function (app) {
   * @url /v1/trips/:id
   */
   app.route('/v1/trips/:id')
-    .get(readTrip)
+    .get(tripsController.readTrip)
     .put(
       updateValidator,
       handleExpressValidation,
-      updateTrip
-    ).delete(deleteTrip)
+      tripsController.updateTrip
+    ).delete(tripsController.deleteTrip)
 
   /**
   * Publish a trip
@@ -71,7 +71,7 @@ export default function (app) {
     .patch(
       publishValidator,
       handleExpressValidation,
-      publishTrip
+      tripsController.publishTrip
     )
 
   /**
@@ -86,7 +86,7 @@ export default function (app) {
     .patch(
       cancelValidator,
       handleExpressValidation,
-      cancelTrip
+      tripsController.cancelTrip
     )
 
   /**
@@ -106,11 +106,11 @@ export default function (app) {
   * @url /v1/trips/:id/applications
   */
   app.route('/v1/trips/:id/applications')
-  .get(listTripApplications)
+  .get(tripsController.listTripApplications)
   .post(
     appCreationValidator,
     handleExpressValidation,
-    createTripApplication
+    tripsController.createTripApplication
   )
 
 }

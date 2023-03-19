@@ -1,6 +1,6 @@
-import { listSponsorships, createSponsorship, deleteSponsorship, paySponsorship, readSponsorship, updateSponsorship } from '../../controllers/SponsorshipController.js'
-import { creationValidator, updateValidator } from '../../controllers/validators/SponsorshipValidator.js'
-import handleExpressValidation from '../../middlewares/ValidationHandlingMiddleware.js'
+import * as sponsorshipController from '../controllers/SponsorshipController.js'
+import { creationValidator, updateValidator } from '../controllers/validators/SponsorshipValidator.js'
+import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
 
@@ -12,14 +12,14 @@ export default function (app) {
   *
   * @section sponsorships
   * @type get post
-  * @url /v2/sponsorships
+  * @url /v1/sponsorships
   */
-  app.route('/v2/sponsorships')
-    .get(listSponsorships)
+  app.route('/v1/sponsorships')
+    .get(sponsorshipController.listSponsorships)
     .post(
       creationValidator,
       handleExpressValidation,
-      createSponsorship
+      sponsorshipController.createSponsorship
     )
 
   /**
@@ -32,15 +32,15 @@ export default function (app) {
   *
   * @section sponsorships
   * @type get put delete
-  * @url /v2/sponsorships/:id
+  * @url /v1/sponsorships/:id
   */
-  app.route('/v2/sponsorships/:id')
-    .get(readSponsorship)
+  app.route('/v1/sponsorships/:id')
+    .get(sponsorshipController.readSponsorship)
     .put(
       updateValidator,
       handleExpressValidation,
-      updateSponsorship
-    ).delete(deleteSponsorship)
+      sponsorshipController.updateSponsorship
+    ).delete(sponsorshipController.deleteSponsorship)
 
   /**
   * Pay a sponsorship
@@ -48,9 +48,9 @@ export default function (app) {
   *
   * @section sponsorships
   * @type patch
-  * @url /v2/sponsorships/:id/pay
+  * @url /v1/sponsorships/:id/pay
   */
-  app.route('/v2/sponsorships/:id/pay')
-    .patch(paySponsorship)
+  app.route('/v1/sponsorships/:id/pay')
+    .patch(sponsorshipController.paySponsorship)
 
 }

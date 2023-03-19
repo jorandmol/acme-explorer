@@ -1,6 +1,6 @@
-import { listFinders, createFinder, readFinder, updateFinder, deleteFinder } from '../../controllers/FinderController.js'
-import { creationValidator } from '../../controllers/validators/FinderValidator.js'
-import handleExpressValidation from '../../middlewares/ValidationHandlingMiddleware.js'
+import * as finderController from '../controllers/FinderController.js'
+import { creationValidator } from '../controllers/validators/FinderValidator.js'
+import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
 
 export default function (app) {
   /**
@@ -14,11 +14,11 @@ export default function (app) {
   * @url /v1/finders
   */
   app.route('/v1/finders')
-    .get(listFinders)
+    .get(finderController.listFinders)
     .post(
       creationValidator,
       handleExpressValidation,
-      createFinder
+      finderController.createFinder
     )
 
   /**
@@ -32,8 +32,8 @@ export default function (app) {
   * @url /v1/finders/:id
   */
   app.route('/v1/finders/:id')
-    .get(readFinder)
-    .put(updateFinder)
-    .delete(deleteFinder)
+    .get(finderController.readFinder)
+    .put(finderController.updateFinder)
+    .delete(finderController.deleteFinder)
 
 }

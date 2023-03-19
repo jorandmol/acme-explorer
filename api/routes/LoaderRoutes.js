@@ -1,4 +1,4 @@
-import { storeJsonInsertMany } from '../../controllers/LoaderController.js'
+import * as loaderController from '../controllers/LoaderController.js'
 
 export default function (app) {
 
@@ -14,6 +14,6 @@ export default function (app) {
   * Sample 1 (actors): http://localhost:8080/v1/loader/insertMany?model=Actor&sourceFile=file://c:/temp/Actors.json
   */
   app.route('/v1/loader/insertMany')
-    .post(storeJsonInsertMany)
+    .post(loaderController.storeJsonInsertMany)
 
 }
