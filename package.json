@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --exit",
+    "p2o": "node postmanToOpenapi.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,11 +18,19 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-validator": "^6.14.3",
+    "firebase-admin": "^11.5.0",
     "mongoose": "^6.8.4",
-    "nanoid": "^4.0.0"
+    "nanoid": "^4.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.2"
   },
   "type": "module",
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.20",
+    "sinon": "^15.0.1",
+    "postman-to-openapi": "^3.0.1"
   }
 }

@@ -1,5 +1,6 @@
 import Trip from '../models/TripModel.js'
 import Actor from '../models/ActorModel.js'
+import GloabalConfig from '../models/GlobalConfigModel.js'
 import RoleEnum from '../enum/RoleEnum.js'
 import { ObjectId } from 'mongodb';
 
@@ -26,23 +27,24 @@ export const listSponsorships = async (req, res) => {
     const sponsorships = await Trip.aggregate(      
       [
         {
-          '$unwind': '$sponsorships'
+          $unwind: "$sponsorships"
         }, {
-          '$match': {
-            'sponsorships.sponsor': actor._id
+          $match: {
+            "sponsorships.sponsor": actor._id
           }
         }, {
-          '$project': {
-            '_id': '$sponsorships._id', 
-            'sponsor': '$sponsorships.sponsor', 
-            'banner': '$sponsorships.banner', 
-            'link': '$sponsorships.link', 
-            'paidAt': '$sponsorships.paidAt', 
-            'trip': {
-              '_id': '$_id', 
-              'ticker': '$ticker', 
-              'title': '$title', 
-              'description': '$description'
+          $project: {
+            _id: "$sponsorships._id", 
+            sponsor: "$sponsorships.sponsor", 
+            banner: "$sponsorships.banner", 
+            link: "$sponsorships.link", 
+            paidAt: "$sponsorships.paidAt",
+            financedAmount: "$sponsorships.financedAmount",
+            trip: {
+              _id: "$_id", 
+              ticker: "$ticker", 
+              title: "$title", 
+              description: "$description"
             }
           }
         }
@@ -104,6 +106,7 @@ export const readSponsorship = async (req, res) => {
         banner: "$sponsorships.banner",
         link: "$sponsorships.link",
         paidAt: "$sponsorships.paidAt",
+        financedAmount: "$sponsorships.financedAmount",
         trip: {
           _id: "$_id",
           ticker: "$ticker",
@@ -126,7 +129,6 @@ export const updateSponsorship = async (req, res) => {
   // TODO: change this when auth is implemented
   const { id } = req.params
   const { actor_id } = req.headers
-  const { banner, link } = req.body
   try {
     const actor = await Actor.findById(actor_id)
     if (!actor) {
@@ -166,7 +168,7 @@ export const updateSponsorship = async (req, res) => {
     const trip = await Trip.findById(tripId)
     if (!trip) { throw new Error('Sponsorship associated with no trip') }
 
-    const newSponsorship = { ...sponsorship, banner, link }
+    const newSponsorship = { ...sponsorship, ...req.body }
     const prevSponsorships = trip.sponsorships.filter(s => s._id.toString() !== sponsorship._id.toString())
     const newSponsorships = [ ...prevSponsorships, newSponsorship ]
 
@@ -182,6 +184,7 @@ export const paySponsorship = async (req, res) => {
   // TODO: change this when auth is implemented
   const { id } = req.params
   const { actor_id } = req.headers
+  let { financedAmount } = req.body
   try {
     const actor = await Actor.findById(actor_id)
     if (!actor) {
@@ -205,6 +208,7 @@ export const paySponsorship = async (req, res) => {
         banner: "$sponsorships.banner",
         link: "$sponsorships.link",
         paidAt: "$sponsorships.paidAt",
+        financedAmount: "$sponsorships.financedAmount",
         tripId: "$_id"
       }}
     ])
@@ -222,6 +226,11 @@ export const paySponsorship = async (req, res) => {
     if (!trip) { throw new Error('Sponsorship associated with no trip') }
 
     sponsorship.paidAt = new Date()
+    if (!financedAmount) {
+      const config = await GloabalConfig.findOne()
+      financedAmount = config?.sponsorshipFlatRate || 0.1
+    }
+    sponsorship.financedAmount = financedAmount
     const prevSponsorships = trip.sponsorships.filter(s => s._id.toString() !== sponsorship._id.toString())
     const newSponsorships = [ ...prevSponsorships, sponsorship ]
     
@@ -259,6 +268,7 @@ export const deleteSponsorship = async (req, res) => {
         banner: "$sponsorships.banner",
         link: "$sponsorships.link",
         paidAt: "$sponsorships.paidAt",
+        financedAmount: "$sponsorships.financedAmount",
         tripId: "$_id"
       }}
     ])

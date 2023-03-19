@@ -17,7 +17,7 @@ const sponsorshipSchema = new mongoose.Schema({
     },
     financedAmount: {
         type: Number,
-        required: 'Financed amount is required'
+        default: 0.0
     },
     paidAt: {
         type: Date,
@@ -121,6 +121,10 @@ tripSchema.pre('save', function (callback) {
 
     callback()
 })
+
+tripSchema.statics.findByFilters = function(filters, limit = 10) {
+    return this.find(filters).limit(limit)
+}
 
 const model = mongoose.model('Trip', tripSchema)
 

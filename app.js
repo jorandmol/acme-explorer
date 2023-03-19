@@ -1,7 +1,8 @@
-import express from 'express'
+import express, { json } from 'express'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import initMongoDBConnection from './api/config/mongoose.js'
+import swagger from './swagger.js'
 import applicationRoutes from './api/routes/ApplicationRoutes.js'
 import tripRoutes from './api/routes/TripRoutes.js'
 import actorRoutes from './api/routes/ActorRoutes.js'
@@ -11,6 +12,9 @@ import loaderRoutes from './api/routes/LoaderRoutes.js'
 import sponsorshipRoutes from './api/routes/SponsorshipRoutes.js'
 import dataWarehouseRoutes from './api/routes/DataWarehouseRoutes.js'
 import { initializeDataWarehouseJob } from "./api/services/DataWarehouseServiceProvider.js";
+import loginRoutes from './api/routes/LoginRoutes.js'
+import admin from 'firebase-admin';
+import serviceAccount from './firebase.json' assert { type: "json" }
 
 dotenv.config()
 
@@ -18,6 +22,11 @@ const app = express()
 const port = 8080
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  // databaseURL: 'https://acmeexplorer.firebaseio.com'
+})
 
 // welcome route
 app.get('/', function (req, res) {
@@ -32,7 +41,9 @@ finderRoutes(app)
 configRoutes(app)
 loaderRoutes(app)
 dataWarehouseRoutes(app)
+loginRoutes(app)
 
+swagger(app)
 
 try {
   await initMongoDBConnection()
@@ -44,3 +55,5 @@ try {
 }
 
 initializeDataWarehouseJob();
+
+export default app

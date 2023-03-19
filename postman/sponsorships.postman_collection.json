@@ -12,13 +12,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "localhost:8080/v1/sponsorships/:id",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"sponsorships",
 						":id"
 					],
 					"variable": [
@@ -43,13 +43,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "localhost:8080/v1/sponsorships",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}"
+						"v1",
+						"sponsorships"
 					]
 				}
 			},
@@ -66,21 +66,30 @@
 						"type": "text"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"financedAmount\": 123\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/pay",
+					"raw": "localhost:8080/v1/sponsorships/:id/pay",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"sponsorships",
 						":id",
 						"pay"
 					],
 					"variable": [
 						{
 							"key": "id",
-							"value": "63fdbe7e997e6f723bfce9b6"
+							"value": "63fb9b9f8ac35cf72c1610a2"
 						}
 					]
 				}
@@ -100,7 +109,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n    \"link\": \"https://messi.com/#goat\"\n}",
+					"raw": "{\n    \"sponsor\": \"63ed27e9db335a31d53ee505\",\n    \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n    \"link\": \"https://www.cristianoronaldo.com\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -108,19 +117,19 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "localhost:8080/v1/sponsorships/:id",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"sponsorships",
 						":id"
 					],
 					"variable": [
 						{
 							"key": "id",
-							"value": "63fdbe7e997e6f723bfce9b6"
+							"value": "63fde66010513bd096120d69"
 						}
 					]
 				}
@@ -139,13 +148,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "localhost:8080/v1/sponsorships/:id",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"sponsorships",
 						":id"
 					],
 					"variable": [
@@ -179,13 +188,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "localhost:8080/v1/sponsorships",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}"
+						"v1",
+						"sponsorships"
 					]
 				}
 			},

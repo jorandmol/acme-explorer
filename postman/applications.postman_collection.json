@@ -18,13 +18,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "localhost:8080/v1/applications",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}"
+						"v1",
+						"applications"
 					]
 				}
 			},
@@ -36,13 +36,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id",
+					"raw": "localhost:8080/v1/applications/:id",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"applications",
 						":id"
 					],
 					"variable": [
@@ -70,13 +70,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}",
+					"raw": "localhost:8080/v1/applications",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}"
+						"v1",
+						"applications"
 					]
 				}
 			},
@@ -88,13 +88,13 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/accept",
+					"raw": "localhost:8080/v1/applications/:id/accept",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"applications",
 						":id",
 						"accept"
 					],
@@ -114,13 +114,13 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/cancel",
+					"raw": "localhost:8080/v1/applications/:id/cancel",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"applications",
 						":id",
 						"cancel"
 					],
@@ -140,13 +140,13 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/pay",
+					"raw": "localhost:8080/v1/applications/:id/pay",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"applications",
 						":id",
 						"pay"
 					],
@@ -175,13 +175,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/reject",
+					"raw": "localhost:8080/v1/applications/:id/reject",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"applications",
 						":id",
 						"reject"
 					],
@@ -210,13 +210,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}{{port}}/{{apiVersion}}/{{path}}/:id/comments",
+					"raw": "localhost:8080/v1/applications/:id/comments",
 					"host": [
-						"{{host}}{{port}}"
+						"localhost:8080"
 					],
 					"path": [
-						"{{apiVersion}}",
-						"{{path}}",
+						"v1",
+						"applications",
 						":id",
 						"comments"
 					],
