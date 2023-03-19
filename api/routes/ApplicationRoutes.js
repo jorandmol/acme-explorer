@@ -26,9 +26,9 @@ export default function (app) {
       applicationController.createApplication
     )
   app.route('/v2/applications')
-    .get(verifyUser([RoleEnum.EXPLORER]), applicationController.listApplicationsAuth)
+    .get(verifyUser([RoleEnum.EXPLORER, RoleEnum.ADMINISTRATOR, RoleEnum.MANAGER]), applicationController.listApplicationsAuth)
     .post(
-      verifyUser([RoleEnum.EXPLORER]),
+      verifyUser([RoleEnum.EXPLORER, RoleEnum.ADMINISTRATOR, RoleEnum.MANAGER]),
       creationValidator,
       handleExpressValidation,
       checkTrip,
@@ -46,7 +46,7 @@ export default function (app) {
   app.route('/v1/applications/:id')
     .get(applicationController.readApplication)
     app.route('/v2/applications/:id')
-    .get(verifyUser([RoleEnum.MANAGER, RoleEnum.EXPLORER]), applicationController.readApplicationAuth)
+    .get(verifyUser([RoleEnum.MANAGER, RoleEnum.EXPLORER, RoleEnum.ADMINISTRATOR]), applicationController.readApplicationAuth)
 
   /**
    * Cancel an application
@@ -131,7 +131,7 @@ export default function (app) {
     )
   app.route('/v2/applications/:id/pay')
     .patch(
-      verifyUser([RoleEnum.EXPLORER]),
+      verifyUser([RoleEnum.EXPLORER, RoleEnum.ADMINISTRATOR]),
       checkTrip,
       applicationController.payApplicationAuth
     )
@@ -154,7 +154,7 @@ export default function (app) {
     )
   app.route('/v2/applications/:id/comments')
     .patch(
-      verifyUser([RoleEnum.EXPLORER]),
+      verifyUser([RoleEnum.EXPLORER, RoleEnum.MANAGER, RoleEnum.ADMINISTRATOR]),
       updateCommentsValidator,
       handleExpressValidation,
       checkTrip,
