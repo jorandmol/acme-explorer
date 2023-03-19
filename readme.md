@@ -71,4 +71,8 @@ BASE_ENDPOINT: `/api/v1`
 
 ## UML Class Diagram
 
- [UML Class Diagram PDF file](./docs/acme-explorer-model.pdf)
+[UML Class Diagram PDF file](./docs/acme-explorer-model.pdf)
+
+## Tests de carga
+
+[Diagnóstico](./gatling/diagnosis.md)
