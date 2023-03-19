@@ -11,7 +11,7 @@ export const login = async (req, res) => {
       res.send(err)
     } else if (!actor) { // an access token isn’t provided, or is invalid
       res.status(401)
-      res.json({ message: 'forbidden', error: err })
+      res.json({ message: 'Forbidden, no actor found', error: err })
     } else {
       // Make sure the password is correct
       actor.verifyPassword(password, async function (err, isMatch) {
@@ -19,7 +19,7 @@ export const login = async (req, res) => {
           res.send(err)
         } else if (!isMatch) { // Password did not match
           res.status(401) // an access token isn’t provided, or is invalid
-          res.json({ message: 'forbidden', error: err })
+          res.json({ message: 'Forbidden, incorrect password', error: err })
         } else {
           try {
             customToken = await admin.auth().createCustomToken(actor.email)
