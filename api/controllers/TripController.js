@@ -62,17 +62,19 @@ const _findTrips = async (actorId, query) => {
     const filters = _generateFilter(query)
     const config = await _getConfig()
     const trips = await Trip.findByFilters(filters, config.limit)
-    const newFinder = new Finder({
-      explorer: ObjectId(actorId),
-      keyword: query?.keyword || null,
-      minPrice: query?.minPrice ? parseInt(query.minPrice) : null,
-      maxPrice: query?.maxPrice ? parseInt(query.maxPrice) : null,
-      minDate: query?.minDate || null,
-      maxDate: query?.maxDate || null,
-      results: trips,
-      expiryDate: new Date(Date.now() + config.cacheLifetime * 1000)
-    })
-    await newFinder.save()
+    if (actorId) {
+      const newFinder = new Finder({
+        explorer: ObjectId(actorId),
+        keyword: query?.keyword || null,
+        minPrice: query?.minPrice ? parseInt(query.minPrice) : null,
+        maxPrice: query?.maxPrice ? parseInt(query.maxPrice) : null,
+        minDate: query?.minDate || null,
+        maxDate: query?.maxDate || null,
+        results: trips,
+        expiryDate: new Date(Date.now() + config.cacheLifetime * 1000)
+      })
+      await newFinder.save()
+    }
     return trips
   } catch (err) {
     throw err
@@ -83,6 +85,11 @@ export const searchTrips = async (req, res) => {
   // TODO: change this when auth is implemented
   const { actor_id } = req.headers
   try {
+    if (!actor_id) {
+      const trips = await _findTrips(null, req.query)
+      res.json(trips)
+      return
+    }
     const actor = await Actor.findById(actor_id)
     if (!actor) {
       res.status(404).send('Actor not found')
@@ -95,7 +102,6 @@ export const searchTrips = async (req, res) => {
     let finder = await Finder.findByExplorer(actor_id);
     if (finder?.length) {
       finder = finder[0]
-      console.log(finder.expiryDate, new Date())
       if (_isSameFinder(finder, req.query) && finder.expiryDate && finder.expiryDate > new Date()) {
         res.json(finder.results)
         console.log("Cached finder returned")
