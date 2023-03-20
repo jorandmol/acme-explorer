@@ -1,6 +1,5 @@
 import Application from '../models/ApplicationModel.js'
 import Actor from '../models/ActorModel.js'
-import Trip from '../models/TripModel.js'
 import StatusEnum from '../enum/StatusEnum.js'
 import RoleEnum from '../enum/RoleEnum.js'
 import mongoose from 'mongoose'
@@ -28,7 +27,7 @@ export const listApplications = async (req, res) => {
 
 export const listApplicationsAuth = async (req, res) => {
   try {
-    const actor = await Actor.findById(req.headers.actor_id)
+    const actor = req.actor
     if (actor) {
       res.json(applications)
     } else {
@@ -75,8 +74,8 @@ export const readApplicationAuth = async (req, res) => {
   try {
     const application = await Application.findById(req.params.id)
     if (application) {
-      trip = application.trip
-      actor = req.actor
+      const trip = application.trip
+      const actor = req.actor
       if (trip.creator === actor._id || application.explorer === actor._id) {
         res.json(application)
       } else {
