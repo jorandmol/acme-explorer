@@ -3,7 +3,7 @@ import { creationValidator as tripCreationValidator, updateValidator, publishVal
 import { creationFromTripValidator as appCreationValidator } from '../controllers/validators/ApplicationValidator.js'
 import { filterValidator } from '../controllers/validators/FinderValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
-import { verifyUser } from '../middlewares/AuthMiddleware.js'
+import { verifyUser, verifyOptionalUser } from '../middlewares/AuthMiddleware.js'
 import RoleEnum from '../enum/RoleEnum.js'
 
 export default function (app) {
@@ -13,7 +13,7 @@ export default function (app) {
   *    Required role: None
   *
   * @section trips
-  * @type get 
+  * @type get
   * @url /search
   */
   app.route('/v1/search')
@@ -24,9 +24,10 @@ export default function (app) {
     )
   app.route('/v2/search')
     .get(
+      verifyOptionalUser(),
       filterValidator,
       handleExpressValidation,
-      tripsController.searchTrips // TODO: Añadir versión que reciba el token y lo descodifique (tener en cuenta que es accesible para usuarios no logueados)
+      tripsController.searchTripsAuth
     )
 
   /**
@@ -62,7 +63,7 @@ export default function (app) {
   *    RequiredRoles: None
   * Delete a trip
   *    RequiredRoles: to be manager who created the trip
-  * 
+  *
   * @section trips
   * @type get put delete
   * @url /trips/:id

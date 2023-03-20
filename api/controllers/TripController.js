@@ -1,6 +1,7 @@
 import Trip from '../models/TripModel.js'
 import Actor from '../models/ActorModel.js'
 import Application from '../models/ApplicationModel.js'
+import Finder from '../models/FinderModel.js'
 import GloabalConfig from '../models/GlobalConfigModel.js'
 import StatusEnum from '../enum/StatusEnum.js'
 import RoleEnum from '../enum/RoleEnum.js'
@@ -10,7 +11,7 @@ const _generateFilter = (filters) => {
   const { keyword, minPrice, maxPrice, minDate, maxDate } = filters
   let filter = {}
   if (keyword) {
-    filter = { $text: { $search: keyword }}
+    filter = { $text: { $search: keyword } }
   }
   if (minPrice || maxPrice) {
     const priceFilter = []
@@ -28,29 +29,136 @@ const _generateFilter = (filters) => {
   return filter
 }
 
-const _getLimit = async () => {
+const _getConfig = async () => {
   try {
     const config = await GloabalConfig.findOne()
-    return config?.numResults || 10
+    return {
+      numResults: config?.numResults || 10,
+      cacheLifetime: config?.cacheLifetime || 3600
+    }
   } catch (err) {
     console.error(err)
-    return 10
+    return {
+      numResults: 10,
+      cacheLifetime: 3600
+    }
+  }
+}
+
+const _isSameFinder = (finder, query) => {
+  const { keyword, minPrice, maxPrice, minDate, maxDate } = query
+  if (((keyword && finder.keyword === keyword) || (!keyword && finder.keyword === null)) &&
+    ((minPrice && finder.minPrice === parseInt(minPrice)) || (!minPrice && finder.minPrice === null)) &&
+    ((maxPrice && finder.maxPrice === parseInt(maxPrice)) || (!maxPrice && finder.maxPrice === null)) &&
+    ((minDate && Date(finder.minDate) === Date(minDate)) || (!minDate && finder.minDate === null)) &&
+    ((maxDate && Date(finder.maxDate) === Date(maxDate)) || (!maxDate && finder.maxDate === null))) {
+    return true
+  }
+  return false
+}
+
+const _findTrips = async (actorId, query) => {
+  try {
+    const filters = _generateFilter(query)
+    const config = await _getConfig()
+    const trips = await Trip.findByFilters(filters, config.limit)
+    if (actorId) {
+      const newFinder = new Finder({
+        explorer: ObjectId(actorId),
+        keyword: query?.keyword || null,
+        minPrice: query?.minPrice ? parseInt(query.minPrice) : null,
+        maxPrice: query?.maxPrice ? parseInt(query.maxPrice) : null,
+        minDate: query?.minDate || null,
+        maxDate: query?.maxDate || null,
+        results: trips,
+        expiryDate: new Date(Date.now() + config.cacheLifetime * 1000)
+      })
+      await newFinder.save()
+    }
+    return trips
+  } catch (err) {
+    throw err
   }
 }
 
 export const searchTrips = async (req, res) => {
-  const filters = _generateFilter(req.query)
+  const { actor_id } = req.headers
   try {
-    const limit = await _getLimit()
-    const trips = await Trip.findByFilters(filters, limit)
-    res.json(trips)
+    if (!actor_id) {
+      const trips = await _findTrips(null, req.query)
+      res.json(trips)
+      return
+    }
+    const actor = await Actor.findById(actor_id)
+    if (!actor) {
+      res.status(404).send('Actor not found')
+      return
+    }
+    if (actor.role !== RoleEnum.EXPLORER) {
+      res.status(403).send('Actor does not have the required role')
+      return
+    }
+    let finder = await Finder.findByExplorer(actor_id);
+    if (finder?.length) {
+      finder = finder[0]
+      if (_isSameFinder(finder, req.query) && finder.expiryDate && finder.expiryDate > new Date()) {
+        res.json(finder.results)
+        console.log("Cached finder returned")
+        return
+      } else {
+        const trips = await _findTrips(actor_id, req.query)
+        res.json(trips)
+        console.log("New finder created, old one expired or different")
+        return
+      }
+    } else {
+      const trips = await _findTrips(actor_id, req.query)
+      res.json(trips)
+      console.log("New finder created, no old one found")
+      return
+    }
   } catch (err) {
+    console.error(err)
+    res.status(500).send(err)
+  }
+}
+
+export const searchTripsAuth = async (req, res) => {
+  const idToken = req.headers?.idtoken
+  const actor = req?.actor
+  try {
+    if (!idToken || (actor && actor.role !== RoleEnum.EXPLORER)) {
+      const trips = await _findTrips(null, req.query)
+      res.json(trips)
+      return
+    }
+    let finder = await Finder.findByExplorer(actor._id);
+    if (finder?.length) {
+      finder = finder[0]
+      if (_isSameFinder(finder, req.query) && finder.expiryDate && finder.expiryDate > new Date()) {
+        res.json(finder.results)
+        console.log("Cached finder returned")
+        return
+      } else {
+        const trips = await _findTrips(actor._id, req.query)
+        res.json(trips)
+        console.log("New finder created, old one expired or different")
+        return
+      }
+    } else {
+      const trips = await _findTrips(actor._id, req.query)
+      res.json(trips)
+      console.log("New finder created, no old one found")
+      return
+    }
+  } catch (err) {
+    console.error(err)
     res.status(500).send(err)
   }
 }
 
 export const listTrips = async (req, res) => {
-  
+
   const { actor_id } = req.headers
   try {
     const actor = await Actor.findById(actor_id)
@@ -80,7 +188,7 @@ export const listTripsAuth = async (req, res) => {
 }
 
 export const createTrip = async (req, res) => {
-  
+
   const { actor_id } = req.headers
   const newTrip = new Trip(req.body)
   try {
@@ -97,7 +205,7 @@ export const createTrip = async (req, res) => {
     newTrip.creator = actor._id
     const trip = await newTrip.save()
     res.json(trip)
-  } catch(err) {
+  } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(422).send(err)
     } else {
@@ -112,7 +220,7 @@ export const createTripAuth = async (req, res) => {
     newTrip.creator = req.actor._id
     const trip = await newTrip.save()
     res.json(trip)
-  } catch(err) {
+  } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(422).send(err)
     } else {
@@ -127,7 +235,7 @@ export const readTrip = async (req, res) => {
     const trip = await Trip.findById(id)
     if (trip) {
       res.json(trip)
-    } else{
+    } else {
       res.status(404).send('Trip not found')
     }
   } catch (err) {
@@ -136,7 +244,7 @@ export const readTrip = async (req, res) => {
 }
 
 export const updateTrip = async (req, res) => {
-  
+
   const { actor_id } = req.headers
   const { id } = req.params
   const newTrip = req.body
@@ -166,7 +274,7 @@ export const updateTrip = async (req, res) => {
     }
 
     if (!newTrip.price) {
-      newTrip.price = [ ...newTrip.stages ].map(stage => stage.price).reduce((totalPrice, actualPrice) => totalPrice + actualPrice, 0)
+      newTrip.price = [...newTrip.stages].map(stage => stage.price).reduce((totalPrice, actualPrice) => totalPrice + actualPrice, 0)
     }
 
     // Keep dates null
@@ -203,7 +311,7 @@ export const updateTripAuth = async (req, res) => {
     }
 
     if (!newTrip.price) {
-      newTrip.price = [ ...newTrip.stages ].map(stage => stage.price).reduce((totalPrice, actualPrice) => totalPrice + actualPrice, 0)
+      newTrip.price = [...newTrip.stages].map(stage => stage.price).reduce((totalPrice, actualPrice) => totalPrice + actualPrice, 0)
     }
 
     // Keep dates null
@@ -222,7 +330,7 @@ export const updateTripAuth = async (req, res) => {
 }
 
 export const deleteTrip = async (req, res) => {
-  
+
   const { actor_id } = req.headers
   const { id } = req.params
   try {
@@ -290,7 +398,7 @@ export const deleteTripAuth = async (req, res) => {
 }
 
 export const publishTrip = async (req, res) => {
-  
+
   const { actor_id } = req.headers
   const { id } = req.params
   const { publicationDate } = req.body
@@ -362,7 +470,7 @@ export const publishTripAuth = async (req, res) => {
 }
 
 export const cancelTrip = async (req, res) => {
-  
+
   const { actor_id } = req.headers
   const { id } = req.params
   const { cancellationReason } = req.body
@@ -454,7 +562,7 @@ export const cancelTripAuth = async (req, res) => {
 }
 
 export const listTripApplications = async (req, res) => {
-  
+
   const { actor_id } = req.headers
   const { id } = req.params
   try {
@@ -473,7 +581,7 @@ export const listTripApplications = async (req, res) => {
       res.status(404).send('Trip not found')
       return
     }
-    
+
     if (trip.creator.toString() !== actor._id.toString()) {
       res.status(403).send('Actor does not have the required permissions')
       return
@@ -494,7 +602,7 @@ export const listTripApplicationsAuth = async (req, res) => {
       res.status(404).send('Trip not found')
       return
     }
-    
+
     if (trip.creator.toString() !== req.actor._id.toString()) {
       res.status(403).send('Actor does not have the required permissions')
       return
@@ -508,7 +616,7 @@ export const listTripApplicationsAuth = async (req, res) => {
 }
 
 export const createTripApplication = async (req, res) => {
-  
+
   const { actor_id } = req.headers
   const { id } = req.params
   const { comments } = req.body
@@ -538,7 +646,7 @@ export const createTripApplication = async (req, res) => {
     const newApplication = new Application({ trip: trip._id, explorer: actor._id, comments })
     const application = await newApplication.save()
     res.json(application)
-  } catch(err){
+  } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(422).send(err)
     } else {
@@ -566,7 +674,7 @@ export const createTripApplicationAuth = async (req, res) => {
     const newApplication = new Application({ trip: trip._id, explorer: req.actor._id, comments })
     const application = await newApplication.save()
     res.json(application)
-  } catch(err){
+  } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(422).send(err)
     } else {
