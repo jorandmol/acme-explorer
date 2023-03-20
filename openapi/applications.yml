@@ -5,17 +5,17 @@ info:
 servers:
   - url: localhost://
 paths:
-  /v1/applications:
+  /v2/applications:
     get:
       tags:
         - applications
       summary: listApplications
       parameters:
-        - name: actor_id
+        - name: idtoken
           in: header
           schema:
             type: string
-          example: 63ed27e930e2f4865b4879b5
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
@@ -33,17 +33,28 @@ paths:
               example:
                 explorer: 63ed27e94fe8c982b12e364a
                 trip: 63f38bf93ff6b85445a656af
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /v1/applications/{id}:
+  /v2/applications/{id}:
     get:
       tags:
         - applications
       summary: readApplication
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -55,7 +66,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/applications/{id}/accept:
+  /v2/applications/{id}/accept:
     patch:
       tags:
         - applications
@@ -63,6 +74,11 @@ paths:
       requestBody:
         content: {}
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -74,7 +90,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/applications/{id}/cancel:
+  /v2/applications/{id}/cancel:
     patch:
       tags:
         - applications
@@ -82,6 +98,11 @@ paths:
       requestBody:
         content: {}
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -93,7 +114,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/applications/{id}/pay:
+  /v2/applications/{id}/pay:
     patch:
       tags:
         - applications
@@ -101,6 +122,11 @@ paths:
       requestBody:
         content: {}
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -112,7 +138,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/applications/{id}/reject:
+  /v2/applications/{id}/reject:
     patch:
       tags:
         - applications
@@ -125,6 +151,11 @@ paths:
               example:
                 rejectionReason: The payment period has expired
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -136,7 +167,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/applications/{id}/comments:
+  /v2/applications/{id}/comments:
     patch:
       tags:
         - applications
@@ -149,6 +180,11 @@ paths:
               example:
                 comments: nada que comentar
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:

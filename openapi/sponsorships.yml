@@ -5,12 +5,17 @@ info:
 servers:
   - url: localhost://
 paths:
-  /v1/sponsorships/{id}:
+  /v2/sponsorships/{id}:
     get:
       tags:
         - sponsorships
       summary: readSponsorship
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -36,11 +41,11 @@ paths:
                   TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=
                 link: https://messi.com/#goat
       parameters:
-        - name: actor_id
+        - name: idtoken
           in: header
           schema:
             type: string
-          example: 63ed27e9db335a31d53ee505
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -57,11 +62,11 @@ paths:
         - sponsorships
       summary: deleteSponsorship
       parameters:
-        - name: actor_id
+        - name: idtoken
           in: header
           schema:
             type: string
-          example: 63ed27e9db335a31d53ee505
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -73,17 +78,17 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/sponsorships:
+  /v2/sponsorships:
     get:
       tags:
         - sponsorships
       summary: listSponsorships
       parameters:
-        - name: actor_id
+        - name: idtoken
           in: header
           schema:
             type: string
-          example: 63ed27e9db335a31d53ee505
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
@@ -104,17 +109,17 @@ paths:
                   TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=
                 link: https://www.cristianoronaldo.com/#cr7
       parameters:
-        - name: actor_id
+        - name: idtoken
           in: header
           schema:
             type: string
-          example: 63ed27e9db335a31d53ee505
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /v1/sponsorships/{id}/pay:
+  /v2/sponsorships/{id}/pay:
     patch:
       tags:
         - sponsorships
@@ -122,11 +127,11 @@ paths:
       requestBody:
         content: {}
       parameters:
-        - name: actor_id
+        - name: idtoken
           in: header
           schema:
             type: string
-          example: 63ed27e9db335a31d53ee505
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:

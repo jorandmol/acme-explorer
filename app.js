@@ -13,7 +13,6 @@ import loaderRoutes from './api/routes/LoaderRoutes.js'
 import sponsorshipRoutes from './api/routes/SponsorshipRoutes.js'
 import dataWarehouseRoutes from './api/routes/DataWarehouseRoutes.js'
 import { initializeDataWarehouseJob } from "./api/services/DataWarehouseServiceProvider.js";
-import loginRoutes from './api/routes/LoginRoutes.js'
 import admin from 'firebase-admin';
 import serviceAccount from './firebase.json' assert { type: "json" }
 
@@ -43,7 +42,6 @@ finderRoutes(app)
 configRoutes(app)
 loaderRoutes(app)
 dataWarehouseRoutes(app)
-loginRoutes(app)
 
 swagger(app)
 

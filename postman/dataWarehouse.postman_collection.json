@@ -10,15 +10,21 @@
 			"name": "readDataWarehouse",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/dashboard",
+					"raw": "localhost:8080/v2/dashboard",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"dashboard"
 					]
 				}
@@ -29,15 +35,21 @@
 			"name": "readLatestDataWarehouse",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/dashboard/latest",
+					"raw": "localhost:8080/v2/dashboard/latest",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"dashboard",
 						"latest"
 					]
@@ -49,7 +61,13 @@
 			"name": "updateRebuildPeriod",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"period\": 30\r\n}",
@@ -60,13 +78,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/dashboard/rebuild-period",
+					"raw": "localhost:8080/v2/dashboard/rebuild-period",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"dashboard",
 						"rebuild-period"
 					]
@@ -78,7 +96,13 @@
 			"name": "spentMoneyByExplorer",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"explorer\": \"63ed27e96bb6772e5dab87ad\",\r\n    \"period\": \"M06\"\r\n}",
@@ -89,13 +113,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/dashboard/spent-money-by-explorer",
+					"raw": "localhost:8080/v2/dashboard/spent-money-by-explorer",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"dashboard",
 						"spent-money-by-explorer"
 					]
@@ -107,7 +131,13 @@
 			"name": "explorersBySpentMoney",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"period\": \"M36\",\r\n    \"theta\": \"gte\",\r\n    \"v\": 1\r\n\r\n}",
@@ -118,13 +148,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/dashboard/explorers-by-spent-money",
+					"raw": "localhost:8080/v2/dashboard/explorers-by-spent-money",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"dashboard",
 						"explorers-by-spent-money"
 					]

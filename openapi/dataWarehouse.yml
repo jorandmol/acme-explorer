@@ -5,27 +5,39 @@ info:
 servers:
   - url: localhost://
 paths:
-  /v1/dashboard:
+  /v2/dashboard:
     get:
       tags:
         - dataWarehouse
       summary: readDataWarehouse
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /v1/dashboard/latest:
+  /v2/dashboard/latest:
     get:
       tags:
         - dataWarehouse
       summary: readLatestDataWarehouse
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /v1/dashboard/rebuild-period:
+  /v2/dashboard/rebuild-period:
     patch:
       tags:
         - dataWarehouse
@@ -37,12 +49,18 @@ paths:
               type: object
               example:
                 period: 30
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /v1/dashboard/spent-money-by-explorer:
+  /v2/dashboard/spent-money-by-explorer:
     post:
       tags:
         - dataWarehouse
@@ -55,12 +73,18 @@ paths:
               example:
                 explorer: 63ed27e96bb6772e5dab87ad
                 period: M06
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /v1/dashboard/explorers-by-spent-money:
+  /v2/dashboard/explorers-by-spent-money:
     post:
       tags:
         - dataWarehouse
@@ -74,6 +98,12 @@ paths:
                 period: M36
                 theta: gte
                 v: 1
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response

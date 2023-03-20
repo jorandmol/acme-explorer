@@ -1,23 +1,30 @@
 {
 	"info": {
-		"_postman_id": "b03f7b85-68a0-4ffd-a991-3502181e3ebd",
+		"_postman_id": "cb02fc4c-4972-42ca-804b-ac972fb62611",
 		"name": "globalConfig",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25718361"
+		"_exporter_id": "24780295"
 	},
 	"item": [
 		{
 			"name": "listConfig",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/config",
+					"raw": "localhost:8080/v2/config",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"config"
 					]
 				}
@@ -28,7 +35,13 @@
 			"name": "updateConfig",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n   \"defaultLanguage\": \"en\",\n    \"cacheLifetime\": 3600,\n    \"numResults\": 10,\n    \"sponsorshipFlatRate\": 0.15,\n    \"dataWhRefresh\": 30\n}",
@@ -39,12 +52,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/config",
+					"raw": "localhost:8080/v2/config",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"config"
 					]
 				}
