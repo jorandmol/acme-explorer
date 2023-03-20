@@ -126,6 +126,13 @@ tripSchema.statics.findByFilters = function(filters, limit = 10) {
     return this.find(filters).limit(limit)
 }
 
+tripSchema.index({ creator: 1 })
+tripSchema.index({ price: 1 })
+tripSchema.index({ startDate: 1 })
+tripSchema.index({ endDate: 1 })
+tripSchema.index({ "sponsorships._id": 1 })
+tripSchema.index({ "sponsorships.sponsor": 1 })
+
 const model = mongoose.model('Trip', tripSchema)
 
 export const schema = model.schema

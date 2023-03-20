@@ -8,29 +8,31 @@
 
 ## API endpoints
 
-BASE_ENDPOINT: `/api/v1`
+BASE_ENDPOINT: `/api/v2`
 
 ### actors
 
-- `POST  /actors`
-- `GET   /actors`
-- `GET   /actors/{id}`
-- `PUT   /actors/{id}`
-- `PATCH /actors/{id}/ban`
-- `PATCH /actors/{id}/unban`
+- `GET     /actors`
+- `POST    /actors`
+- `GET     /actors/{id}`
+- `PUT     /actors/{id}`
+- `DELETE  /actors/{id}`
+- `PATCH   /actors/{id}/ban`
+- `PATCH   /actors/{id}/unban`
+- `POST    /login`
 
 ### trips
 
 - `GET     /trips`
 - `POST    /trips`
-- `POST    /trips/{id}/applications`
 - `GET     /search ?keyword ?minPrice ?maxPrice ?minDate ?maxDate`
 - `GET     /trips/{id}`
-- `GET     /trips/{id}/applications`
-- `PATCH   /trips/{id}/publish`
-- `PATCH   /trips/{id}/cancel`
 - `PUT     /trips/{id}`
 - `DELETE  /trips/{id}`
+- `GET     /trips/{id}/applications`
+- `POST    /trips/{id}/applications`
+- `PATCH   /trips/{id}/publish`
+- `PATCH   /trips/{id}/cancel`
 
 ### sponsorships
 
@@ -38,12 +40,13 @@ BASE_ENDPOINT: `/api/v1`
 - `POST    /sponsorships`
 - `GET     /sponsorships/{id}`
 - `PUT     /sponsorships/{id}`
-- `PATCH   /sponsorships/{id}/pay`
 - `DELETE  /sponsorships/{id}`
+- `PATCH   /sponsorships/{id}/pay`
 
 ### applications
 
 - `GET   /applications`
+- `POST  /applications`
 - `GET   /applications/{id}`
 - `PATCH /applications/{id}/accept`
 - `PATCH /applications/{id}/reject`
@@ -51,23 +54,22 @@ BASE_ENDPOINT: `/api/v1`
 - `PATCH /applications/{id}/pay`
 - `PATCH /applications/{id}/comment`
 
-### finder
-
-- `GET   /finders/{explorerId}`
-- `PUT   /finders/{explorerId}`
-
 ### dashboard
 
-- `POST  /dashboard/spent-money-by-explorer`
-- `POST  /dashboard/explorers-by-spent-money`
 - `GET   /dashboard`
 - `GET   /dashboard/latest`
 - `PATCH /dashboard/rebuild-period`
+- `POST  /dashboard/explorers-by-spent-money`
+- `POST  /dashboard/spent-money-by-explorer`
 
 ### config
 
 - `GET   /config`
 - `PUT   /config`
+
+### data loader
+
+- `POST   /loader/insertMany ?model ?sourceFile `
 
 ## UML Class Diagram
 

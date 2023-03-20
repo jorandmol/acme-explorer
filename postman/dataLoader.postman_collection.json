@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "127eb3c2-b358-4231-9d75-e59548815547",
+		"name": "dataLoader",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25718361"
+	},
+	"item": [
+		{
+			"name": "insertMany",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT ADMIN TOKEN",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v2/loader/insertMany?model=Application&sourceFile=../../loaders/applications.json",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v2",
+						"loader",
+						"insertMany"
+					],
+					"query": [
+						{
+							"key": "model",
+							"value": "Application"
+						},
+						{
+							"key": "sourceFile",
+							"value": "../../loaders/applications.json"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

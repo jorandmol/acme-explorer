@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "83074802-359b-4628-ac3f-4a7c256c04d0",
+		"_postman_id": "81c8c9aa-4eda-43c7-a122-b931432544fd",
 		"name": "trips",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24780295"
+		"_exporter_id": "25718361"
 	},
 	"item": [
 		{
@@ -43,7 +43,7 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/v2/search",
+					"raw": "localhost:8080/v2/search?keyword=londres&minPrice=200&maxPrice=700&minDate=2023-01-01&maxDate=2023-09-01",
 					"host": [
 						"localhost"
 					],
@@ -55,28 +55,23 @@
 					"query": [
 						{
 							"key": "keyword",
-							"value": "test",
-							"disabled": true
+							"value": "londres"
 						},
 						{
 							"key": "minPrice",
-							"value": "100",
-							"disabled": true
+							"value": "200"
 						},
 						{
 							"key": "maxPrice",
-							"value": "200",
-							"disabled": true
+							"value": "700"
 						},
 						{
 							"key": "minDate",
-							"value": "2022-12-01",
-							"disabled": true
+							"value": "2023-01-01"
 						},
 						{
 							"key": "maxDate",
-							"value": "2022-12-05",
-							"disabled": true
+							"value": "2023-09-01"
 						}
 					]
 				}

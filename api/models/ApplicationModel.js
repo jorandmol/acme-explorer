@@ -41,6 +41,11 @@ ApplicationSchema.statics.alreadyExists = async function (explorerId, tripId) {
     else return false
 }
 
+ApplicationSchema.index({ explorer: 1 })
+ApplicationSchema.index({ trip: 1 })
+ApplicationSchema.index({ status: 1 })
+ApplicationSchema.index({ trip: 1, status: 1 })
+
 const model = mongoose.model('Application', ApplicationSchema)
 
 export const schema = model.schema

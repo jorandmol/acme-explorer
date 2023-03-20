@@ -58,6 +58,31 @@ paths:
           schema:
             type: string
           example: INSERT TOKEN
+        - name: keyword
+          in: query
+          schema:
+            type: string
+          example: londres
+        - name: minPrice
+          in: query
+          schema:
+            type: integer
+          example: '200'
+        - name: maxPrice
+          in: query
+          schema:
+            type: integer
+          example: '700'
+        - name: minDate
+          in: query
+          schema:
+            type: string
+          example: '2023-01-01'
+        - name: maxDate
+          in: query
+          schema:
+            type: string
+          example: '2023-09-01'
       responses:
         '200':
           description: Successful response

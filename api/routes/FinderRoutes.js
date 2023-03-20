@@ -4,7 +4,7 @@ import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware
 
 /**
  * Finder no tiene versión dos porque no requiere rutas
- * Estas son legacy 
+ * Estas son legacy
  */
 
 export default function (app) {

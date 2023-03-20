@@ -74,7 +74,8 @@ export default function (app) {
       updateValidator,
       handleExpressValidation,
       tripsController.updateTrip
-    ).delete(tripsController.deleteTrip)
+    )
+    .delete(tripsController.deleteTrip)
   app.route('/v2/trips/:id')
     .get(tripsController.readTrip)
     .put(
@@ -82,7 +83,8 @@ export default function (app) {
       updateValidator,
       handleExpressValidation,
       tripsController.updateTripAuth
-    ).delete(verifyUser([RoleEnum.MANAGER]), tripsController.deleteTripAuth)
+    )
+    .delete(verifyUser([RoleEnum.MANAGER]), tripsController.deleteTripAuth)
 
   /**
   * Publish a trip
@@ -145,19 +147,22 @@ export default function (app) {
   * @url /trips/:id/applications
   */
   app.route('/v1/trips/:id/applications')
-  .get(tripsController.listTripApplications)
-  .post(
-    appCreationValidator,
-    handleExpressValidation,
-    tripsController.createTripApplication
-  )
+    .get(tripsController.listTripApplications)
+    .post(
+      appCreationValidator,
+      handleExpressValidation,
+      tripsController.createTripApplication
+    )
   app.route('/v2/trips/:id/applications')
-  .get(verifyUser([RoleEnum.MANAGER]), tripsController.listTripApplicationsAuth)
-  .post(
-    verifyUser([RoleEnum.MANAGER]),
-    appCreationValidator,
-    handleExpressValidation,
-    tripsController.createTripApplicationAuth
-  )
+    .get(
+      verifyUser([RoleEnum.MANAGER]),
+      tripsController.listTripApplicationsAuth
+    )
+    .post(
+      verifyUser([RoleEnum.MANAGER]),
+      appCreationValidator,
+      handleExpressValidation,
+      tripsController.createTripApplicationAuth
+    )
 
 }

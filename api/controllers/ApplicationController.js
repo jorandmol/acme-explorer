@@ -4,15 +4,19 @@ import StatusEnum from '../enum/StatusEnum.js'
 import RoleEnum from '../enum/RoleEnum.js'
 import mongoose from 'mongoose'
 
+const _getExplorerApplications = async (explorerId) => {
+  return await Application.aggregate([
+    { $match: { explorer: new mongoose.Types.ObjectId(explorerId) } },
+    { $group: { _id: "$status", applications: { $push: "$$ROOT" } } }
+  ]);
+}
+
 export const listApplications = async (req, res) => {
   try {
     const actor = await Actor.findById(req.headers.actor_id)
     if (actor) {
       if (actor.role === RoleEnum.EXPLORER) {
-        const applications = await Application.aggregate([
-          { $match: { explorer: new mongoose.Types.ObjectId(actor._id) } },
-          { $group: { _id: "$status", applications: { $push: "$$ROOT" } } }
-        ]);
+        const applications = await _getExplorerApplications(actor._id)
         res.json(applications)
       } else {
         res.status(403).send('Actor is not an explorer')
@@ -29,7 +33,13 @@ export const listApplicationsAuth = async (req, res) => {
   try {
     const actor = req.actor
     if (actor) {
-      res.json(applications)
+      if (actor.role === RoleEnum.EXPLORER) {
+        const applications = await _getExplorerApplications(actor._id)
+        res.json(applications)
+      } else {
+        const applications = await Application.find()
+        res.json(applications)
+      }
     } else {
       res.status(404).send('Actor not found')
     }
@@ -347,7 +357,7 @@ export const updateApplicationCommentsAuth = async (req, res) => {
           const updatedApplication = await application.save();
           res.send(updatedApplication);
         } else {
-          res.status(403).send('Actor is not the explorer')
+          res.status(403).send('Actor is not the explorer who created the application')
         }
       } else {
         res.status(422).send({ message: "Application status is " + application.status.toUpperCase() + ", it must be PENDING" });

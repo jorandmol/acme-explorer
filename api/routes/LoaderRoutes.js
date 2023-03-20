@@ -18,6 +18,9 @@ export default function (app) {
   app.route('/v1/loader/insertMany')
     .post(loaderController.storeJsonInsertMany)
   app.route('/v2/loader/insertMany')
-    .post(verifyUser([RoleEnum.ADMINISTRATOR]), loaderController.storeJsonInsertMany)
+    .post(
+      verifyUser([RoleEnum.ADMINISTRATOR]),
+      loaderController.storeJsonInsertMany
+    )
 
 }
