@@ -12,19 +12,19 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e96f6eb8680cc0b162",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/v1/trips",
+					"raw": "localhost:8080/v2/trips",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"trips"
 					]
 				}
@@ -35,37 +35,48 @@
 			"name": "search",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/search?keyword=test&minPrice=100&maxPrice=200&minDate=2022-12-01&maxDate=2022-12-05",
+					"raw": "localhost:8080/v2/search",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"search"
 					],
 					"query": [
 						{
 							"key": "keyword",
-							"value": "test"
+							"value": "test",
+							"disabled": true
 						},
 						{
 							"key": "minPrice",
-							"value": "100"
+							"value": "100",
+							"disabled": true
 						},
 						{
 							"key": "maxPrice",
-							"value": "200"
+							"value": "200",
+							"disabled": true
 						},
 						{
 							"key": "minDate",
-							"value": "2022-12-01"
+							"value": "2022-12-01",
+							"disabled": true
 						},
 						{
 							"key": "maxDate",
-							"value": "2022-12-05"
+							"value": "2022-12-05",
+							"disabled": true
 						}
 					]
 				}
@@ -78,19 +89,19 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e96f6eb8680cc0b162",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/v1/trips/:id/applications",
+					"raw": "localhost:8080/v2/trips/:id/applications",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"trips",
 						":id",
 						"applications"
@@ -126,13 +137,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/trips/:id/applications",
+					"raw": "localhost:8080/v2/trips/:id/applications",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"trips",
 						":id",
 						"applications"
@@ -151,15 +162,21 @@
 			"name": "readTrip",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/trips/:id",
+					"raw": "localhost:8080/v2/trips/:id",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"trips",
 						":id"
 					],
@@ -179,8 +196,8 @@
 				"method": "PATCH",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e96f6eb8680cc0b162",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
@@ -194,13 +211,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/trips/:id/publish",
+					"raw": "localhost:8080/v2/trips/:id/publish",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"trips",
 						":id",
 						"publish"
@@ -221,8 +238,8 @@
 				"method": "PATCH",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e96f6eb8680cc0b162",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
@@ -236,13 +253,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/trips/:id/cancel",
+					"raw": "localhost:8080/v2/trips/:id/cancel",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"trips",
 						":id",
 						"cancel"
@@ -263,8 +280,8 @@
 				"method": "PUT",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e96f6eb8680cc0b162",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
@@ -278,13 +295,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/trips/:id",
+					"raw": "localhost:8080/v2/trips/:id",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"trips",
 						":id"
 					],
@@ -304,19 +321,19 @@
 				"method": "DELETE",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e96f6eb8680cc0b162",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/v1/trips/:id",
+					"raw": "localhost:8080/v2/trips/:id",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"trips",
 						":id"
 					],
@@ -336,8 +353,8 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e96f6eb8680cc0b162",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
@@ -351,13 +368,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/trips",
+					"raw": "localhost:8080/v2/trips",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"trips"
 					]
 				}

@@ -125,7 +125,7 @@ export const searchTrips = async (req, res) => {
 }
 
 export const listTrips = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   try {
     const actor = await Actor.findById(actor_id)
@@ -145,8 +145,17 @@ export const listTrips = async (req, res) => {
   }
 }
 
+export const listTripsAuth = async (req, res) => {
+  try {
+    const trips = await Trip.find({ creator: ObjectId(req.actor._id) })
+    res.json(trips)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
 export const createTrip = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const newTrip = new Trip(req.body)
   try {
@@ -172,6 +181,21 @@ export const createTrip = async (req, res) => {
   }
 }
 
+export const createTripAuth = async (req, res) => {
+  const newTrip = new Trip(req.body)
+  try {
+    newTrip.creator = req.actor._id
+    const trip = await newTrip.save()
+    res.json(trip)
+  } catch(err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
+
 export const readTrip = async (req, res) => {
   const { id } = req.params
   try {
@@ -187,7 +211,7 @@ export const readTrip = async (req, res) => {
 }
 
 export const updateTrip = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const { id } = req.params
   const newTrip = req.body
@@ -235,8 +259,45 @@ export const updateTrip = async (req, res) => {
   }
 }
 
+export const updateTripAuth = async (req, res) => {
+  const { id } = req.params
+  const newTrip = req.body
+  try {
+    const trip = await Trip.findById(id)
+    if (!trip) {
+      res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator.toString() !== req.actor._id.toString()) {
+      res.status(403).send('Actor does not have the required permissions')
+      return
+    }
+    if (trip.publicationDate) {
+      res.status(422).send('The trip has already been published, you can not modify it')
+      return
+    }
+
+    if (!newTrip.price) {
+      newTrip.price = [ ...newTrip.stages ].map(stage => stage.price).reduce((totalPrice, actualPrice) => totalPrice + actualPrice, 0)
+    }
+
+    // Keep dates null
+    newTrip.publicationDate = null
+    newTrip.cancellationDate = null
+    newTrip.cancellationReason = null
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: trip._id }, newTrip, { new: true })
+    res.json(updatedTrip)
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
+
 export const deleteTrip = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const { id } = req.params
   try {
@@ -275,8 +336,36 @@ export const deleteTrip = async (req, res) => {
   }
 }
 
+export const deleteTripAuth = async (req, res) => {
+  const { id } = req.params
+  try {
+    const trip = await Trip.findById(id)
+    if (!trip) {
+      res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator.toString() !== req.actor._id.toString()) {
+      res.status(403).send('Actor does not have the required permissions')
+      return
+    }
+    if (trip.publicationDate) {
+      res.status(422).send('The trip has already been published, you can not delete it')
+      return
+    }
+
+    const deletionResponse = await Trip.deleteOne({ _id: trip._id })
+    if (deletionResponse.deletedCount > 0) {
+      res.json({ message: 'Trip successfully deleted' })
+    } else {
+      res.status(404).send('Trip could not be deleted')
+    }
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
 export const publishTrip = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const { id } = req.params
   const { publicationDate } = req.body
@@ -317,8 +406,38 @@ export const publishTrip = async (req, res) => {
   }
 }
 
+export const publishTripAuth = async (req, res) => {
+  const { id } = req.params
+  const { publicationDate } = req.body
+  try {
+    const trip = await Trip.findById(id)
+    if (!trip) {
+      res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator.toString() !== req.actor._id.toString()) {
+      res.status(403).send('Actor does not have the required permissions')
+      return
+    }
+    if (trip.publicationDate) {
+      res.status(422).send('The trip has already been published')
+      return
+    }
+
+    trip.publicationDate = publicationDate
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: trip._id }, trip, { new: true })
+    res.json(updatedTrip)
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
+
 export const cancelTrip = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const { id } = req.params
   const { cancellationReason } = req.body
@@ -369,8 +488,48 @@ export const cancelTrip = async (req, res) => {
   }
 }
 
+export const cancelTripAuth = async (req, res) => {
+  const { id } = req.params
+  const { cancellationReason } = req.body
+  try {
+    const trip = await Trip.findById(id)
+    if (!trip) {
+      res.status(404).send('Trip not found')
+      return
+    }
+    if (trip.creator.toString() !== req.actor._id.toString()) {
+      res.status(403).send('Actor does not have the required permissions')
+      return
+    }
+    if (trip.cancellationDate) {
+      res.status(422).send('The trip has already been cancelled')
+      return
+    }
+    if (!trip.publicationDate) {
+      res.status(422).send('The trip is not published yet')
+      return
+    }
+    const apps = await Application.find({ trip: trip._id, status: StatusEnum.ACCEPTED })
+    if (apps.length > 0) {
+      res.status(422).send('The trip has accepted applications, you can not cancel it')
+      return
+    }
+
+    trip.cancellationDate = new Date()
+    trip.cancellationReason = cancellationReason
+    const updatedTrip = await Trip.findOneAndUpdate({ _id: trip._id }, trip, { new: true })
+    res.json(updatedTrip)
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
+
 export const listTripApplications = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const { id } = req.params
   try {
@@ -402,8 +561,29 @@ export const listTripApplications = async (req, res) => {
   }
 }
 
+export const listTripApplicationsAuth = async (req, res) => {
+  const { id } = req.params
+  try {
+    const trip = await Trip.findById(id)
+    if (!trip) {
+      res.status(404).send('Trip not found')
+      return
+    }
+    
+    if (trip.creator.toString() !== req.actor._id.toString()) {
+      res.status(403).send('Actor does not have the required permissions')
+      return
+    }
+
+    const applications = await Application.find({ trip: trip._id })
+    res.json(applications)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
 export const createTripApplication = async (req, res) => {
-  // TODO: change this when auth is implemented
+  
   const { actor_id } = req.headers
   const { id } = req.params
   const { comments } = req.body
@@ -434,6 +614,34 @@ export const createTripApplication = async (req, res) => {
     const application = await newApplication.save()
     res.json(application)
   } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
+
+export const createTripApplicationAuth = async (req, res) => {
+  const { id } = req.params
+  const { comments } = req.body
+  try {
+    const trip = await Trip.findById(id)
+    if (!trip) {
+      res.status(404).send('Trip not found')
+      return
+    }
+
+    const explorerTripApplications = await Application.find({ trip: trip._id, explorer: req.actor._id })
+    if (explorerTripApplications.length) {
+      res.status(409).send('There is already another application created by this user')
+      return
+    }
+
+    const newApplication = new Application({ trip: trip._id, explorer: req.actor._id, comments })
+    const application = await newApplication.save()
+    res.json(application)
+  } catch(err){
     if (err.name === 'ValidationError') {
       res.status(422).send(err)
     } else {

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "13db3034-4338-4ac6-9744-3126651c772f",
+		"_postman_id": "11b4c5af-d9da-4049-a2d1-dd1661d81a61",
 		"name": "sponsorships",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24780295"
@@ -10,14 +10,21 @@
 			"name": "readSponsorship",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/v1/sponsorships/:id",
+					"raw": "localhost:8080/v2/sponsorships/:id",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"sponsorships",
 						":id"
 					],
@@ -37,18 +44,19 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e9db335a31d53ee505",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/v1/sponsorships",
+					"raw": "localhost:8080/v2/sponsorships",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"sponsorships"
 					]
 				}
@@ -61,27 +69,19 @@
 				"method": "PATCH",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e9db335a31d53ee505",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"financedAmount\": 123\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "localhost:8080/v1/sponsorships/:id/pay",
+					"raw": "localhost:8080/v2/sponsorships/:id/pay",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"sponsorships",
 						":id",
 						"pay"
@@ -89,7 +89,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63fb9b9f8ac35cf72c1610a2"
+							"value": "63fdbe7e997e6f723bfce9b6"
 						}
 					]
 				}
@@ -102,14 +102,14 @@
 				"method": "PUT",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e9db335a31d53ee505",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"sponsor\": \"63ed27e9db335a31d53ee505\",\n    \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n    \"link\": \"https://www.cristianoronaldo.com\"\n}",
+					"raw": "{\n    \"banner\": \"TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCAuLi4=\",\n    \"link\": \"https://messi.com/#goat\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -117,19 +117,20 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/sponsorships/:id",
+					"raw": "localhost:8080/v2/sponsorships/:id",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"sponsorships",
 						":id"
 					],
 					"variable": [
 						{
 							"key": "id",
-							"value": "63fde66010513bd096120d69"
+							"value": "63fdbe7e997e6f723bfce9b6"
 						}
 					]
 				}
@@ -142,18 +143,19 @@
 				"method": "DELETE",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e9db335a31d53ee505",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/v1/sponsorships/:id",
+					"raw": "localhost:8080/v2/sponsorships/:id",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"sponsorships",
 						":id"
 					],
@@ -173,8 +175,8 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "actor_id",
-						"value": "63ed27e9db335a31d53ee505",
+						"key": "idtoken",
+						"value": "INSERT TOKEN",
 						"type": "text"
 					}
 				],
@@ -188,12 +190,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/v1/sponsorships",
+					"raw": "localhost:8080/v2/sponsorships",
 					"host": [
-						"localhost:8080"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"v1",
+						"v2",
 						"sponsorships"
 					]
 				}

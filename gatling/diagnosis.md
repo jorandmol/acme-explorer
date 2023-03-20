@@ -1,4 +1,4 @@
-# Prueba de estrés
+# Tests de carga
 
 ## Configuración
 

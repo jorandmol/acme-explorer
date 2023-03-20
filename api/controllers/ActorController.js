@@ -1,5 +1,6 @@
 import Actor from '../models/ActorModel.js'
 import admin from 'firebase-admin';
+import RoleEnum from '../enum/RoleEnum.js'
 
 export const login = async (req, res) => {
   console.log('starting login an actor')
@@ -11,7 +12,7 @@ export const login = async (req, res) => {
       res.send(err)
     } else if (!actor) { // an access token isn’t provided, or is invalid
       res.status(401)
-      res.json({ message: 'forbidden', error: err })
+      res.json({ message: 'Forbidden, no actor found', error: err })
     } else {
       // Make sure the password is correct
       actor.verifyPassword(password, async function (err, isMatch) {
@@ -19,7 +20,7 @@ export const login = async (req, res) => {
           res.send(err)
         } else if (!isMatch) { // Password did not match
           res.status(401) // an access token isn’t provided, or is invalid
-          res.json({ message: 'forbidden', error: err })
+          res.json({ message: 'Forbidden, incorrect password', error: err })
         } else {
           try {
             customToken = await admin.auth().createCustomToken(actor.email)
@@ -77,6 +78,32 @@ export const updateActor = async (req, res) => {
     const actor = await Actor.findOneAndUpdate({ _id: req.params.id }, newActor, { new:true })
     if (actor) {
       res.json(actor)
+    } else{
+      res.status(404).send('Actor not found')
+    }
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
+
+// function that check that the actor is the same as the one in the token or is an admin
+export const updateActorAuth = async (req, res) => {
+  const newActor = req.body
+  try {
+    const actor = req.actor
+    if (actor) {
+      // check that the actor is the same as the one in the token or is an admin
+      if (req.actor._id === newActor._id || req.actor.role === RoleEnum.ADMINISTRATOR) {
+        const updatedActor = await Actor.findOneAndUpdate({ _id: req.params.id }, newActor, { new:true })
+        res.json(updatedActor)
+      } else {
+        console.log(req.actor.role)
+        res.status(403).send('Forbidden')
+      }
     } else{
       res.status(404).send('Actor not found')
     }

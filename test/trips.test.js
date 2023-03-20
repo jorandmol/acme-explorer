@@ -392,6 +392,7 @@ describe('Trips', () => {
       sinon.stub(Actor, 'findById').returns(Promise.resolve(manager1))
       sinon.stub(Trip, 'findById').returns(Promise.resolve(publishedTrip))
       sinon.stub(Trip, 'findOneAndUpdate').returns(Promise.resolve(result))
+      sinon.stub(Application, 'find').returns([])
       chai
         .request(app)
         .patch(endpoint + publishedTrip._id.toString() + '/cancel')
@@ -404,7 +405,7 @@ describe('Trips', () => {
         })
     })
     it('Should return 403', done => {
-      const actorStub = sinon.stub(Actor, 'findById').returns(Promise.resolve(explorer1))
+      sinon.stub(Actor, 'findById').returns(Promise.resolve(explorer1))
       chai
         .request(app)
         .patch(endpoint + publishedTrip._id.toString() + '/cancel')
@@ -416,8 +417,8 @@ describe('Trips', () => {
         })
     })
     it('Should return 404', done => {
-      const actorStub = sinon.stub(Actor, 'findById').returns(Promise.resolve(manager1))
-      const idStub = sinon.stub(Trip, 'findById').returns(Promise.resolve(null))
+      sinon.stub(Actor, 'findById').returns(Promise.resolve(manager1))
+      sinon.stub(Trip, 'findById').returns(Promise.resolve(null))
       chai
         .request(app)
         .patch(endpoint + '404' + '/cancel')
@@ -429,9 +430,9 @@ describe('Trips', () => {
         })
     })
     it('Should return 422', done => {
-      const canceledTrip = { ...publishedTrip, cancellationReason: new Date() }
-      const actorStub = sinon.stub(Actor, 'findById').returns(Promise.resolve(manager1))
-      const idStub = sinon.stub(Trip, 'findById').returns(Promise.resolve(canceledTrip))
+      const canceledTrip = { ...publishedTrip, cancellationDate: new Date() }
+      sinon.stub(Actor, 'findById').returns(Promise.resolve(manager1))
+      sinon.stub(Trip, 'findById').returns(Promise.resolve(canceledTrip))
       chai
         .request(app)
         .patch(endpoint + publishedTrip._id.toString() + '/cancel')
@@ -464,6 +465,7 @@ describe('Trips', () => {
     it('Should return 403', done => {
       const manager2 = { ...manager1, _id: ObjectId('63ed2787c617b43b603f7a5d')}
       sinon.stub(Actor, 'findById').returns(Promise.resolve(manager2))
+      sinon.stub(Trip, 'findById').returns(Promise.resolve(trip1))
       chai
         .request(app)
         .get(endpoint + trip1._id.toString() + '/applications')
@@ -510,6 +512,7 @@ describe('Trips', () => {
     it('Should return 409', done => {
       sinon.stub(Actor, 'findById').returns(Promise.resolve(explorer1))
       sinon.stub(Application, 'find').returns(Promise.resolve([appl1]))
+      sinon.stub(Trip, 'findById').returns(Promise.resolve(trip1))
       chai
         .request(app)
         .post(endpoint + trip1._id.toString() + '/applications')

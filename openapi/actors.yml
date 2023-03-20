@@ -5,11 +5,17 @@ info:
 servers:
   - url: localhost://
 paths:
-  /v1/actors:
+  /v2/actors:
     get:
       tags:
         - actors
       summary: listActors
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
@@ -32,17 +38,28 @@ paths:
                 phone: '+34674747478'
                 address: 13 Rue del percebe
                 role: explorer
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /v1/actors/{id}:
+  /v2/actors/{id}:
     get:
       tags:
         - actors
       summary: readActor
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -72,6 +89,11 @@ paths:
                 address: 15 Rue del percebe
                 role: explorer
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
@@ -88,12 +110,95 @@ paths:
         - actors
       summary: deleteActor
       parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
         - name: id
           in: path
           schema:
             type: string
           required: true
           example: 63e2732f60ea8efc059fb802
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/actors/{id}/ban:
+    patch:
+      tags:
+        - actors
+      summary: banActor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                date: '2023-07-10 15:00:00.000'
+                reason: Fraude fiscal
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63e2732f60ea8efc059fb802
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/actors/{id}/unban:
+    patch:
+      tags:
+        - actors
+      summary: unbanActor
+      requestBody:
+        content: {}
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 63e2732f60ea8efc059fb802
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/login:
+    post:
+      tags:
+        - actors
+      summary: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: pepefon@gmail.com
+                password: 12345678
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT TOKEN
       responses:
         '200':
           description: Successful response

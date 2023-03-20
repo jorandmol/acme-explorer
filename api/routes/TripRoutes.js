@@ -1,8 +1,10 @@
-import { searchTrips, listTrips, createTrip, readTrip, updateTrip, deleteTrip, publishTrip, cancelTrip, listTripApplications, createTripApplication } from '../controllers/TripController.js'
+import * as tripsController from '../controllers/TripController.js'
 import { creationValidator as tripCreationValidator, updateValidator, publishValidator, cancelValidator } from '../controllers/validators/TripValidator.js'
 import { creationFromTripValidator as appCreationValidator } from '../controllers/validators/ApplicationValidator.js'
 import { filterValidator } from '../controllers/validators/FinderValidator.js'
 import handleExpressValidation from '../middlewares/ValidationHandlingMiddleware.js'
+import { verifyUser } from '../middlewares/AuthMiddleware.js'
+import RoleEnum from '../enum/RoleEnum.js'
 
 export default function (app) {
 
@@ -11,14 +13,20 @@ export default function (app) {
   *    Required role: None
   *
   * @section trips
-  * @type get
-  * @url /v1/search
+  * @type get 
+  * @url /search
   */
   app.route('/v1/search')
     .get(
       filterValidator,
       handleExpressValidation,
-      searchTrips
+      tripsController.searchTrips
+    )
+  app.route('/v2/search')
+    .get(
+      filterValidator,
+      handleExpressValidation,
+      tripsController.searchTrips // TODO: Añadir versión que reciba el token y lo descodifique (tener en cuenta que es accesible para usuarios no logueados)
     )
 
   /**
@@ -29,14 +37,22 @@ export default function (app) {
   *
   * @section trips
   * @type get post
-  * @url /v1/trips
+  * @url /trips
   */
   app.route('/v1/trips')
-    .get(listTrips)
+    .get(tripsController.listTrips)
     .post(
       tripCreationValidator,
       handleExpressValidation,
-      createTrip
+      tripsController.createTrip
+    )
+  app.route('/v2/trips')
+    .get(verifyUser([RoleEnum.MANAGER]), tripsController.listTrips)
+    .post(
+      verifyUser([RoleEnum.MANAGER]),
+      tripCreationValidator,
+      handleExpressValidation,
+      tripsController.createTripAuth
     )
 
   /**
@@ -49,15 +65,23 @@ export default function (app) {
   *
   * @section trips
   * @type get put delete
-  * @url /v1/trips/:id
+  * @url /trips/:id
   */
   app.route('/v1/trips/:id')
-    .get(readTrip)
+    .get(tripsController.readTrip)
     .put(
       updateValidator,
       handleExpressValidation,
-      updateTrip
-    ).delete(deleteTrip)
+      tripsController.updateTrip
+    ).delete(tripsController.deleteTrip)
+  app.route('/v2/trips/:id')
+    .get(tripsController.readTrip)
+    .put(
+      verifyUser([RoleEnum.MANAGER]),
+      updateValidator,
+      handleExpressValidation,
+      tripsController.updateTripAuth
+    ).delete(verifyUser([RoleEnum.MANAGER]), tripsController.deleteTripAuth)
 
   /**
   * Publish a trip
@@ -65,13 +89,20 @@ export default function (app) {
   *
   * @section trips
   * @type patch
-  * @url /v1/trips/:id/publish
+  * @url /trips/:id/publish
   */
   app.route('/v1/trips/:id/publish')
     .patch(
       publishValidator,
       handleExpressValidation,
-      publishTrip
+      tripsController.publishTrip
+    )
+  app.route('/v2/trips/:id/publish')
+    .patch(
+      verifyUser([RoleEnum.MANAGER]),
+      publishValidator,
+      handleExpressValidation,
+      tripsController.publishTripAuth
     )
 
   /**
@@ -80,13 +111,20 @@ export default function (app) {
   *
   * @section trips
   * @type patch
-  * @url /v1/trips/:id/cancel
+  * @url /trips/:id/cancel
   */
   app.route('/v1/trips/:id/cancel')
     .patch(
       cancelValidator,
       handleExpressValidation,
-      cancelTrip
+      tripsController.cancelTrip
+    )
+  app.route('/v2/trips/:id/cancel')
+    .patch(
+      verifyUser([RoleEnum.MANAGER]),
+      cancelValidator,
+      handleExpressValidation,
+      tripsController.cancelTripAuth
     )
 
   /**
@@ -103,14 +141,22 @@ export default function (app) {
   *
   * @section trips
   * @type get post
-  * @url /v1/trips/:id/applications
+  * @url /trips/:id/applications
   */
   app.route('/v1/trips/:id/applications')
-  .get(listTripApplications)
+  .get(tripsController.listTripApplications)
   .post(
     appCreationValidator,
     handleExpressValidation,
-    createTripApplication
+    tripsController.createTripApplication
+  )
+  app.route('/v2/trips/:id/applications')
+  .get(verifyUser([RoleEnum.MANAGER]), tripsController.listTripApplicationsAuth)
+  .post(
+    verifyUser([RoleEnum.MANAGER]),
+    appCreationValidator,
+    handleExpressValidation,
+    tripsController.createTripApplicationAuth
   )
 
 }
