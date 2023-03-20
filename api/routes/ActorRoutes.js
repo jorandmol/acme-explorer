@@ -39,7 +39,9 @@ export default function (app) {
     )
   app.route('/v2/actors')
     .get(
-      verifyUser([RoleEnum.ADMINISTRATOR]), actorController.listActors)
+      verifyUser([RoleEnum.ADMINISTRATOR]),
+      actorController.listActors
+    )
     .post(
       creationValidator,
       handleExpressValidation,
@@ -64,8 +66,14 @@ export default function (app) {
     .delete(actorController.deleteActor)
   app.route('/v2/actors/:id')
     .get(actorController.readActor)
-    .put(verifyUser(Object.values(RoleEnum)), actorController.updateActorAuth)
-    .delete(verifyUser([RoleEnum.ADMINISTRATOR]), actorController.deleteActor)
+    .put(
+      verifyUser(Object.values(RoleEnum)),
+      actorController.updateActorAuth
+    )
+    .delete(
+      verifyUser([RoleEnum.ADMINISTRATOR]),
+      actorController.deleteActor
+    )
 
   /**
    * Ban an actor
@@ -89,6 +97,9 @@ export default function (app) {
   app.route('/v1/actors/:id/unban')
     .patch(actorController.unbanActor)
   app.route('/v2/actors/:id/unban')
-    .patch(verifyUser([RoleEnum.ADMINISTRATOR]), actorController.unbanActor)
+    .patch(
+      verifyUser([RoleEnum.ADMINISTRATOR]),
+      actorController.unbanActor
+    )
 
 }

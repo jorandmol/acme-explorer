@@ -18,7 +18,10 @@ export default function (app) {
   app.route('/v1/dashboard')
     .get(dataWarehouseController.listIndicators)
   app.route('/v2/dashboard')
-    .get(verifyUser([RoleEnum.ADMINISTRATOR]), dataWarehouseController.listIndicators)
+    .get(
+      verifyUser([RoleEnum.ADMINISTRATOR]),
+      dataWarehouseController.listIndicators
+    )
 
   /**
    * Get a list of last computed indicator
@@ -30,7 +33,10 @@ export default function (app) {
   app.route("/v1/dashboard/latest")
     .get(dataWarehouseController.lastIndicator)
   app.route("/v2/dashboard/latest")
-    .get(verifyUser([RoleEnum.ADMINISTRATOR]), dataWarehouseController.lastIndicator)
+    .get(
+      verifyUser([RoleEnum.ADMINISTRATOR]),
+      dataWarehouseController.lastIndicator
+    )
 
   /**
    * Update computation period for rebuilding
@@ -66,14 +72,16 @@ export default function (app) {
       spentMoneyByExplorerValidator,
       handleExpressValidation,
       periodDecoder,
-      dataWarehouseController.spentMoneyByExplorer)
+      dataWarehouseController.spentMoneyByExplorer
+    )
   app.route('/v2/dashboard/spent-money-by-explorer')
     .post(
       verifyUser([RoleEnum.ADMINISTRATOR]),
       spentMoneyByExplorerValidator,
       handleExpressValidation,
       periodDecoder,
-      dataWarehouseController.spentMoneyByExplorer)
+      dataWarehouseController.spentMoneyByExplorer
+    )
 
   /**
    * Get a list of explorers ids and the amount of money that they spent in a period
@@ -88,7 +96,8 @@ export default function (app) {
       handleExpressValidation,
       periodDecoder,
       operationParser,
-      dataWarehouseController.explorersBySpentMoney)
+      dataWarehouseController.explorersBySpentMoney
+    )
   app.route('/v2/dashboard/explorers-by-spent-money')
     .post(
       verifyUser([RoleEnum.ADMINISTRATOR]),
@@ -96,5 +105,6 @@ export default function (app) {
       handleExpressValidation,
       periodDecoder,
       operationParser,
-      dataWarehouseController.explorersBySpentMoney)
+      dataWarehouseController.explorersBySpentMoney
+    )
 }

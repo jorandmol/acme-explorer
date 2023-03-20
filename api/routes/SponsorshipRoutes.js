@@ -24,7 +24,10 @@ export default function (app) {
       sponsorshipController.createSponsorship
     )
   app.route('/v2/sponsorships')
-    .get(verifyUser([RoleEnum.SPONSOR]), sponsorshipController.listSponsorshipsAuth)
+    .get(
+      verifyUser([RoleEnum.SPONSOR]),
+      sponsorshipController.listSponsorshipsAuth
+    )
     .post(
       verifyUser([RoleEnum.SPONSOR]),
       creationValidator,
@@ -71,5 +74,8 @@ export default function (app) {
   app.route('/v1/sponsorships/:id/pay')
     .patch(sponsorshipController.paySponsorship)
   app.route('/v2/sponsorships/:id/pay')
-    .patch(verifyUser([RoleEnum.SPONSOR]), sponsorshipController.paySponsorshipAuth)
+    .patch(
+      verifyUser([RoleEnum.SPONSOR]),
+      sponsorshipController.paySponsorshipAuth
+    )
 }

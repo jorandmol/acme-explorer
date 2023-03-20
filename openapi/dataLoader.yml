@@ -1,0 +1,35 @@
+openapi: 3.0.0
+info:
+  title: dataLoader
+  version: 1.0.0
+servers:
+  - url: localhost://
+paths:
+  /v2/loader/insertMany:
+    post:
+      tags:
+        - dataLoader
+      summary: insertMany
+      requestBody:
+        content: {}
+      parameters:
+        - name: idtoken
+          in: header
+          schema:
+            type: string
+          example: INSERT ADMIN TOKEN
+        - name: model
+          in: query
+          schema:
+            type: string
+          example: Application
+        - name: sourceFile
+          in: query
+          schema:
+            type: string
+          example: ../../loaders/applications.json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

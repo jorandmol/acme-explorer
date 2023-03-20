@@ -42,8 +42,13 @@ const FinderSchema = new mongoose.Schema({
 FinderSchema.index({ explorer: 1, createdAt: 1 })
 
 FinderSchema.statics.findByExplorer = function(actorId) {
-    return this.find({ explorer_id: actorId }).sort("-createdAt").limit(1)
+    return this.find({ explorer: actorId }).sort("-createdAt").limit(1)
 }
+
+FinderSchema.index({ explorer: 1, date: -1 })
+FinderSchema.index({ keyword: 1 })
+FinderSchema.index({ minPrice: 1 })
+FinderSchema.index({ maxPrice: 1 })
 
 const model = mongoose.model('Finder', FinderSchema)
 

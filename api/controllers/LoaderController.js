@@ -5,6 +5,7 @@ const storeJsonInsertMany = async (req, res) => {
   const { model, sourceFile } = req.query
   if (!model || !sourceFile) {
     res.status(400).send('Model and sourceFile are mandatory fields')
+    return
   }
 
   const data = JSON.parse(await readFile(new URL(sourceFile, import.meta.url)));
