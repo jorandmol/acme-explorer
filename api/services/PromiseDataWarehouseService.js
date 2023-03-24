@@ -7,7 +7,7 @@ import GlobalConfig from "../models/GlobalConfigModel.js"
 import StatusEnum from "../enum/StatusEnum.js"
 import mongoose from "mongoose"
 
-let defaultPeriod = "*/10 * * * * *"
+let defaultPeriod = "* * * * 0"
 let dataWarehouseJob
 
 const buildNewDataWarehouse = (resultsDataWarehouse, period) => {
