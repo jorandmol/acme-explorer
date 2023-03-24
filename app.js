@@ -14,18 +14,28 @@ import sponsorshipRoutes from './api/routes/SponsorshipRoutes.js'
 import dataWarehouseRoutes from './api/routes/DataWarehouseRoutes.js'
 import { initializeDataWarehouseJob } from "./api/services/DataWarehouseServiceProvider.js";
 import admin from 'firebase-admin';
-import serviceAccount from './firebase.json' assert { type: "json" }
 
 dotenv.config()
 
 const app = express()
-const port = 8080
+const port = process.env.PORT || 8080
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cors())
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert({
+    type: 'service_account',
+    project_id: process.env.FIREBASE_PROJECT_ID,
+    private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
+    private_key: Buffer.from(process.env.FIREBASE_PRIVATE_KEY , 'base64').toString('ascii'),
+    client_email: process.env.FIREBASE_CLIENT_EMAIL,
+    client_id: process.env.FIREBASE_CLIENT_ID,
+    auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+    token_uri: 'https://oauth2.googleapis.com/token',
+    auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+    client_x509_cert_url: process.env.FIREBASE_CLIENT_CERT_URL
+  }),
   // databaseURL: 'https://acmeexplorer.firebaseio.com'
 })
 
