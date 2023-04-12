@@ -48,7 +48,7 @@ export default function (app) {
       tripsController.createTrip
     )
   app.route('/v2/trips')
-    .get(verifyUser([RoleEnum.MANAGER]), tripsController.listTrips)
+    .get(verifyUser([RoleEnum.MANAGER]), tripsController.listTripsAuth)
     .post(
       verifyUser([RoleEnum.MANAGER]),
       tripCreationValidator,
