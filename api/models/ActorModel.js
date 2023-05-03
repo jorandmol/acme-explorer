@@ -39,6 +39,10 @@ const ActorSchema = new mongoose.Schema({
             type: String,
         }
     },
+    language: {
+        type: String,
+        default: 'es'
+    },
     customToken: {
       type: String
     },
