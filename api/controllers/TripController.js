@@ -26,6 +26,7 @@ const _generateFilter = (filters) => {
     filter = { ...filter, endDate: { $lte: maxDate } }
   }
 
+  filter = { ...filter, publicationDate: { $lte: new Date() } }
   return filter
 }
 
