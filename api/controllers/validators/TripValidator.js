@@ -34,7 +34,7 @@ const updateValidator = [
   check('price').optional().isFloat({ min: 0 }),
   check('stages.*.title').exists({ checkFalsy: true }).isString().isLength({ max: 100 }).trim().escape(),
   check('stages.*.description').exists({ checkFalsy: true }).isString().isLength({ min: 10, max: 255 }).trim().escape(),
-  check('stages.*.price').exists({ checkFalsy: true }).isFloat({ min: 10 }),
+  check('stages.*.price').exists({ checkFalsy: true }).isFloat({ min: 0 }),
   check('pictures.*.title').optional().isString().isLength({ max: 100 }).trim().escape(),
   check('pictures.*.image').optional().isString().isBase64()
 ]
