@@ -185,7 +185,7 @@ export const acceptApplicationAuth = async (req, res) => {
     const application = await Application.findById(id);
     if (application) {
       if (application.status === StatusEnum.PENDING) {
-        if (application.trip.creator === req.actor._id) {
+        if (req.trip.creator.toString() === req.actor._id.toString()) {
           application.status = StatusEnum.DUE;
           const updatedApplication = await application.save();
           res.send(updatedApplication);
@@ -241,7 +241,7 @@ export const rejectApplicationAuth = async (req, res) => {
     const application = await Application.findById(id);
     if (application) {
       if (application.status === StatusEnum.PENDING) {
-        if (application.trip.creator === req.actor._id) {
+        if (req.trip.creator.toString() === req.actor._id.toString()) {
           application.status = StatusEnum.REJECTED;
           application.rejectionReason = rejectionReason;
           const updatedApplication = await application.save();

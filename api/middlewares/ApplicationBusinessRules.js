@@ -29,6 +29,7 @@ export const checkTrip = async (req, res, next) => {
         res.status(400).send({ message: "Trip has been cancelled" });
 
       } else {
+        req.trip = trip;
         next();
       }
     } else {

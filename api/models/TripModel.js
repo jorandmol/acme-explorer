@@ -123,7 +123,7 @@ tripSchema.pre('save', function (callback) {
 })
 
 tripSchema.statics.findByFilters = function(filters, limit = 10) {
-    return this.find(filters).limit(limit)
+    return this.find(filters).sort({ createdAt: -1 }).limit(limit)
 }
 
 tripSchema.index({ creator: 1 })

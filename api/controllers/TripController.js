@@ -72,7 +72,7 @@ const _findTrips = async (actorId, query) => {
         minDate: query?.minDate || null,
         maxDate: query?.maxDate || null,
         results: trips,
-        expiryDate: new Date(Date.now() + config.cacheLifetime * 1000)
+        expiryDate: new Date(Date.now() + config.cacheLifetime * 0)
       })
       await newFinder.save()
     }
