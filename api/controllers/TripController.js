@@ -181,7 +181,7 @@ export const listTrips = async (req, res) => {
 
 export const listTripsAuth = async (req, res) => {
   try {
-    const trips = await Trip.find({ creator: ObjectId(req.actor._id) })
+    const trips = await Trip.find({ creator: ObjectId(req.actor._id) }).sort({ createdAt: -1 })
     res.json(trips)
   } catch (err) {
     res.status(500).send(err)
