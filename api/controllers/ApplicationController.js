@@ -289,20 +289,20 @@ export const payApplication = async (req, res) => {
   }
 };
 
-// Comprueba que sea el manager que ha creado la application
+// Comprueba que sea el explorer que ha creado la application
 export const payApplicationAuth = async (req, res) => {
   const { id } = req.params;
   try {
     const application = await Application.findById(id);
     if (application) {
       if (application.status === StatusEnum.DUE) {
-        if (application.trip.creator === req.actor._id) {
+        if (application.explorer === req.actor._id) {
           application.status = StatusEnum.ACCEPTED;
           application.paidAt = new Date();
           const updatedApplication = await application.save();
           res.send(updatedApplication);
         } else {
-          res.status(403).send('Actor is not the trip creator')
+          res.status(403).send('Actor is not the application creator')
         }
       } else {
         res.status(422).send({ message: "Application status is " + application.status.toUpperCase() + ", it must be DUE" });
