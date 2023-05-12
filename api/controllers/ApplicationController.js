@@ -7,7 +7,9 @@ import mongoose from 'mongoose'
 const _getExplorerApplications = async (explorerId) => {
   return await Application.aggregate([
     { $match: { explorer: new mongoose.Types.ObjectId(explorerId) } },
-    { $group: { _id: "$status", applications: { $push: "$$ROOT" } } }
+    { $sort: { createdAt: -1 } },
+    { $group: { _id: "$status", applications: { $push: "$$ROOT" } } },
+    { $sort: { _id: 1 } }
   ]);
 }
 
