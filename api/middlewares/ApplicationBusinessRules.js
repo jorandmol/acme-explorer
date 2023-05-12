@@ -1,6 +1,5 @@
 import Application from "../models/ApplicationModel.js";
 import Trip from "../models/TripModel.js";
-import StatusEnum from "../enum/StatusEnum.js";
 
 export const checkTrip = async (req, res, next) => {
   let tripId = null;
@@ -18,14 +17,15 @@ export const checkTrip = async (req, res, next) => {
 
     if (tripId) {
       const trip = await Trip.findById(tripId);
+      const isCancel = req.path.endsWith("cancel");
 
       if (!trip) {
         res.status(404).send({ message: "Trip Not Found" });
 
-      } else if (trip && trip.startDate < new Date()) {
+      } else if (trip && trip.startDate < new Date() && !isCancel) {
         res.status(400).send({ message: "Trip has already started" });
 
-      } else if (trip.cancellationDate) {
+      } else if (trip.cancellationDate && !isCancel) {
         res.status(400).send({ message: "Trip has been cancelled" });
 
       } else {

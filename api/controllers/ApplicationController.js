@@ -131,7 +131,7 @@ export const cancelApplicationAuth = async (req, res) => {
     const application = await Application.findById(id);
     if (application) {
       if (application.status === StatusEnum.PENDING || application.status === StatusEnum.DUE || application.status === StatusEnum.ACCEPTED) {
-        if (application.explorer === req.actor._id) {
+        if (application.explorer.toString() === req.actor._id.toString()) {
           application.status = StatusEnum.CANCELLED;
           application.cancellationDate = new Date();
           const updatedApplication = await application.save();
@@ -296,7 +296,9 @@ export const payApplicationAuth = async (req, res) => {
     const application = await Application.findById(id);
     if (application) {
       if (application.status === StatusEnum.DUE) {
-        if (application.explorer === req.actor._id) {
+        console.log(application.explorer)
+        console.log(req.actor._id)
+        if (application.explorer.toString() === req.actor._id.toString()) {
           application.status = StatusEnum.ACCEPTED;
           application.paidAt = new Date();
           const updatedApplication = await application.save();
